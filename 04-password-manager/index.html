@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Karla|Inter"
+      rel="stylesheet"
+    />
+    <link href="index.css" rel="stylesheet" />
+    <title>Password Generation</title>
+  </head>
+  <body>
+    <main>
+      <h1>Generate a <span>random password</span></h1>
+      <p>Never use an insecure password again</p>
+      <button type="button" onclick="generatePassword()">
+        Generate passwords
+      </button>
+      <hr />
+      <label>Password length</label>
+      <div class="columns">
+        <input id="length-output" type="text" value="10" readonly />
+        <input
+          id="length-input"
+          class="slider"
+          type="range"
+          value="10"
+          min="1"
+          max="20"
+          step="1"
+          oninput="updateLength()"
+        />
+      </div>
+      <hr />
+      <label>Click to copy</label>
+      <div class="columns">
+        <div class="column1">
+          <input
+            type="text"
+            id="password1"
+            class="password-fields"
+            onclick="copyToClipboard(this)"
+            readonly
+          />
+          <input
+            type="text"
+            id="password2"
+            class="password-fields"
+            onclick="copyToClipboard(this)"
+            readonly
+          />
+        </div>
+
+        <div class="column2">
+          <input
+            type="text"
+            id="password3"
+            class="password-fields"
+            onclick="copyToClipboard(this)"
+            readonly
+          />
+          <input
+            type="text"
+            id="password4"
+            class="password-fields"
+            onclick="copyToClipboard(this)"
+            readonly
+          />
+        </div>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

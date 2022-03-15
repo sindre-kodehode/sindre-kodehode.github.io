@@ -1,0 +1,151 @@
+body {
+  margin: 2em auto;
+  max-width: 32em;
+  background: #1c1c1c;
+  color: white;
+  font-family: Inter;
+}
+
+h1 {
+  font-family: Karla;
+  font-size: 3em;
+  margin-bottom: 0em;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+  font-size: 1.4em;
+  text-align: justify;
+}
+
+span {
+  color: #4adf86;
+  text-align: justify;
+}
+
+main {
+  background: #1f2937;
+  padding: 1em 3em 2em 3em;
+}
+
+button {
+  background: #10b981;
+  background-image: url("icon-1.png");
+  background-position: 0.5em 0.1em;
+  background-repeat: no-repeat;
+  background-size: 2em;
+  text-align: center;
+  width: 50%;
+  border: 0;
+  padding: 0.5em 1em 0.5em 2em;
+  margin: 1em 0;
+  color: white;
+  border-radius: 0.3em;
+  font-weight: bold;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+label {
+  color: #55f991;
+  padding-top: 0.5em;
+  display: block;
+}
+
+hr {
+  color: #2f3e53;
+}
+
+.password-fields {
+  background: #273549;
+  background-image: url("icon-2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2em;
+  border: 0;
+  border-radius: 0.3em;
+  color: #55f991;
+  text-align: center;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  user-select: none;
+}
+
+.password-fields:active {
+  background: #2f3e53;
+}
+
+.password-fields:focus {
+  outline: none;
+}
+
+.slider {
+  -webkit-appearance: none;
+  margin: 1.5em 0em 1.5em 1em;
+  width: 100%;
+  height: 0.5em;
+  background: #273549;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  outline: none;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  background: #4adf86;
+  border-radius: 1em;
+  color: #4adf86;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  appearance: none;
+  background: #4adf86;
+  color: #4adf86;
+  border-radius: 1em;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+
+.columns {
+  display: flex;
+}
+
+.column1 {
+  margin: 0.25em 0em 0 0;
+}
+
+.column2 {
+  margin: 0.25em 1em 0 1em;
+}
+
+#length-input::-moz-range-thumb {
+  background: #55f991;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+}
+
+#length-output {
+  background: #273549;
+  border: 0;
+  border-radius: 0.3em;
+  color: #55f991;
+  text-align: center;
+  padding: 0.5em;
+  margin: 0.5em 0 1em 0;
+  user-select: none;
+  outline: none;
+}
