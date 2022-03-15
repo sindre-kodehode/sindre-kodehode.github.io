@@ -1,0 +1,43 @@
+body {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+header {
+  background-image: linear-gradient(45deg, #fb3796, #585dfe);
+  margin: 1.5em auto 0;
+  max-width: 30em;
+  padding: 1.5em;
+}
+
+main {
+  background-color: #1f2937;
+  margin: 0 auto;
+  max-width: 30em;
+  padding: 0.5em 1.5em 2.0em 1.5em;
+}
+
+main h3 {
+  font-size: 1em;
+  margin: 1.5em 0 0 0;
+}
+
+main p {
+  font-size: 1em;
+  color: #d2d2d2;
+  margin: 0.5em 0 0 0;
+}
+
+#input {
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  font-size: 6em;
+  font-weight: bolder;
+  max-width: 5em;
+  outline: 0;
+  text-align: center;
+}

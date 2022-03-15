@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' />
+    <link href="index.css" rel="stylesheet" />
+
+    <title>Unit Conversion</title>
+  </head>
+
+  <body>
+    <header>
+
+      <h2>Metric/Imperial unit conversion</h2>
+      <input type="text" id="input" oninput="convert()" value="0" />
+
+    </header>
+
+    <main>
+
+      <h3>Length (Meter/Feet)</h3>
+      <p id="metersFeet">
+        0 meters = 0.000 feet |
+        0 feet   = 0.000 meters
+      </p>
+
+      <h3>Volume (Liters/Gallons)</h3>
+      <p id="litersGallons">
+        0 liters  = 0.000 gallons |
+        0 gallons = 0.000 liters
+      </p>
+
+      <h3>Mass (Kilograms/Pounds)</h3>
+      <p id="kilosPounds">
+        0 kilos  = 0.000 pounds |
+        0 pounds = 0.000 kilos
+      </p>
+
+    </main>
+
+    <script src="index.js"></script>
+
+  </body>
+</html>
