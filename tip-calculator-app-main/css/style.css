@@ -1,0 +1,119 @@
+body {
+  background: hsl(185, 41%, 84%);
+  font-family: "Space Mono", "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin: 2em auto;
+  width: 50em;
+}
+
+main {
+  background: hsl(0, 0%, 100%);
+  border-radius: 1.5em;
+}
+
+h1 {
+  color: hsl(186, 14%, 43%);
+  letter-spacing: 0.3em;
+  line-height: 1.3em;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 2em;
+}
+
+p {
+  color: hsl(186, 14%, 43%);
+  font-size: 0.2em;
+  margin: 2em 0;
+}
+
+input {
+  background: hsl(189, 41%, 97%);
+  border-radius: 0.3em;
+  border: none;
+  box-sizing: border-box;
+  color: hsl(183, 100%, 15%);
+  font-family: "Space Mono", "Courier New", Courier, monospace;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0 0 2em 0;
+  padding: 0.5em 1em;
+  text-align: right;
+  width: 100%;
+}
+
+button {
+  background: hsl(183, 100%, 15%);
+  border-radius: 0.3em;
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-family: "Space Mono", "Courier New", Courier, monospace;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+    padding: 2em;
+}
+
+.button-container {
+  column-gap: 0.5em;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: 0 0 2em 0;
+  row-gap: 0.5em;
+}
+
+.custom-button {
+  background: hsl(189, 41%, 97%);
+  color: hsl(186, 14%, 43%);
+  padding: 0em;
+}
+
+.result-container {
+  background: hsl(183, 100%, 15%);
+  border-radius: 0.5em;
+  padding: 2em;
+}
+
+.amount-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 2em;
+  margin: 1em 0 8em 0;
+}
+
+.result-text {
+  font-size: 0.5em;
+  margin: 0;
+  padding: 0;
+}
+
+.result-number {
+  color: hsl(172, 67%, 45%);
+  font-size: 2.5em;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
+
+.highlight {
+  color: hsl(0, 0%, 100%);
+}
+
+.smaller-highlight {
+  color: hsl(185, 41%, 84%);
+  font-size: 0.1em;
+}
+
+.reset-button {
+  width: 100%;
+  background: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+  font-size: 1.2em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
