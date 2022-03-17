@@ -14,38 +14,45 @@
     </header>
     <main>
       <div class="app-container">
-        <div class="app-column">
-          <p>Bill</p>
-          <input id="bill-el" type="text" placeholder="0" />
+        <div class="input-container">
 
-          <p>Select Tip %</p>
+          <label>Bill</label>
+          <label id="error-bill" class="error-message"></label>
+          <input id="bill-el" class="full-width-input" type="text" placeholder="0" />
+
+          <label>Select Tip %</label>
+          <label id="error-tip" class="error-message"></label>
           <div class="button-container">
-            <button>5%</button>
-            <button>10%</button>
-            <button>15%</button>
-            <button>25%</button>
-            <button>50%</button>
-            <button class="custom-button">Custom</button>
+            <button id="tip5-btn">5%</button>
+            <button id="tip10-btn">10%</button>
+            <button id="tip15-btn">15%</button>
+            <button id="tip25-btn">25%</button>
+            <button id="tip50-btn">50%</button>
+            <input id="custom-el" class="custom-input" type="text" placeholder="Custom" />
           </div>
 
-          <p>Number of People</p>
-          <input id="people-el" type="text" placeholder="0"/>
+          <label>Number of People </label>
+          <label id="error-people" class="error-message"></label>
+          <input id="people-el" class="full-width-input" type="text" placeholder="0" min="10" />
+
         </div>
-        <div class="app-column">
-          <div class="result-container">
-            <div class="amount-container">
-              <p class="result-text">
-                <span class="highlight">Tip Amount</span> <br />
-                <span class="smaller-highlight">/ person</span> </p>
-              <p id="amount-el" class="result-number">$0.00</p>
+        <div class="result-container">
+          <div class="amount-container">
 
-              <p class="result-text"> 
-                <span class="highlight">Total</span> <br /> 
-                <span class="smaller-highlight">/ person</span> </p>
-              <p id="total-el" class="result-number">$0.00</p>
-            </div>
-            <button class="reset-button" id="reset-btn">reset</button>
+            <p class="result-text">
+              <span class="highlight">Tip Amount</span> <br />
+              <span class="smaller-highlight">/ person</span> </p>
+            <p id="amount-el" class="result-number">$0.00</p>
+
+            <p class="result-text"> 
+              <span class="highlight">Total</span> <br />
+              <span class="smaller-highlight">/ person</span> </p>
+            <p id="total-el" class="result-number">$0.00</p>
+
           </div>
+
+          <button class="reset-button" id="reset-btn" disabled>reset</button>
+
         </div>
       </div>
     </main>

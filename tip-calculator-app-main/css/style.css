@@ -26,19 +26,72 @@ p {
   margin: 2em 0;
 }
 
+p.result-text {
+  font-size: 0.5em;
+  margin: 0;
+  padding: 0;
+}
+
+p.result-number {
+  color: hsl(172, 67%, 45%);
+  font-size: 2.5em;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  color: hsl(186, 14%, 43%);
+  font-size: 0.2em;
+}
+
+label.error-message {
+  color: hsl(0, 67%, 45%);
+  float: right;
+}
+
+span.highlight {
+  color: hsl(0, 0%, 100%);
+}
+
+span.smaller-highlight {
+  color: hsl(185, 41%, 84%);
+  font-size: 0.1em;
+}
+
 input {
   background: hsl(189, 41%, 97%);
   border-radius: 0.3em;
   border: none;
-  box-sizing: border-box;
   color: hsl(183, 100%, 15%);
   font-family: "Space Mono", "Courier New", Courier, monospace;
   font-size: 1em;
   font-weight: bold;
-  margin: 0 0 2em 0;
+}
+
+input:hover {
+  outline: 0.15em solid hsl(172, 67%, 45%);
+}
+
+input:focus {
+  outline: 0.15em solid hsl(172, 67%, 45%);
+}
+
+input.full-width-input {
+  box-sizing: border-box;
   padding: 0.5em 1em;
   text-align: right;
   width: 100%;
+}
+
+input.custom-input {
+  padding: 0.5em 1em;
+  text-align: center;
+  max-width: 5em;
+}
+
+input#bill-el {
+  margin-bottom: 4em;
 }
 
 button {
@@ -50,27 +103,52 @@ button {
   font-size: 1em;
   font-weight: bold;
   padding: 0.5em 1em;
+  width: 100%;
+}
+
+button:hover {
+  background: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+  cursor: pointer;
+}
+
+button:focus {
+  background: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+  outline: none;
+}
+
+button.reset-button {
+  background: hsl(172, 67%, 45%);
+  box-sizing: border-box;
+  color: hsl(183, 100%, 15%);
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+button.reset-button:hover {
+  background: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+  cursor: pointer;
+}
+
+button.reset-button:disabled {
+  opacity: 10%;
 }
 
 .app-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 2em;
-    padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2em;
+  padding: 2em;
 }
 
 .button-container {
   column-gap: 0.5em;
   display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 0 0 2em 0;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 4em;
   row-gap: 0.5em;
-}
-
-.custom-button {
-  background: hsl(189, 41%, 97%);
-  color: hsl(186, 14%, 43%);
-  padding: 0em;
 }
 
 .result-container {
@@ -83,37 +161,5 @@ button {
   display: grid;
   grid-template-columns: auto auto;
   row-gap: 2em;
-  margin: 1em 0 8em 0;
-}
-
-.result-text {
-  font-size: 0.5em;
-  margin: 0;
-  padding: 0;
-}
-
-.result-number {
-  color: hsl(172, 67%, 45%);
-  font-size: 2.5em;
-  text-align: right;
-  margin: 0;
-  padding: 0;
-}
-
-.highlight {
-  color: hsl(0, 0%, 100%);
-}
-
-.smaller-highlight {
-  color: hsl(185, 41%, 84%);
-  font-size: 0.1em;
-}
-
-.reset-button {
-  width: 100%;
-  background: hsl(172, 67%, 45%);
-  color: hsl(183, 100%, 15%);
-  font-size: 1.2em;
-  text-transform: uppercase;
-  box-sizing: border-box;
+  margin: 1em 0 5em 0;
 }
