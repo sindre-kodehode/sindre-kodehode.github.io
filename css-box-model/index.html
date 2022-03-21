@@ -8,78 +8,88 @@
     <title>CSS Box Model</title>
   </head>
   <body>
-    <header><h1>CSS Box Model</h1></header>
+    <header><h1>CSS BOX MODEL</h1></header>
     <main>
-      <div class="paragraph-container">
-        <p class="dotted">dotted borders</p>
-        <p class="dashed">dashed borders</p>
-        <p class="solid">solid borders</p>
-        <p class="double">double borders</p>
-        <p class="groove">groove borders</p>
-        <p class="ridge">ridge borders</p>
-        <p class="inset">inset borders</p>
-        <p class="outset">outset borders</p>
-        <p class="hidden">hidden borders</p>
+      <h2>margin, border, padding and content</h2>
+
+      <div class="margin-box">
+        <p>margin</p>
+        <div class="border-box">
+          <p>border</p>
+          <div class="padding-box">
+            <p>padding</p>
+            <div class="content-box">
+              <p>content</p>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <h2>border-style</h2>
       <div class="paragraph-container">
-        <p class="thin">thin borders</p>
-        <p class="thin">thin borders</p>
-        <p class="thin">thin borders</p>
-        <p class="medium">medium borders</p>
-        <p class="medium">medium borders</p>
-        <p class="medium">medium borders</p>
-        <p class="thick">thick borders</p>
-        <p class="thick">thick borders</p>
-        <p class="thick">thick borders</p>
+        <p class="grid-item dotted color-accent-6">dotted borders</p>
+        <p class="grid-item dashed color-accent-6">dashed borders</p>
+        <p class="grid-item solid color-accent-6">solid borders</p>
+        <p class="grid-item double color-accent-6">double borders</p>
+        <p class="grid-item hidden color-accent-6">hidden borders</p>
+        <p class="grid-item groove color-accent-6">groove borders</p>
+        <p class="grid-item ridge color-accent-6">ridge borders</p>
+        <p class="grid-item inset color-accent-6">inset borders</p>
+        <p class="grid-item outset color-accent-6">outset borders</p>
       </div>
 
+      <h2>border-width</h2>
       <div class="paragraph-container">
-        <p class="light-color">light borders</p>
-        <p class="light-color">light borders</p>
-        <p class="light-color">light borders</p>
-        <p class="medium-color">medium borders</p>
-        <p class="medium-color">medium borders</p>
-        <p class="medium-color">medium borders</p>
-        <p class="thick-color">dark borders</p>
-        <p class="thick-color">dark borders</p>
-        <p class="thick-color">dark borders</p>
+        <p class="grid-item width-1">border-width<br/>0.1em</p>
+        <p class="grid-item width-2">border-width<br/>0.2em</p>
+        <p class="grid-item width-3">border-width<br/>0.3em</p>
+        <p class="grid-item width-4">border-width<br/>0.4em</p>
+        <p class="grid-item width-5">border-width<br/>0.5em</p>
+        <p class="grid-item width-6">border-width<br/>0.6em</p>
+        <p class="grid-item width-7">border-width<br/>0.7em</p>
+        <p class="grid-item width-8">border-width<br/>0.8em</p>
+        <p class="grid-item width-9">border-width<br/>0.9em</p>
+      </div>
+
+      <h2>border-color</h2>
+      <div class="paragraph-container">
+        <p class="grid-item color-accent-1">border-color<br/>brightness<br/>13%</p>
+        <p class="grid-item color-accent-2">border-color<br/>brightness<br/>23%</p>
+        <p class="grid-item color-accent-3">border-color<br/>brightness<br/>33%</p>
+        <p class="grid-item color-accent-4">border-color<br/>brightness<br/>43%</p>
+        <p class="grid-item color-accent-5">border-color<br/>brightness<br/>53%</p>
+        <p class="grid-item color-accent-6">border-color<br/>brightness<br/>63%</p>
+        <p class="grid-item color-accent-7">border-color<br/>brightness<br/>73%</p>
+        <p class="grid-item color-accent-8">border-color<br/>brightness<br/>83%</p>
+        <p class="grid-item color-accent-9">border-color<br/>brightness<br/>93%</p>
+      </div>
+
+      <h2>border-radius</h2>
+      <div class="paragraph-container">
+        <p class="grid-item radius-1">border-radius<br/>0.1em</p>
+        <p class="grid-item radius-2">border-radius<br/>0.2em</p>
+        <p class="grid-item radius-3">border-radius<br/>0.3em</p>
+        <p class="grid-item radius-4">border-radius<br/>0.4em</p>
+        <p class="grid-item radius-5">border-radius<br/>0.5em</p>
+        <p class="grid-item radius-6">border-radius<br/>0.6em</p>
+        <p class="grid-item radius-7">border-radius<br/>0.7em</p>
+        <p class="grid-item radius-8">border-radius<br/>0.8em</p>
+        <p class="grid-item radius-9">border-radius<br/>0.9em</p>
+      </div>
+
+      <h2>outline</h2>
+      <p>hover to show outline</p>
+      <div class="paragraph-container">
+        <p class="grid-item outline-1">outline<br/>0.1em</p>
+        <p class="grid-item outline-2">outline<br/>0.2em</p>
+        <p class="grid-item outline-3">outline<br/>0.3em</p>
+        <p class="grid-item outline-4">outline<br/>0.4em</p>
+        <p class="grid-item outline-5">outline<br/>0.5em</p>
+        <p class="grid-item outline-6">outline<br/>0.6em</p>
+        <p class="grid-item outline-7">outline<br/>0.7em</p>
+        <p class="grid-item outline-8">outline<br/>0.8em</p>
+        <p class="grid-item outline-9">outline<br/>0.9em</p>
       </div>
     </main>
   </body>
-  <script src="index.js"></script>
 </html>
-
-<!--
-
-# border-style
-dotted
-dashed
-solid
-double
-groove
-ridge
-inset
-outset
-none
-hidden
-
-# border-width
-thin
-medium
-thick
-
-# border-color
-monochromatic
-
-# border-radius
-different border radius
-
-# outline
-hover over to highlight
-
-# margin
-
-# padding
-
--->
