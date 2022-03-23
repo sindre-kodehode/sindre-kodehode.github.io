@@ -1,45 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>HTML Lists</title>
-</head>
-<body>
-    <ul>
-        <li></li>
-    </ul>
+  </head>
+  <body>
+    <header>
+      <h1>CSS list styling</h1>
+    </header>
+    <main>
+      <!----------------------------------------------------------------------------\
+  |    Types of lists                                                          |
+  \----------------------------------------------------------------------------->
+      <h2>Types of lists</h2>
+      <div class="list-container">
+        <ul>
+          <li>unordered list</li>
+          <li>unordered list</li>
+          <li>unordered list</li>
+        </ul>
 
-    <ol>
-        <li></li>
-    </ol>
+        <ol>
+          <li>ordered list</li>
+          <li>ordered list</li>
+          <li>ordered list</li>
+        </ol>
 
-</body>
+        <dl>
+          <dt>description list</dt>
+          <dd>definition 1</dd>
+          <dt>description list</dt>
+          <dd>definition 2</dd>
+        </dl>
+      </div>
+      <!----------------------------------------------------------------------------\
+|    Unordered lists                                                          |
+\----------------------------------------------------------------------------->
+      <h2>Unordered list stylings</h2>
+      <div class="list-container">
+        <ul class="circle">
+          <li>circle</li>
+          <li>circle</li>
+          <li>circle</li>
+        </ul>
+
+        <ul class="disc">
+          <li>disc</li>
+          <li>disc</li>
+          <li>disc</li>
+        </ul>
+
+        <ul class="square">
+          <li>square</li>
+          <li>square</li>
+          <li>square</li>
+        </ul>
+      </div>
+
+      <!----------------------------------------------------------------------------\
+|    Ordered lists                                                            |
+\----------------------------------------------------------------------------->
+      <h2>Ordered list stylings</h2>
+      <h3>Alphabetic</h3>
+      <div class="list-container-4">
+        <ol class="armenian">
+          <li>armenian</li>
+          <li>armenian</li>
+          <li>armenian</li>
+        </ol>
+
+        <ol class="georgian">
+          <li>georgian</li>
+          <li>georgian</li>
+          <li>georgian</li>
+        </ol>
+
+        <ol class="hebrew">
+          <li>hebrew</li>
+          <li>hebrew</li>
+          <li>hebrew</li>
+        </ol>
+
+        <ol class="lower-alpha">
+          <li>lower-alpha</li>
+          <li>lower-alpha</li>
+          <li>lower-alpha</li>
+        </ol>
+
+        <ol class="lower-greek">
+          <li>lower-greek</li>
+          <li>lower-greek</li>
+          <li>lower-greek</li>
+        </ol>
+
+        <ol class="upper-alpha">
+          <li>upper-alpha</li>
+          <li>upper-alpha</li>
+          <li>upper-alpha</li>
+        </ol>
+
+        <ol class="upper-greek">
+          <li>upper-greek</li>
+          <li>upper-greek</li>
+          <li>upper-greek</li>
+        </ol>
+      </div>
+
+      <h3>Japanese</h3>
+      <div class="list-container-4">
+        <ol class="hiragana">
+          <li>hiragana</li>
+          <li>hiragana</li>
+          <li>hiragana</li>
+        </ol>
+
+        <ol class="hiragana-iroha">
+          <li>hiragana-iroha</li>
+          <li>hiragana-iroha</li>
+          <li>hiragana-iroha</li>
+        </ol>
+
+        <ol class="katakana">
+          <li>katakana</li>
+          <li>katakana</li>
+          <li>katakana</li>
+        </ol>
+
+        <ol class="katakana-iroha">
+          <li>katakana-iroha</li>
+          <li>katakana-iroha</li>
+          <li>katakana-iroha</li>
+        </ol>
+      </div>
+
+      <h3>Numeric</h3>
+      <div class="list-container">
+        <ol class="cjk-ideographic">
+          <li>cjk-ideographic</li>
+          <li>cjk-ideographic</li>
+          <li>cjk-ideographic</li>
+        </ol>
+
+        <ol class="decimal">
+          <li>decimal</li>
+          <li>decimal</li>
+          <li>decimal</li>
+        </ol>
+
+        <ol class="decimal-leading-zero">
+          <li>decimal-leading-zero</li>
+          <li>decimal-leading-zero</li>
+          <li>decimal-leading-zero</li>
+        </ol>
+
+        <ol class="lower-roman">
+          <li>lower-roman</li>
+          <li>lower-roman</li>
+          <li>lower-roman</li>
+        </ol>
+
+        <ol class="upper-roman">
+          <li>upper-roman</li>
+          <li>upper-roman</li>
+          <li>upper-roman</li>
+        </ol>
+      </div>
+
+      <!----------------------------------------------------------------------------\
+|    List position                                                            |
+\----------------------------------------------------------------------------->
+      <h2>List position styling</h2>
+      <div class="list-container">
+        <ul class="inside">
+          <li>inside</li>
+          <li>inside</li>
+          <li>inside</li>
+        </ul>
+        <ul class="outside">
+          <li>outside</li>
+          <li>outside</li>
+          <li>outside</li>
+        </ul>
+      </div>
+
+      <!----------------------------------------------------------------------------\
+|    Emojis lists                                                             |
+\----------------------------------------------------------------------------->
+      <h2>Emoji list styling</h2>
+      <div class="list-container">
+        <ul class="emoji smile">
+          <li>smile</li>
+          <li>smile</li>
+          <li>smile</li>
+        </ul>
+        <ul class="emoji laugh">
+          <li>laugh</li>
+          <li>laugh</li>
+          <li>laugh</li>
+        </ul>
+        <ul class="emoji heart">
+          <li>heart</li>
+          <li>heart</li>
+          <li>heart</li>
+        </ul>
+      </div>
+
+      <!----------------------------------------------------------------------------\
+|    Image lists                                                              |
+\----------------------------------------------------------------------------->
+      <h2>Image list styling</h2>
+      <div class="list-container">
+        <ul class="image-mouse">
+          <li>mouse</li>
+          <li>mouse</li>
+          <li>mouse</li>
+        </ul>
+        <ul class="image-keyboard">
+          <li>keyboard</li>
+          <li>keyboard</li>
+          <li>keyboard</li>
+        </ul>
+        <ul class="image-screen">
+          <li>screen</li>
+          <li>screen</li>
+          <li>screen</li>
+        </ul>
+      </div>
+
+      <!----------------------------------------------------------------------------\
+|    Gradient lists                                                           |
+\----------------------------------------------------------------------------->
+      <h2>Color gradient list styling</h2>
+      <div class="list-container">
+        <ul class="gradient-red-green">
+          <li>red-green</li>
+          <li>red-green</li>
+          <li>red-green</li>
+        </ul>
+        <ul class="gradient-blue-orange">
+          <li>blue-orange</li>
+          <li>blue-orange</li>
+          <li>blue-orange</li>
+        </ul>
+        <ul class="gradient-yellow-purple">
+          <li>yellow-purple</li>
+          <li>yellow-purple</li>
+          <li>yellow-purple</li>
+        </ul>
+      </div>
+    </main>
+  </body>
 </html>
 
 <!--
 
 # ul
 # ol
+# dl
 
 # list-style-type
-- disc
-- circle
-- square
-- none
-- character
-- custom counter style
-
-# type I i A a 1
-
-# list-style-position: inside
-
-# list-style-image: linear-gradient( to left bottom, red, blue);
-
-# list-style-image: url("img.gif");
-
-# dl -> dt, dd
+# list-style-position
+# list-style-image: linear-gradient();
+# list-style-image: url();
 
 # use google fonts
 

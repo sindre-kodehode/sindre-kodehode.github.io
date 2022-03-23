@@ -1,0 +1,112 @@
+:root {
+  --catawba       : #6d3b47ff;
+  --dark-liver    : #453a49ff;
+  --magenta-dye   : #ba2c73ff;
+  --space-cadet   : #191d32ff;
+  --space-cadet-2 : #282f44ff;
+}
+
+body {
+    margin: auto;
+    max-width: 50em;
+    background: var(--space-cadet);
+}
+
+h1, h2 {
+    color: var(--catawba);
+}
+
+ul, ol, dl {
+    background: var(--space-cadet-2);
+    color: var(--magenta-dye);
+}
+
+li, dt, dd {
+    background: var(--dark-liver);
+}
+
+/******************************************************************************
+*  Unrdered list types                                                        *
+******************************************************************************/
+.circle { list-style-type : circle ; }
+.disc   { list-style-type : disc   ; }
+.square { list-style-type : square ; }
+
+
+/******************************************************************************
+*  Ordered list types                                                         *
+******************************************************************************/
+.armenian             { list-style-type : armenian             ; }
+.cjk-ideographic      { list-style-type : cjk-ideographic      ; }
+.decimal              { list-style-type : decimal              ; }
+.decimal-leading-zero { list-style-type : decimal-leading-zero ; }
+.georgian             { list-style-type : georgian             ; }
+.hebrew               { list-style-type : hebrew               ; }
+.hiragana             { list-style-type : hiragana             ; }
+.hiragana-iroha       { list-style-type : hiragana-iroha       ; }
+.katakana             { list-style-type : katakana             ; }
+.katakana-iroha       { list-style-type : katakana-iroha       ; }
+.lower-alpha          { list-style-type : lower-alpha          ; }
+.lower-greek          { list-style-type : lower-greek          ; }
+.lower-latin          { list-style-type : lower-latin          ; }
+.lower-roman          { list-style-type : lower-roman          ; }
+.upper-alpha          { list-style-type : upper-alpha          ; }
+.upper-greek          { list-style-type : upper-greek          ; }
+.upper-latin          { list-style-type : upper-latin          ; }
+.upper-roman          { list-style-type : upper-roman          ; }
+
+
+/******************************************************************************
+*  List style positions                                                       *
+******************************************************************************/
+.outside { list-style-position : outside ; }
+.inside  { list-style-position : inside  ; }
+
+
+/******************************************************************************
+*  Emoji                                                                      *
+******************************************************************************/
+.emoji              { list-style-type : none  ; }
+.emoji > li::before { margin-right    : 0.5em ; }
+
+.smile > li::before { content : "😃" ; }
+.laugh > li::before { content : "🤣" ; }
+.heart > li::before { content : "😍" ; }
+
+
+/******************************************************************************
+*  List style image                                                           *
+******************************************************************************/
+.image-mouse    { list-style-image : url(img/reshot-icon-mouse.svg)    ; }
+.image-keyboard { list-style-image : url(img/reshot-icon-keyboard.svg) ; }
+.image-screen   { list-style-image : url(img/reshot-icon-screen.svg)   ; }
+
+
+/******************************************************************************
+*  List style gradient                                                        *
+******************************************************************************/
+.gradient-red-green {
+    list-style-image : linear-gradient(45deg, #B82214, #66B032);
+}
+
+.gradient-blue-orange {
+    list-style-image : linear-gradient(45deg, #144EB8, #FB8604);
+}
+
+.gradient-yellow-purple {
+    list-style-image : linear-gradient(45deg, #FEFE33, #8601AF);
+}
+
+
+/******************************************************************************
+*  Grid container                                                             *
+******************************************************************************/
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.list-container-4 {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
