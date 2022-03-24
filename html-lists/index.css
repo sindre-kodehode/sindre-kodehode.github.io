@@ -1,28 +1,33 @@
 :root {
-  --catawba       : #6d3b47ff;
-  --dark-liver    : #453a49ff;
-  --magenta-dye   : #ba2c73ff;
-  --space-cadet   : #191d32ff;
-  --space-cadet-2 : #282f44ff;
+  --color-lightest : #efddfd;
+  --color-light    : #d198fc;
+  --color-dark     : #170325;
+  --color-darkest  : #0a0311;
+
+  --color-red     : #B82214;
+  --color-green   : #66B032;
+  --color-blue    : #144EB8;
+  --color-orange  : #FB8604;
+  --color-yellow  : #FEFE33;
+  --color-purpule : #8601AF;
 }
 
 body {
-    margin: auto;
-    max-width: 50em;
-    background: var(--space-cadet);
+    background  : var(--color-darkest);
+    color       : var(--color-lightest);
+    font-family : "PT Serif";
+    margin      : auto;
+    max-width   : 40em;
 }
 
-h1, h2 {
-    color: var(--catawba);
+h1 {
+  font-family : "Limelight" ;
+  font-size   : 3.5em;
+  text-align  : center;
 }
 
-ul, ol, dl {
-    background: var(--space-cadet-2);
-    color: var(--magenta-dye);
-}
-
-li, dt, dd {
-    background: var(--dark-liver);
+h1, h2, h3 {
+    color : var(--color-light);
 }
 
 /******************************************************************************
@@ -62,9 +67,11 @@ li, dt, dd {
 .outside { list-style-position : outside ; }
 .inside  { list-style-position : inside  ; }
 
+.outside li, .inside li { background: var(--color-dark); }
+
 
 /******************************************************************************
-*  Emoji                                                                      *
+*  Emoji list style                                                           *
 ******************************************************************************/
 .emoji              { list-style-type : none  ; }
 .emoji > li::before { margin-right    : 0.5em ; }
@@ -86,15 +93,18 @@ li, dt, dd {
 *  List style gradient                                                        *
 ******************************************************************************/
 .gradient-red-green {
-    list-style-image : linear-gradient(45deg, #B82214, #66B032);
+    list-style-image
+    : linear-gradient(45deg , var(--color-red) , var(--color-green));
 }
 
 .gradient-blue-orange {
-    list-style-image : linear-gradient(45deg, #144EB8, #FB8604);
+    list-style-image 
+    : linear-gradient(45deg, var(--color-blue), var(--color-orange));
 }
 
 .gradient-yellow-purple {
-    list-style-image : linear-gradient(45deg, #FEFE33, #8601AF);
+    list-style-image
+    : linear-gradient(45deg, var(--color-yellow), var(--color-purpule));
 }
 
 
@@ -102,11 +112,11 @@ li, dt, dd {
 *  Grid container                                                             *
 ******************************************************************************/
 .list-container {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+    display               : grid;
+    grid-template-columns : repeat(3, auto);
 }
 
 .list-container-4 {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
+    display               : grid;
+    grid-template-columns : repeat(4, auto);
 }
