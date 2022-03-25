@@ -10,14 +10,14 @@ const leadsFromStorage = localStorage.getItem('myLeads');
 
 let myLeads = [];
 
+deleteBtn.addEventListener('click', deleteLeads);
+ inputBtn.addEventListener('click', addLead);
+   tabBtn.addEventListener('click', addTab);
+
 if (leadsFromStorage) {
   myLeads = JSON.parse(leadsFromStorage);
   render(myLeads);
 }
-
-inputBtn.addEventListener('click', addLead);
-deleteBtn.addEventListener('click', deleteLeads);
-tabBtn.addEventListener('click', saveTab)
 
 function addLead() {
   myLeads.push(inputEl.value);
@@ -27,28 +27,36 @@ function addLead() {
   render(myLeads);
 }
 
-function saveLeads() {
-  localStorage.setItem('myLeads', JSON.stringify(myLeads));
-  console.log('hello');
-}
-
-function saveTab() {
-  console.log('hello');
-  browser.tabs.get().url;
-
-  myLeads.push(browser.tabs);
-  saveLeads();
-  render(myLeads);
+function addTab() {
+  chrome.tabs.query(
+    {
+      active        : true,
+      currentWindow : true
+    },
+    function(tabs) {
+      myLeads.push(tabs[0].url);
+      saveLeads();
+      render(myLeads);
+    }
+  );
 }
 
 function deleteLeads() {
   localStorage.clear();
   myLeads = [];
+
   render(myLeads);
+}
+
+function saveLeads() {
+  localStorage.setItem(
+    'myLeads', JSON.stringify(myLeads)
+  );
 }
 
 function render(list) {
   let listItems = '';
+
   for (const li of list) {
     listItems += `
     <li>
