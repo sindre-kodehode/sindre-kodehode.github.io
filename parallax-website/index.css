@@ -1,0 +1,95 @@
+:root {
+  --dark-sienna : #310c12ff ;
+  --khaki-web   : #cbb6a4ff ;
+}
+
+* {
+  box-sizing : border-box ;
+  margin     : 0          ;
+  padding    : 0          ;
+}
+
+body,
+html {
+  background  : var(--dark-sienna)     ;
+  color       : var(--khaki-web)       ;
+  font-family : "Noto Serif JP", serif ;
+  height      : 100%                   ;
+  text-align  : justify                ;
+}
+
+
+/******************************************************************************
+*  Text stying                                                                *
+*  Separate styling is applied to every other <p> element to style the        *
+*  japanese text vertically and reversed colors                               *
+******************************************************************************/
+h2,
+p {
+  align-items     : center ;
+  display         : flex   ;
+  justify-content : center ;
+}
+
+h2 {
+  font-size  : 4rem     ;
+  min-height : 8em      ;
+  position   : relative ;
+}
+
+h2.title {
+  filter     : opacity(100%) ;
+  min-height : 100%          ;
+}
+
+p {
+  font-size   : 1.1rem ;
+  line-height : 2.5em  ;
+  padding     : 4em 0  ;
+}
+
+p:nth-of-type(even) {
+  margin    : 0 auto ;
+  max-width : 40em   ;
+}
+
+p:nth-of-type(odd) {
+  background   : var(--khaki-web)   ;
+  color        : var(--dark-sienna) ;
+  max-height   : 25em               ;
+  width        : 100%               ;
+  writing-mode : vertical-rl        ;
+}
+
+
+/******************************************************************************
+*  Header background styling                                                  *
+*  Applies a background image to the headings with fixed attachement to       *
+*  achieve a parallax effect. Also applies a gradient between the background  *
+*  and text to darken the image and make the text more legible. Inspired by   *
+*  Kevin Powell's video about ::before and ::after                            *
+*  https://youtu.be/QFjqxVMwIl8                                               *
+******************************************************************************/
+h2::before,
+h2::after {
+  content  : ''       ;
+  inset    : 0        ;
+  position : absolute ;
+  z-index  : -1       ;
+}
+
+h2::before {
+  background      : center no-repeat fixed ;
+  background-size : cover                  ;
+}
+
+h2.bg-image1::before { background-image : url('img/IMG_20190415_164800.jpg') ; }
+h2.bg-image2::before { background-image : url('img/IMG_20190504_154657.jpg') ; }
+h2.bg-image3::before { background-image : url('img/IMG_20190409_140823.jpg') ; }
+h2.bg-image4::before { background-image : url('img/IMG_20190409_133946.jpg') ; }
+h2.bg-image5::before { background-image : url('img/IMG_20190409_130543.jpg') ; }
+h2.bg-image6::before { background-image : url('img/IMG_20190408_135107.jpg') ; }
+
+h2::after {
+  background : linear-gradient(0deg , #000000ee, #00000000) ;
+}
