@@ -83,12 +83,12 @@ h2::before {
   background-size : cover                  ;
 }
 
-h2.bg-image1::before { background-image : url('img/IMG_20190415_164800.jpg') ; }
-h2.bg-image2::before { background-image : url('img/IMG_20190504_154657.jpg') ; }
-h2.bg-image3::before { background-image : url('img/IMG_20190409_140823.jpg') ; }
-h2.bg-image4::before { background-image : url('img/IMG_20190409_133946.jpg') ; }
-h2.bg-image5::before { background-image : url('img/IMG_20190409_130543.jpg') ; }
-h2.bg-image6::before { background-image : url('img/IMG_20190408_135107.jpg') ; }
+h2.bg-image1::before { background-image : url('../img/IMG_20190415_164800.jpg') ; }
+h2.bg-image2::before { background-image : url('../img/IMG_20190504_154657.jpg') ; }
+h2.bg-image3::before { background-image : url('../img/IMG_20190409_140823.jpg') ; }
+h2.bg-image4::before { background-image : url('../img/IMG_20190409_133946.jpg') ; }
+h2.bg-image5::before { background-image : url('../img/IMG_20190409_130543.jpg') ; }
+h2.bg-image6::before { background-image : url('../img/IMG_20190408_135107.jpg') ; }
 
 h2::after {
   background : linear-gradient(0deg , #000000ee, #00000000) ;
