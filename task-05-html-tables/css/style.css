@@ -111,18 +111,20 @@ tr:first-child th:first-child {
 
 
 /******************************************************************************
-*  visual effects                                                             *
+*  Visual effects                                                             *
+*  Adds a blur filter to make it look even more like a picture. It            *
+*  dissapears on hover and also adds a highlight on the hovered cell.         *
 ******************************************************************************/
 main {
-  filter: blur(0.8px);
+  filter     : blur(0.8px) ;
 }
 
 main:hover {
-  filter: none;
+  filter     : none        ;
 }
 
 td:hover, th:hover {
-  background : #dddddd ;
+  background : #dddddd     ;
 }
 
 
@@ -132,7 +134,7 @@ td:hover, th:hover {
 *  \a adds a new-line character and "whitespace: pre;" makes sure it counts.  *
 ******************************************************************************/
 body {
-  counter-reset     : period-counter                             ;
+  counter-reset     : period-counter                            ;
 }
 
 tr:first-child
