@@ -10,4 +10,4 @@
 - [task-02-css-box-model](./task-02-css-box-model)
 - [task-04-css-parallax-website](./task-04-css-parallax-website)
 - [task-05-html-tables](./task-05-html-tables)
-
+- [project-planets](./planeter-prosjekt/)
