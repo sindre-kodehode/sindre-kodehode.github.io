@@ -111,8 +111,16 @@ tr:first-child th:first-child {
 
 
 /******************************************************************************
-*  Hover effect                                                               *
+*  visual effects                                                             *
 ******************************************************************************/
+main {
+  filter: blur(0.8px);
+}
+
+main:hover {
+  filter: none;
+}
+
 td:hover, th:hover {
   background : #dddddd ;
 }
