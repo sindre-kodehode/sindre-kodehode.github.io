@@ -138,7 +138,7 @@ body {
 }
 
 tr:first-child
-th:not(:first-child):not(:nth-child(5)):before {
+th:not( :first-child ):not( :nth-child(5) )::before {
   content           : counter(period-counter, upper-roman) '\a' ;
   counter-increment : period-counter                            ;
   white-space       : pre                                       ;
