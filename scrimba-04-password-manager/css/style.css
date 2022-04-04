@@ -31,7 +31,7 @@ main {
 
 button {
   background: #10b981;
-  background-image: url("icon-1.png");
+  background-image: url("../img/icon-1.png");
   background-position: 0.5em 0.1em;
   background-repeat: no-repeat;
   background-size: 2em;
@@ -63,7 +63,7 @@ hr {
 
 .password-fields {
   background: #273549;
-  background-image: url("icon-2.png");
+  background-image: url("../img/icon-2.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 2em;
