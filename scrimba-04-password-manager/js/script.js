@@ -2,8 +2,15 @@ let pass1El  = document.getElementById('password1');
 let pass2El  = document.getElementById('password2');
 let pass3El  = document.getElementById('password3');
 let pass4El  = document.getElementById('password4');
+
 let outputEl = document.getElementById('length-output');
 let inputEl  = document.getElementById('length-input');
+
+let generateButton = document.getElementById('generate-button');
+
+inputEl.addEventListener('input', updateLength);
+generateButton.addEventListener('click', generatePassword);
+
 
 let legalChars = "";
 legalChars    += "0123456789";
