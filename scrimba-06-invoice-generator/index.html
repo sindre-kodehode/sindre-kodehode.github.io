@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter"
-    />
-    <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Invoice Creator</title>
-  </head>
-  <body>
-    <header>
-      <h1>Invoice creator</h1>
-      <p>Thanks for choosing GoodCorp. LLC!</p>
-    </header>
-    <main>
-      <form name="">
-        <div class="button-container">
-          <input id="wash-car-button" type="button" value="Wash Car: $10" />
-          <input id="mow-lawn-button" type="button" value="Mow Lawn: $20" />
-          <input id="pull-weeds-button" type="button" value="Pull Weeds: $30" />
-        </div>
-        <div class="header-container">
-          <p>task</p>
-          <p>total</p>
-        </div>
-        <div class="task-container">
-        </div>
-        <hr />
-        <div class="header-container">
-          <p>notes</p>
-          <p>total amount</p>
-        </div>
-        <output>$0</output>
-        <input type="reset" value="Send Invoice" />
-      </form>
-    </main>
-  </body>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <title>Invoice Creator</title>
+
+</head>
+<body>
+
+  <header>
+    <h1>Invoice creator</h1>
+    <p>Thanks for choosing GoodCorp. LLC!</p>
+  </header>
+
+  <main>
+
+    <div class="button-container">
+      <input id="wash-car-button" type="button" value="Wash Car: $10" />
+      <input id="mow-lawn-button" type="button" value="Mow Lawn: $20" />
+      <input id="pull-weeds-button" type="button" value="Pull Weeds: $30" />
+    </div>
+
+    <div class="header-container">
+      <h2>task</h2>
+      <h2>total</h2>
+    </div>
+
+    <div id="task-container"></div>
+
+    <hr />
+
+    <div class="header-container">
+      <h2>notes</h2>
+      <h2>total amount</h2>
+    </div>
+
+    <output id="total-element">$0</output>
+
+    <input id="send-invoice-button" type="button" value="Send Invoice" disabled="disabled" />
+
+  </main>
+</body>
+<script src="js/script.js"></script>
 </html>
