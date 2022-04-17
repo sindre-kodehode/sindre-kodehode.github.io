@@ -1,0 +1,174 @@
+body {
+  background : #e5e5e5 ;
+}
+
+
+/*******************************************************************************
+*  Desktop                                                                     *
+*******************************************************************************/
+.Desktop-1 {
+  background : #fff     ;
+  height     : 1024px   ;
+  inset      :   20px   ;
+  position   : absolute ;
+  width      : 1440px   ;
+  z-index    : -4       ;
+}
+
+
+/*******************************************************************************
+*  Line                                                                        *
+*******************************************************************************/
+.Line {
+  background    : #fff            ;
+  position      : absolute        ;
+  border-bottom :  4px solid #fff ;
+  border-top    :  4px solid #fff ;
+}
+
+.Line-1,
+.Line-3 {
+  height :  2px ;
+  width  : 67px ;
+}
+
+.Line-2 {
+  height    :  2px           ;
+  transform : rotate(-90deg) ;
+  width     : 70px           ;
+}
+
+.Line-1 { inset : 311px 708px ; }
+.Line-2 { inset : 307px 702px ; }
+.Line-3 { inset : 631px 708px ; }
+
+
+/*******************************************************************************
+*  Ellipse                                                                     *
+*******************************************************************************/
+.Ellipse {
+  position      : absolute ;
+  border-radius : 50%      ;
+}
+
+.Ellipse-1,
+.Ellipse-2 {
+  background : #4333f7 ;
+  height     : 113px   ;
+  width      : 115px   ;
+}
+
+.Ellipse-3,
+.Ellipse-4,
+.Ellipse-5,
+.Ellipse-6 {
+  background : #9def6b ;
+  height     : 154px   ;
+  width      : 178px   ;
+}
+
+.Ellipse-1,
+.Ellipse-2,
+.Ellipse-3,
+.Ellipse-6 {
+  z-index : -1 ;
+}
+
+.Ellipse-4,
+.Ellipse-5 {
+  z-index : -3 ;
+}
+
+.Ellipse-1 { inset : 584px  684px ; }
+.Ellipse-2 { inset : 265px  684px ; }
+.Ellipse-3 { inset : 143px  287px ; }
+.Ellipse-4 { inset : 668px  287px ; }
+.Ellipse-5 { inset : 143px 1042px ; }
+.Ellipse-6 { inset : 668px 1042px ; }
+
+
+/*******************************************************************************
+*  Rectangle                                                                   *
+*******************************************************************************/
+.Rectangle-1 {
+  position      : absolute    ;
+  background    : #f87429     ;
+  border-radius :  52px       ;
+  height        : 563px       ;
+  inset         : 197px 335px ;
+  width         : 814px       ;
+  z-index       :  -2         ;
+}
+
+/*******************************************************************************
+*  Text                                                                        *
+*******************************************************************************/
+.Text {
+  position    : absolute ;
+  user-select : none     ;
+}
+
+.Text-0 {
+  color : #969696          ;
+  font  : 400 11px 'Inter' ;
+  height:  11px            ;
+  inset :  5px 20px        ;
+  width :  70px            ;
+}
+
+.Text-4 {
+  color         : #fff          ;
+  font          : 128px 'Inter' ;
+  height        : 152px         ;
+  inset         : 405px 708px   ;
+  overflow-wrap : anywhere      ;
+  width         :  67px         ;
+}
+
+.Text-1,
+.Text-2 {
+  font : 32px 'Inter' ;
+}
+
+.Text-1 {
+  height : 164px       ;
+  inset  :  18px 465px ;
+  width  : 531px       ;
+}
+
+.Text-2 {
+  height :  42px       ;
+  inset  : 766px 487px ;
+  width  : 427px       ;
+}
+
+.Text-3 {
+  font   :   20px 'Inter' ;
+  height :  225px         ;
+  inset  :  822px 448px   ;
+  width  : 1095px         ;
+}
+
+
+/*******************************************************************************
+*  Hover                                                                       *
+*******************************************************************************/
+.Ellipse:hover, 
+.Rectangle-1:hover,
+.Text-0:hover ~ .Desktop-1 {
+  outline : #0d99ff solid 2px ;
+}
+ 
+.Text:hover {
+  text-decoration : underline #0d99ff 2px ;
+}
+
+.Text-0:hover {
+  color           : #0d99ff ;
+  text-decoration : none    ;
+}
+
+.Line:hover {
+  background : #0d99ff ;
+  z-index    : 1       ;
+}
