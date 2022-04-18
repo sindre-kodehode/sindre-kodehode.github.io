@@ -1,0 +1,45 @@
+main {
+  background    : #f87429  ;
+  border-radius : 5rem     ;
+  inset         : 5rem     ;
+  position      : absolute ;
+} 
+
+main {
+  align-items     : center       ;
+  display         : flex         ;
+  flex-direction  : column       ;
+  justify-content : space-around ;
+}
+
+output,
+button {
+  color       : #fff         ;
+  font        : 8rem 'Inter' ;
+  user-select : none         ;
+}
+
+button {
+  background    : #4333f7 ;
+  border        : none    ;
+  border-radius : 50%     ;
+  height        : 1.25em  ;
+  width         : 1.25em  ;
+}
+
+button::before,
+button::after {
+  background    : #9def6b  ;
+  border-radius : 50%      ;
+  content       : ''       ;
+  height        : 9rem     ;
+  position      : absolute ;
+  width         : 10rem    ;
+}
+
+button::before { z-index : -1 ; }
+
+.inc-btn::after  { top    : -2.5rem ; left  : -2.5rem ; }
+.inc-btn::before { top    : -2.5rem ; right : -2.5rem ; }
+.dec-btn::after  { bottom : -2.5rem ; right : -2.5rem ; }
+.dec-btn::before { bottom : -2.5rem ; left  : -2.5rem ; }
