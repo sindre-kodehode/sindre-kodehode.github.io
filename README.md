@@ -13,6 +13,8 @@
 - [task-03-html-lists](./html-lists)
 - [task-04-css-parallax-website](./task-04-css-parallax-website)
 - [task-05-html-tables](./task-05-html-tables)
+- [task-06-html-task-v1](./task-06-easter-task/v1)
+- [task-06-html-task-v2](./task-06-easter-task/v2)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt/)
