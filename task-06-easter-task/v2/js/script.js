@@ -1,15 +1,34 @@
 "use strict";
 
+
+/*******************************************************************************
+*  elements from the DOM                                                       *
+*******************************************************************************/
 const decBtn = document.querySelector( ".dec-btn" );
 const incBtn = document.querySelector( ".inc-btn" );
 const mainEl = document.querySelector( "main"     );
 const numEl  = document.querySelector( "output"   );
 
+
+/*******************************************************************************
+*  listen for clicks on the buttons, increment or decrement accordingly        *
+*******************************************************************************/
 decBtn.addEventListener( "click", () => { updateNumber( getNumber() - 1 ); });
 incBtn.addEventListener( "click", () => { updateNumber( getNumber() + 1 ); });
 
+
+/*******************************************************************************
+*  getNumber:                                                                  *
+*  converts the text of the output element to a Number and returns it          *
+*******************************************************************************/
 function getNumber() { return Number( numEl.textContent ); }
 
+
+/*******************************************************************************
+*  updateNumber:                                                               *
+*  checks if the number is divisible by 10, changes the background of the      *
+*  main element if so, also updates the text of the number element.            *
+*******************************************************************************/
 function updateNumber( n ) {
   if ( ( n % 10 ) === 0 ) {
     const maxColor  = 0xffffff;
