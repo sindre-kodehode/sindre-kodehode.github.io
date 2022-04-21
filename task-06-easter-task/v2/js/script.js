@@ -13,15 +13,13 @@ const numEl  = document.querySelector( "output"   );
 /*******************************************************************************
 *  listen for clicks on the buttons, increment or decrement accordingly        *
 *******************************************************************************/
-decBtn.addEventListener( "click", () => { updateNumber( getNumber() - 1 ); });
-incBtn.addEventListener( "click", () => { updateNumber( getNumber() + 1 ); });
+decBtn.addEventListener("click", () => {
+  updateNumber( +( numEl.textContent ) - 1 );
+});
 
-
-/*******************************************************************************
-*  getNumber:                                                                  *
-*  converts the text of the output element to a Number and returns it          *
-*******************************************************************************/
-function getNumber() { return Number( numEl.textContent ); }
+incBtn.addEventListener("click", () => {
+  updateNumber( +( numEl.textContent ) + 1 );
+});
 
 
 /*******************************************************************************
