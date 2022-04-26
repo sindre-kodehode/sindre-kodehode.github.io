@@ -14,11 +14,13 @@ const numEl  = document.querySelector( "output"   );
 *  listen for clicks on the buttons, increment or decrement accordingly        *
 *******************************************************************************/
 decBtn.addEventListener("click", () => {
-  updateNumber( +( numEl.textContent ) - 1 );
+  let n = +( numEl.textContent );
+  updateNumber( n - 1 );
 });
 
 incBtn.addEventListener("click", () => {
-  updateNumber( +( numEl.textContent ) + 1 );
+  let n = +( numEl.textContent );
+  updateNumber( n + 1 );
 });
 
 
