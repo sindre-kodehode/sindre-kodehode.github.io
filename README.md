@@ -15,6 +15,7 @@
 - [task-05-html-tables](./task-05-html-tables)
 - [task-06-html-task-v1](./task-06-easter-task/v1)
 - [task-06-html-task-v2](./task-06-easter-task/v2)
+- [task-07-css-pseudo-elements](./task-07-css-pseudo-elements)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt/)
