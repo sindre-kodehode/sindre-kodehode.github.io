@@ -1,6 +1,130 @@
-/* ::after */
-/* ::before */
-/* ::first-letter */
-/* ::first-line */
-/* ::marker */
-/* ::selection */
+@import url(https://fonts.googleapis.com/css?family=Fleur+De+Leah);
+
+:root {
+  --bg-dark   : #b5977daa ;
+  --bg-light  : #cbb6a4   ;
+  --text-dark : #000f14   ;
+  --text-red  : #c53049   ;
+}
+
+* {
+  box-sizing : border-box ;
+}
+
+body {
+  background : var(--bg-light) ;
+}
+
+main {
+  margin    : 0 auto ;
+  max-width : 50em   ;
+}
+
+
+/*******************************************************************************
+*  headers                                                                     *
+*******************************************************************************/
+h2 {
+  margin     : 2em    ;
+  text-align : center ;
+}
+
+h2::before, h2::after {
+  background-size : cover                            ;
+  background      : url(../img/border.svg) no-repeat ;
+  content         : ''                               ;
+  display         : inline-block                     ;
+  height          : 2em                              ;
+  position        : relative                         ;
+  width           : 8em                              ;
+}
+
+h2::after {
+  transform: scaleX(-1);
+  left: 1em;
+}
+
+h2::before {
+  right:1em;
+}
+
+
+/*******************************************************************************
+*  paragraphs                                                                  *
+*******************************************************************************/
+p {
+  background : linear-gradient( var(--bg-dark), var(--bg-dark) )
+             , url( ../img/noise.svg )                           ;
+  box-shadow : 5px 10px 10px var(--text-dark)                    ;
+  color      : var(--text-dark)                                  ;
+  font       : 2rem "Fleur De Leah"                              ;
+  margin     : 0 1em                                             ;
+  padding    : 2em                                               ;
+  text-align : justify                                           ;
+}
+
+p::first-letter {
+  color       : var(--text-red) ;
+  float       : left            ;
+  font-size   : 6em             ;
+  margin      : 0 0.4em 0.2em 0 ;
+}
+
+p:nth-of-type(even)::first-letter {
+  float       : right               ;
+  margin      : 0 0.4em 0.2em 0.4em ;
+}
+
+p::first-line {
+  text-decoration : underline wavy var(--text-red) 2px ;
+}
+
+p::selection {
+  background : var(--text-red) ;
+}
+
+
+/*******************************************************************************
+*  list                                                                        *
+*******************************************************************************/
+ul {
+  background            : linear-gradient( var(--bg-dark), var(--bg-dark) )
+                        , url( ../img/noise.svg )                           ;
+  box-shadow            : 5px 10px 10px var(--text-dark)                    ;
+  display               : grid                                              ;
+  grid-template-columns : repeat( 3, auto )                                 ;
+  margin                : 2em 2em                                           ;
+  padding               : 1em 3em                                           ;
+}
+
+ul li::marker {
+  color     : var(--text-red) ;
+  font-size : 2rem            ;
+}
+
+
+/*******************************************************************************
+*  textarea                                                                    *
+*******************************************************************************/
+textarea {
+  background : var(--bg-light)                ;
+  border     : 1em solid var(--bg-dark)       ;
+  box-shadow : 5px 10px 10px var(--text-dark) ;
+  height     : 20em                           ;
+  padding    : 2em                            ;
+  resize     : none                           ;
+  width      : 100%                           ;
+}
+
+textarea::placeholder {
+  color : var(--text-red) ;
+}
+
+textarea:hover {
+  border : 1em solid var(--text-red) ;
+}
+
+textarea:focus {
+  border  : 1em solid var(--text-red) ;
+  outline : none                      ;
+}
