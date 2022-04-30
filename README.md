@@ -16,10 +16,12 @@
 - [task-06-html-task-v1](./task-06-easter-task/v1)
 - [task-06-html-task-v2](./task-06-easter-task/v2)
 - [task-07-css-pseudo-elements](./task-07-css-pseudo-elements)
+- [task-08-js-string-and-array-builtins](./task-08-js-string-and-array-builtins)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt/)
 
 ## extra tasks
 - [extra-01-tip-calculator-app-main](./extra-01-tip-calculator-app-main)
+- [extra-02-nrk-newsfeed](./extra-02-nrk-newsfeed/)
  
