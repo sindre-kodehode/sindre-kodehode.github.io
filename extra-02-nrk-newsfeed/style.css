@@ -1,0 +1,23 @@
+body {
+  font     : 1rem monospace;
+  margin   : 0 auto        ;
+  padding  : 1em           ;
+  max-width: 80ch          ;
+}
+
+p {
+  margin :0;
+  padding:0;
+}
+
+img {
+  border: solid 0.5em #999;
+  float : right           ;
+  height: auto            ;
+  margin: 0 0 1em 1em     ;
+  width : 50%             ;
+}
+
+.selected {
+  background-color: #999;
+}
