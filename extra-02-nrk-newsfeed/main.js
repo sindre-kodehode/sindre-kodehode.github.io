@@ -1,17 +1,35 @@
 "use strict"
 
+
+/*******************************************************************************
+* server sent event source                                                     *
+*******************************************************************************/
 const url = "https://nrkno-ssenotifier.nrk.no/sse/newsfeed";
 const eventSource = new EventSource( url );
 
+
+/*******************************************************************************
+* DOM elements                                                                 *
+*******************************************************************************/
 const articlesElement = document.querySelector( ".articles" );
 const viewElement     = document.querySelector( ".view" );
 
+
+/*******************************************************************************
+* global variables                                                             *
+*******************************************************************************/
 let articles;
 let data;
-let selectedArticle = 0;
+let selected = 0;
 
+
+/*******************************************************************************
+* message recived event                                                        *
+*******************************************************************************/
 eventSource.onmessage = event => {
   data = JSON.parse( event.data );
+
+  articlesElement.textContent = "";
 
   for ( let message of data.messages ) {
     const infoElement = document.createElement( "p" );
@@ -20,48 +38,51 @@ eventSource.onmessage = event => {
     articlesElement.appendChild( infoElement );
   }
   
-  articles = document.querySelectorAll( "p" );
-  articles[selectedArticle].classList.toggle( "selected" );
+  articles = document.querySelectorAll( ".articles p" );
+  articles[selected].classList.toggle( "selected" );
   viewArticle();
 };
 
+
+/*******************************************************************************
+* keypress events                                                              *
+*******************************************************************************/
 document.addEventListener( "keydown", event => {
   switch ( event.code ) {
-    case "KeyJ" : nextArticle(); break;
-    case "KeyK" : prevArticle(); break;
+    case "KeyJ" : selectArticle( selected + 1 ); break;
+    case "KeyK" : selectArticle( selected - 1 ); break;
   }
 });
 
-const nextArticle = () => {
-  articles[selectedArticle].classList.toggle( "selected" );
-  selectedArticle++;
 
-  if ( selectedArticle > articles.length - 1 ) {
-    selectedArticle = articles.length - 1;
+/*******************************************************************************
+* highlight selected article                                                   *
+*******************************************************************************/
+const selectArticle = ( article ) => {
+  articles[selected].classList.toggle( "selected" );
+
+  selected = article;
+
+  if ( selected < 0 ) {
+    selected = 0;
   }
 
-  articles[selectedArticle].classList.toggle( "selected" );
-  articles[selectedArticle].scrollIntoView( true );
+  if ( selected > articles.length - 1 ) {
+    selected = articles.length - 1;
+  }
+
+  articles[selected].classList.toggle( "selected" );
+  articles[selected].scrollIntoView( true );
 
   viewArticle();
 };
 
-const prevArticle = () => {
-  articles[selectedArticle].classList.toggle( "selected" );
-  selectedArticle--;
 
-  if ( selectedArticle < 0 ) {
-    selectedArticle = 0;
-  }
-
-  articles[selectedArticle].classList.toggle( "selected" );
-  articles[selectedArticle].scrollIntoView( true );
-
-  viewArticle();
-};
-
+/*******************************************************************************
+* view selected article view at bottom of the page                             *
+*******************************************************************************/
 const viewArticle = () => {
-  const message = data.messages[selectedArticle];
+  const message = data.messages[selected];
   const title = document.createElement( "h2" );
   const info  = document.createElement( "p" );
   const lead  = document.createElement( "p" );
@@ -73,7 +94,7 @@ const viewArticle = () => {
     info.textContent += ` ${message.compilations[0].title}`;
   }
 
-  lead.innerHTML    = `${message.lead}`;
+  lead.innerHTML = `${message.lead}`;
 
   viewElement.innerHTML = "";
   viewElement.appendChild( title );
