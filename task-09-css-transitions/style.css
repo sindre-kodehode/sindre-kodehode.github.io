@@ -1,0 +1,97 @@
+@import url( "https://fonts.googleapis.com/css2?family=DM+Sans" );
+
+* {
+  margin  : 0 ;
+  padding : 0 ;
+}
+
+
+/*******************************************************************************
+* common properties                                                            *
+*******************************************************************************/
+body {
+  background  : #e56977               ;
+  color       : #fff                  ;
+  font-family : 'DM Sans', sans-serif ;
+}
+
+main {
+  margin    : 0 auto ;
+  max-width : 70ch   ;
+}
+
+section, h1, h2 {
+  background    : #18181b ;
+  padding       : 1em     ;
+}
+
+
+/*******************************************************************************
+*  headers                                                                     *
+*******************************************************************************/
+h1 { text-align : center    ; }
+h2 { margin     : 2em 0 0 0 ; }
+
+
+/*******************************************************************************
+* border-radius                                                                *
+*******************************************************************************/
+section, h1 { border-radius : 0 0 20px 20px ; }
+h2          { border-radius : 20px 20px 0 0 ; }
+
+
+/*******************************************************************************
+* section                                                                      *
+*******************************************************************************/
+section {
+  display               : grid      ;
+  gap                   : 0.5em     ;
+  grid-template-columns : 7em auto  ;
+  margin                : 0 0 2em 0 ;
+  text-align            : right     ;
+}
+
+section div {
+  height : 2em ;
+  width  : 2em ;
+}
+
+section:hover div {
+  width : 100% ;
+}
+
+
+/*******************************************************************************
+* duration                                                                     *
+*******************************************************************************/
+section:nth-of-type(1) div                { background : #973c30         ; }
+
+section:nth-of-type(1) div:nth-of-type(1) { transition : width 1s linear ; }
+section:nth-of-type(1) div:nth-of-type(2) { transition : width 2s linear ; }
+section:nth-of-type(1) div:nth-of-type(3) { transition : width 3s linear ; }
+section:nth-of-type(1) div:nth-of-type(4) { transition : width 4s linear ; }
+section:nth-of-type(1) div:nth-of-type(5) { transition : width 5s linear ; }
+
+
+/*******************************************************************************
+* delay                                                                        *
+*******************************************************************************/
+section:nth-of-type(2) div                { background : #e090fd            ; }
+
+section:nth-of-type(2) div:nth-of-type(1) { transition : width 2s linear 0s ; }
+section:nth-of-type(2) div:nth-of-type(2) { transition : width 2s linear 1s ; }
+section:nth-of-type(2) div:nth-of-type(3) { transition : width 2s linear 2s ; }
+section:nth-of-type(2) div:nth-of-type(4) { transition : width 2s linear 3s ; }
+section:nth-of-type(2) div:nth-of-type(5) { transition : width 2s linear 4s ; }
+
+
+/*******************************************************************************
+* transition function                                                          *
+*******************************************************************************/
+section:nth-of-type(3) div                { background : #ef986d              ; }
+
+section:nth-of-type(3) div:nth-of-type(1) { transition : width 2s linear      ; }
+section:nth-of-type(3) div:nth-of-type(2) { transition : width 2s ease        ; }
+section:nth-of-type(3) div:nth-of-type(3) { transition : width 2s ease-out    ; }
+section:nth-of-type(3) div:nth-of-type(4) { transition : width 2s ease-in     ; }
+section:nth-of-type(3) div:nth-of-type(5) { transition : width 2s ease-in-out ; }
