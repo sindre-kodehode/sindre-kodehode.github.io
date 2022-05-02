@@ -12,7 +12,7 @@ const eventSource = new EventSource( url );
 * DOM elements                                                                 *
 *******************************************************************************/
 const articlesElement = document.querySelector( ".articles" );
-const viewElement     = document.querySelector( ".view" );
+const viewElement     = document.querySelector( ".view"     );
 
 
 /*******************************************************************************
@@ -21,6 +21,7 @@ const viewElement     = document.querySelector( ".view" );
 let articles;
 let data;
 let selected = 0;
+let pressedG = false;
 
 
 /*******************************************************************************
@@ -48,11 +49,22 @@ eventSource.onmessage = event => {
 * keypress events                                                              *
 *******************************************************************************/
 document.addEventListener( "keydown", event => {
-  switch ( event.code ) {
-    case "KeyJ" : selectArticle( selected + 1 ); break;
-    case "KeyK" : selectArticle( selected - 1 ); break;
+  switch ( event.key) {
+    case "j" : selectArticle( selected + 1 );        break;
+    case "k" : selectArticle( selected - 1 );        break;
+    case "g" : checkG();                             break;
+    case "G" : selectArticle( articles.length - 1 ); break;
   }
 });
+
+const checkG = () => {
+  if ( pressedG ) {
+    selectArticle( 0 );
+  } else {
+    pressedG = true;  
+    setTimeout( () => pressedG = false, 500 );
+  }
+};
 
 
 /*******************************************************************************
@@ -83,9 +95,9 @@ const selectArticle = ( article ) => {
 *******************************************************************************/
 const viewArticle = () => {
   const message = data.messages[selected];
-  const title = document.createElement( "h2" );
-  const info  = document.createElement( "p" );
-  const lead  = document.createElement( "p" );
+  const title   = document.createElement( "h2" );
+  const info    = document.createElement( "p"  );
+  const lead    = document.createElement( "p"  );
 
   title.textContent = `${message.title}`;
   info.textContent  = `${message.time}`;
@@ -96,13 +108,14 @@ const viewArticle = () => {
 
   lead.innerHTML = `${message.lead}`;
 
-  viewElement.innerHTML = "";
+  viewElement.textContent = "";
   viewElement.appendChild( title );
   viewElement.appendChild( info );
 
   if ( message.attachment ) {
     const image = document.createElement( "img" );
-    image.src = message.attachment.image;
+    image.src   = message.attachment.image;
+
     viewElement.appendChild( image );
   }
 
