@@ -17,10 +17,11 @@
 - [task-06-html-task-v2](./task-06-easter-task/v2)
 - [task-07-css-pseudo-elements](./task-07-css-pseudo-elements)
 - [task-08-js-string-and-array-builtins](./task-08-js-string-and-array-builtins)
-- [task-09-css-transitions](./task-09-css-transitions/)
+- [task-09-css-transitions](./task-09-css-transitions)
+- [task-10-js-arrays-loops-and-methods](./task-10-js-arrays-loops-and-methods)
 
 ## kodehode projects
-- [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt/)
+- [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
 
 ## extra tasks
 - [extra-01-tip-calculator-app-main](./extra-01-tip-calculator-app-main)
