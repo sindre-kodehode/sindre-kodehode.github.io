@@ -1,4 +1,4 @@
-# sindre-kodehode.github.io
+# sindre-kodehode
 
 ## scrimba tasks
 - [scrimba-01-passenger-counter](./scrimba-01-passenger-counter)
@@ -17,6 +17,7 @@
 - [task-06-html-task-v2](./task-06-easter-task/v2)
 - [task-07-css-pseudo-elements](./task-07-css-pseudo-elements)
 - [task-08-js-string-and-array-builtins](./task-08-js-string-and-array-builtins)
+- [task-09-css-transitions](./task-09-css-transitions/)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt/)
