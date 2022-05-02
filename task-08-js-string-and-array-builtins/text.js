@@ -1,5 +1,5 @@
-export const alice = `
-CHAPTER I.
+export const alice =
+`CHAPTER I.
 Down the Rabbit-Hole
 
 Alice was beginning to get very tired of sitting by her sister on the
@@ -200,5 +200,54 @@ things to happen, that it seemed quite dull and stupid for life to go
 on in the common way.
 
 So she set to work, and very soon finished off the cake.`;
+
+export const intro =
+`West of House
+You are in an open field west of a big white house with a boarded
+front door.
+There is a small mailbox here.\n`;
+
+export const descriptions = [ 
+`Darkness
+It is pitch black. You are likely to be eaten by a grue.\n`,
+
+`Damp Cave
+Someone carrying a large bag is casually leaning against one of the walls
+here. He does not speak, but it is clear from his acpect that the bag will be
+taken only over his dead body.\n`,
+
+`The Troll Room
+This is a small room with passages to the east and south and a forbidding
+hole leading west. Bloodstains and deep scrathces (perhaps made by an
+axe) mar the walls.  A nasty-looking troll, brandishing a bloody axe,
+blocks all passages out of the room.  Your sword has begun to glow
+very brightly.\n`,
+];
+
+export const deathscenes = [
+`Oh, no!  You walked into the slavering fangs of a lurking grue.
+As you take your last breath, you feel relieved of your burdens. The
+feeling passes as you find yourself before the gates of Hades, where the
+spirits jeer at you and deny you entry.  Your senses are disturbed.
+The objects in the dungeon appear indistinct, bleached of color,
+even unreal.
+The room looks strange and unearthly and objects appear indistinct.\n`,
+
+`You charge, but the thief jumps nimbly aside.
+The butt of his stiletto cracks you on the skull, and you stagger back.
+The thief bows formally, raises his stiletto, and with a wry grin, ends the
+battle and your life.\n`,
+
+`Your sword misses the troll by an inch.
+The troll's swing knocks you over as you barely parry in time.\n`,
+];
+
+export const actions = [
+"walk into darkness",
+"attack thief with sword",
+"attack troll with sword",
+];
+
+export const gameover = "You have no more lives, game over.";
 
 export { alice as default };
