@@ -67,11 +67,13 @@ result = [];
 added = 0;
 
 for ( let name of names ) {
-  if ( name.includes( "-" ) )
+  if ( name.includes( "-" ) ) {
     continue;
+  }
 
-  if ( added++ % 10 === 0 )
+  if ( added++ % 10 === 0 ) {
     name = name.toUpperCase();
+  }
 
   result.push( name + "!" );
 };
@@ -90,25 +92,46 @@ for ( let name of names ) {
   chars += name.length;
 }
 
-console.log( `chars in names array : ${chars.toExponential()}` );
+console.log( `chars in array : ${chars.toExponential()}` );
 
 
 /*******************************************************************************
-*  bonus: do everything with buildtin methods only                             *
+*  bonus: do everything in one loop!                                           *
 *******************************************************************************/
 console.log( "\n-- Bonus 1 ".padEnd( 81, "-") )
 
-result = names.filter( ( name, index ) => 
-  index % 2 === 0 && !name.includes( "-" )
-);
+result = [];
 
-longest = Array.from( result ).sort( ( a, b ) => b.length - a.length)[0];
+added   = 0;
+chars   = 0;
+longest = "";
 
-result = result.map( ( name, index ) =>
-  ( index % 10 === 0 ? name.toUpperCase() : name ) + "!"
-);
+names.forEach( ( name, index ) => {
+  // remove odd numbered names
+  if ( index % 2 !== 0 ) {
+    return;
+  }
 
-chars = result.join( "" ).length;
+  // remove hyphened names
+  if ( name.includes( "-" ) ) {
+    return;
+  }
+
+  // check if longest name
+  if ( name.length > longest.length ) {
+    longest = name;
+  }
+
+  // change to upper-case if divisible by 10
+  if ( added++ % 10 === 0 ) {
+    name = name.toUpperCase();
+  }
+
+  name  += "!";
+  chars += name.length;
+
+  result.push( name );
+});
 
 console.log( result );
 console.log( `longest name (${longest.length} chars) : ${longest}` );
@@ -116,31 +139,15 @@ console.log( `chars in array : ${chars.toExponential()}` );
 
 
 /*******************************************************************************
-*  bonus: do everything in one loop!                                           *
+*  bonus: do everything with buildtin methods only                             *
 *******************************************************************************/
 console.log( "\n-- Bonus 2 ".padEnd( 81, "-") )
 
-result = [];
+result = names.filter( ( v, k ) => k % 2 === 0 && !v.includes( "-" ) );
+longest = Array.from( result ).sort( ( a, b ) => b.length - a.length)[0];
 
-added = 0;
-chars = 0;
-longest = "";
-
-names.forEach( ( name, index ) => {
-  if ( index % 2 !== 0 || name.includes( "-" ) )
-    return;
-
-  if ( name.length > longest.length )
-    longest = name;
-
-  if ( added++ % 10 === 0 )
-    name = name.toUpperCase();
-
-  name += "!";
-  chars += name.length + 1;
-
-  result.push( name );
-});
+result = result.map( ( v, k ) => ( k % 10 === 0 ? v.toUpperCase() : v ) + "!" );
+chars = result.join( "" ).length;
 
 console.log( result );
 console.log( `longest name (${longest.length} chars) : ${longest}` );
@@ -203,7 +210,7 @@ longest name (17 chars) : Michael-Alexander
 ]
 
 -- Task 4 ----------------------------------------------------------------------
-chars in names array : 1.6385e+4
+chars in array : 1.6385e+4
 
 -- Bonus 1 ---------------------------------------------------------------------
 [
@@ -230,7 +237,7 @@ chars in names array : 1.6385e+4
   ... 1215 more items
 ]
 longest name (15 chars) : Oluwafikunayomi
-chars in array : 1.6385e+4
+chars in array : 8.895e+3
 
 -- Bonus 2 ---------------------------------------------------------------------
 [
