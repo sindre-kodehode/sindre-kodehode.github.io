@@ -11,7 +11,6 @@ import names from "./text.js"
 /*******************************************************************************
 * global variables                                                             *
 *******************************************************************************/
-let added;
 let chars;
 let longest;
 let result;
@@ -64,14 +63,13 @@ console.log( `longest name(s) (${longest[0].length} chars) : ${longest}` );
 console.log( "\n-- Task 3 ".padEnd( 81, "-") )
 
 result = [];
-added = 0;
 
 for ( let name of names ) {
   if ( name.includes( "-" ) ) {
     continue;
   }
 
-  if ( added++ % 10 === 0 ) {
+  if ( result.length % 10 === 0 ) {
     name = name.toUpperCase();
   }
 
@@ -102,7 +100,6 @@ console.log( "\n-- Bonus 1 ".padEnd( 81, "-") )
 
 result = [];
 
-added   = 0;
 chars   = 0;
 longest = "";
 
@@ -123,7 +120,7 @@ names.forEach( ( name, index ) => {
   }
 
   // change to upper-case if divisible by 10
-  if ( added++ % 10 === 0 ) {
+  if ( result.length % 10 === 0 ) {
     name = name.toUpperCase();
   }
 
@@ -143,11 +140,52 @@ console.log( `chars in array : ${chars.toExponential()}` );
 *******************************************************************************/
 console.log( "\n-- Bonus 2 ".padEnd( 81, "-") )
 
-result = names.filter( ( v, k ) => k % 2 === 0 && !v.includes( "-" ) );
-longest = Array.from( result ).sort( ( a, b ) => b.length - a.length)[0];
+result  = names.filter( ( name, index ) => 
+  index % 2 === 0 && !name.includes( "-" )
+);
 
-result = result.map( ( v, k ) => ( k % 10 === 0 ? v.toUpperCase() : v ) + "!" );
-chars = result.join( "" ).length;
+longest = Array.from( result ).sort(
+  ( a, b ) => b.length - a.length
+)[0];
+
+result = result.map( ( name, index ) =>
+  ( index % 10 === 0 ? name.toUpperCase() : name ) + "!"
+);
+
+chars  = result.join( "" ).length;
+
+console.log( result );
+console.log( `longest name (${longest.length} chars) : ${longest}` );
+console.log( `chars in array : ${chars.toExponential()}` );
+
+
+/*******************************************************************************
+*  bonus: use reduce                                                           *
+*******************************************************************************/
+console.log( "\n-- Bonus 3 ".padEnd( 81, "-") )
+
+longest = "";
+chars   = 0;
+
+result = names.reduce( ( previousValue, currentValue, currentIndex ) => {
+  if ( currentIndex % 2 === 0 && !currentValue.includes( "-" ) ) {
+    if ( currentValue.length > longest.length ) {
+      longest = currentValue;
+    }
+
+    currentValue = (
+      previousValue.length % 10 === 0
+        ? currentValue.toUpperCase()
+        : currentValue
+    ) + "!";
+
+    chars += currentValue.length;
+
+    previousValue.push( currentValue );
+  }
+
+  return previousValue;
+}, []);
 
 console.log( result );
 console.log( `longest name (${longest.length} chars) : ${longest}` );
@@ -240,6 +278,33 @@ longest name (15 chars) : Oluwafikunayomi
 chars in array : 8.895e+3
 
 -- Bonus 2 ---------------------------------------------------------------------
+[
+  'AARAN!',      'Aarez!',      'Aaron!',      'Aarron!',     'Aaryn!',
+  'Aazaan!',     'Abbas!',      'Abdalroof!',  'Abdirahman!', 'Abdul!',
+  'ABDULBASIR!', 'Abdulkarem!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
+  'Abel!',       'Abhisumant!', 'Abir!',       'Abu!',        'Ace!',
+  'ADAM!',       'Addison!',    'Adegbola!',   'Aden!',       'Adie!',
+  'Aditya!',     'Adrian!',     'Aedan!',      'Aedyn!',      'Afonso!',
+  'AHMED!',      'Ahoua!',      'Aiadan!',     'Aiden!',      'Aidy!',
+  'Aiman!',      'Ainslie!',    'Airidas!',    'AJ!',         'Akan!',
+  'AL!',         'Alan!',       'Alasdair!',   'Alber!',      'Albie!',
+  'Alec!',       'Aleem!',      'Aleksander!', 'Aleksandrs!', 'Alessandro!',
+  'ALEX!',       'Alexei!',     'Alexzander!', 'Alfee!',      'Alfred!',
+  'Alhaji!',     'Ali!',        'Alieu!',      'Alisdair!',   'Alistair!',
+  'ALISTER!',    'Allan!',      'Allen!',      'Allister!',   'Alphonse!',
+  'Alum!',       'Alvin!',      'Amaan!',      'Amani!',      'Ameer!',
+  'AMI!',        'Amir!',       'Ammar!',      'Amolpreet!',  'Amrinder!',
+  'Amro!',       'Andrea!',     'Andrei!',     'Andrew!',     'Anees!',
+  'ANGEL!',      'Angus!',      'Anis!',       'Anmolpreet!', 'Anndra!',
+  'Anthony!',    'Antoine!',    'Antoni!',     'Antony!',     'Anubhav!',
+  'AON!',        'Apisai!',     'Aran!',       'Arann!',      'Arayan!',
+  'Archie!',     'Ardal!',      'Areeb!',      'Aref!',       'Argyle!',
+  ... 1215 more items
+]
+longest name (15 chars) : Oluwafikunayomi
+chars in array : 8.895e+3
+
+-- Bonus 3 ---------------------------------------------------------------------
 [
   'AARAN!',      'Aarez!',      'Aaron!',      'Aarron!',     'Aaryn!',
   'Aazaan!',     'Abbas!',      'Abdalroof!',  'Abdirahman!', 'Abdul!',
