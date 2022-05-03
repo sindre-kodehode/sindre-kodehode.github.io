@@ -1,0 +1,74 @@
+* {
+  margin  : 0 ;
+  padding : 0 ;
+}
+
+:root {
+  --duration : 8s;
+}
+
+
+/*******************************************************************************
+*  sun and moon                                                                *
+*******************************************************************************/
+.sun, .moon {
+  animation : planets var( --duration ) linear infinite ;
+  clip-path : circle( 50% )                             ;
+  height    : 100px                                     ;
+  left      : calc( 50% - 50px )                        ;
+  position  : absolute                                  ;
+  top       : calc( 55% - 50px )                        ;
+  width     : 100px                                     ;
+  z-index   : -1                                        ;
+}
+
+.sun {
+  --start-deg : 0deg   ;
+  --end-deg   : 360deg ;
+  background  : yellow ;
+}
+
+.moon {
+  --start-deg : 180deg ;
+  --end-deg   : 540deg ;
+  background  : bisque ;
+}
+
+
+/*******************************************************************************
+*  sky and ground                                                              *
+*******************************************************************************/
+.sky, .ground {
+  animation  : fade var( --duration ) linear infinite ;
+  position   : absolute                               ;
+  width      : 100vw                                  ;
+}
+
+.sky {
+  --color    : skyblue ;
+  height     : 100vh   ;
+  top        : 0       ;
+  z-index    : -2      ;
+}
+
+.ground {
+  --color    : greenyellow                    ;
+  clip-path  : ellipse( 100% 100% at bottom ) ;
+  height     : 50vh                           ;
+  top        : 50%                            ;
+}
+
+
+/*******************************************************************************
+*  keyframes                                                                   *
+*******************************************************************************/
+@keyframes fade {
+    0% { background : var( --color ) ; }
+   50% { background : black          ; }
+  100% { background : var( --color ) ; }
+}
+
+@keyframes planets {
+    0% { transform : rotate( var( --start-deg ) ) translate( 33vw ) ; }
+  100% { transform : rotate( var( --end-deg   ) ) translate( 33vw ) ; }
+}
