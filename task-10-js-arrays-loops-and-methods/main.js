@@ -1,24 +1,36 @@
 #! /usr/bin/env node
 "use strict"
 
+
+/*******************************************************************************
+* imports                                                                      *
+*******************************************************************************/
 import names from "./text.js"
-let result = [];
+
+
+/*******************************************************************************
+* global variables                                                             *
+*******************************************************************************/
+let added;
+let chars;
+let longest;
+let result;
+
 
 /*******************************************************************************
 * 1. Fjern alle navn fra arrayet som har index som er oddetall                 *
 *******************************************************************************/
 console.log( "-- Task 1 ".padEnd( 80, "-") )
 
-result = names.filter(
-  ( _, i ) => i % 2 === 0
-);
+result = [];
+
+for ( let i = 0; i < names.length; i++ ) {
+  if ( i % 2 === 0 ) {
+    result.push( names[i] );
+  }
+}
 
 console.log( result );
-
-/* with a for loop */
-// for ( let i = 0; i < names.length; i++ )
-//   if ( i % 2 === 0)
-//     result.push( names[i] );
 
 
 /*******************************************************************************
@@ -26,28 +38,21 @@ console.log( result );
 *******************************************************************************/
 console.log( "\n-- Task 2 ".padEnd( 81, "-") )
 
-result = Array.from( names ).sort( 
-  ( a, b ) => b.length - a.length
-);
+result = [];
 
-let longest = result[0];
+for ( let name of names ) {
+  const length = name.length;
 
-console.log( `longest name (${longest.length} chars) : ${longest}` );
+  if ( !result[length] ) {
+    result[length] = [];
+  }
 
-/* makes an array of arrays with the index of the second array indicating */
-/* how many characters there are in the name.                             */
-// result = [];
-//
-// for ( let name of names ) {
-//   const length = name.length;
-//
-//   if ( typeof result[length] === "undefined" ) {
-//     result[length] = [];
-//   }
-//   result[length].push( name );
-// }
-//
-// console.log( `longest name (${result.at( -1 )[0].length} chars) : ${result.at( -1)}` );
+  result[length].push( name );
+}
+
+longest = result.at(-1);
+
+console.log( `longest name(s) (${longest[0].length} chars) : ${longest}` );
 
 
 /*******************************************************************************
@@ -59,29 +64,19 @@ console.log( `longest name (${longest.length} chars) : ${longest}` );
 console.log( "\n-- Task 3 ".padEnd( 81, "-") )
 
 result = [];
-let added = 0;
+added = 0;
 
 for ( let name of names ) {
   if ( name.includes( "-" ) )
     continue;
 
-  if ( ++added % 10 === 0 )
+  if ( added++ % 10 === 0 )
     name = name.toUpperCase();
 
   result.push( name + "!" );
-}
+};
 
 console.log( result );
-
-/* with builtin methods */
-// const addExclamation = name => name + "!";
-// const removeHyphen   = name => !name.includes( "-" );
-//
-// const toUpperModuloTen = ( name, index ) => {
-//   return index % 10 === 0 ? name.toUpperCase() : name
-// };
-//
-// console.log( names.filter( removeHyphen ).map( toUpperModuloTen ).map( addExclamation ) );
 
 
 /*******************************************************************************
@@ -89,15 +84,41 @@ console.log( result );
 *******************************************************************************/
 console.log( "\n-- Task 4 ".padEnd( 81, "-") )
 
-let chars = names.join().length.toExponential();
+chars = 0;
 
-console.log( `chars in names array : ${chars}` );
+for ( let name of names ) {
+  chars += name.length;
+}
+
+console.log( `chars in names array : ${chars.toExponential()}` );
+
+
+/*******************************************************************************
+*  bonus: do everything with buildtin methods only                             *
+*******************************************************************************/
+console.log( "\n-- Bonus 1 ".padEnd( 81, "-") )
+
+result = names.filter( ( name, index ) => 
+  index % 2 === 0 && !name.includes( "-" )
+);
+
+longest = Array.from( result ).sort( ( a, b ) => b.length - a.length)[0];
+
+result = result.map( ( name, index ) =>
+  ( index % 10 === 0 ? name.toUpperCase() : name ) + "!"
+);
+
+chars = result.join( "" ).length;
+
+console.log( result );
+console.log( `longest name (${longest.length} chars) : ${longest}` );
+console.log( `chars in array : ${chars.toExponential()}` );
 
 
 /*******************************************************************************
 *  bonus: do everything in one loop!                                           *
 *******************************************************************************/
-console.log( "\n-- Bonus ".padEnd( 81, "-") )
+console.log( "\n-- Bonus 2 ".padEnd( 81, "-") )
 
 result = [];
 
@@ -105,19 +126,21 @@ added = 0;
 chars = 0;
 longest = "";
 
-for ( let [ index, name ] of names.entries() ) {
+names.forEach( ( name, index ) => {
   if ( index % 2 !== 0 || name.includes( "-" ) )
-    continue;
-
-  if ( ++added % 10 === 0 )
-    name = name.toUpperCase();
+    return;
 
   if ( name.length > longest.length )
     longest = name;
 
+  if ( added++ % 10 === 0 )
+    name = name.toUpperCase();
+
+  name += "!";
   chars += name.length + 1;
-  result.push( name + "!" );
-}
+
+  result.push( name );
+});
 
 console.log( result );
 console.log( `longest name (${longest.length} chars) : ${longest}` );
@@ -156,54 +179,81 @@ longest name (17 chars) : Michael-Alexander
 
 -- Task 3 ----------------------------------------------------------------------
 [
-  'Aaran!',       'Aaren!',       'Aarez!',      'Aarman!',     'Aaron!',
-  'Aarron!',      'Aaryan!',      'Aaryn!',      'Aayan!',      'AAZAAN!',
-  'Abaan!',       'Abbas!',       'Abdallah!',   'Abdalroof!',  'Abdihakim!',
-  'Abdirahman!',  'Abdisalam!',   'Abdul!',      'Abdulbasir!', 'ABDULKADIR!',
-  'Abdulkarem!',  'Abdulkhader!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
-  'Abdurraheem!', 'Abel!',        'Abhinav!',    'Abhisumant!', 'ABID!',
-  'Abir!',        'Abraham!',     'Abu!',        'Abubakar!',   'Ace!',
-  'Adain!',       'Adam!',        'Addison!',    'Addisson!',   'ADEGBOLA!',
-  'Adegbolahan!', 'Aden!',        'Adenn!',      'Adie!',       'Adil!',
-  'Aditya!',      'Adnan!',       'Adrian!',     'Adrien!',     'AEDAN!',
-  'Aedin!',       'Aedyn!',       'Aeron!',      'Afonso!',     'Ahmad!',
-  'Ahmed!',       'Ahoua!',       'Ahtasham!',   'Aiadan!',     'AIDAN!',
-  'Aiden!',       'Aidian!',      'Aidy!',       'Ailin!',      'Aiman!',
-  'Ainsley!',     'Ainslie!',     'Airen!',      'Airidas!',    'AIRLIE!',
+  'AARAN!',       'Aaren!',       'Aarez!',      'Aarman!',     'Aaron!',
+  'Aarron!',      'Aaryan!',      'Aaryn!',      'Aayan!',      'Aazaan!',
+  'ABAAN!',       'Abbas!',       'Abdallah!',   'Abdalroof!',  'Abdihakim!',
+  'Abdirahman!',  'Abdisalam!',   'Abdul!',      'Abdulbasir!', 'Abdulkadir!',
+  'ABDULKAREM!',  'Abdulkhader!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
+  'Abdurraheem!', 'Abel!',        'Abhinav!',    'Abhisumant!', 'Abid!',
+  'ABIR!',        'Abraham!',     'Abu!',        'Abubakar!',   'Ace!',
+  'Adain!',       'Adam!',        'Addison!',    'Addisson!',   'Adegbola!',
+  'ADEGBOLAHAN!', 'Aden!',        'Adenn!',      'Adie!',       'Adil!',
+  'Aditya!',      'Adnan!',       'Adrian!',     'Adrien!',     'Aedan!',
+  'AEDIN!',       'Aedyn!',       'Aeron!',      'Afonso!',     'Ahmad!',
+  'Ahmed!',       'Ahoua!',       'Ahtasham!',   'Aiadan!',     'Aidan!',
+  'AIDEN!',       'Aidian!',      'Aidy!',       'Ailin!',      'Aiman!',
+  'Ainsley!',     'Ainslie!',     'Airen!',      'Airidas!',    'Airlie!',
   'AJ!',          'Ajay!',        'Ajayraj!',    'Akan!',       'Akram!',
-  'Al!',          'Ala!',         'Alan!',       'Alanas!',     'ALASDAIR!',
-  'Alastair!',    'Alber!',       'Albert!',     'Albie!',      'Aldred!',
-  'Alec!',        'Aled!',        'Aleem!',      'Aleksandar!', 'ALEKSANDER!',
-  'Aleksandr!',   'Aleksandrs!',  'Alekzander!', 'Alessandro!', 'Alessio!',
-  'Alex!',        'Alexander!',   'Alexei!',     'Alexx!',      'ALEXZANDER!',
+  'Al!',          'Ala!',         'Alan!',       'Alanas!',     'Alasdair!',
+  'ALASTAIR!',    'Alber!',       'Albert!',     'Albie!',      'Aldred!',
+  'Alec!',        'Aled!',        'Aleem!',      'Aleksandar!', 'Aleksander!',
+  'ALEKSANDR!',   'Aleksandrs!',  'Alekzander!', 'Alessandro!', 'Alessio!',
+  'Alex!',        'Alexander!',   'Alexei!',     'Alexx!',      'Alexzander!',
   ... 2522 more items
 ]
 
 -- Task 4 ----------------------------------------------------------------------
-chars in names array : 1.9122e+4
+chars in names array : 1.6385e+4
 
--- Bonus -----------------------------------------------------------------------
+-- Bonus 1 ---------------------------------------------------------------------
 [
-  'Aaran!',      'Aarez!',      'Aaron!',      'Aarron!',     'Aaryn!',
-  'Aazaan!',     'Abbas!',      'Abdalroof!',  'Abdirahman!', 'ABDUL!',
-  'Abdulbasir!', 'Abdulkarem!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
-  'Abel!',       'Abhisumant!', 'Abir!',       'Abu!',        'ACE!',
-  'Adam!',       'Addison!',    'Adegbola!',   'Aden!',       'Adie!',
-  'Aditya!',     'Adrian!',     'Aedan!',      'Aedyn!',      'AFONSO!',
-  'Ahmed!',      'Ahoua!',      'Aiadan!',     'Aiden!',      'Aidy!',
-  'Aiman!',      'Ainslie!',    'Airidas!',    'AJ!',         'AKAN!',
-  'Al!',         'Alan!',       'Alasdair!',   'Alber!',      'Albie!',
-  'Alec!',       'Aleem!',      'Aleksander!', 'Aleksandrs!', 'ALESSANDRO!',
-  'Alex!',       'Alexei!',     'Alexzander!', 'Alfee!',      'Alfred!',
-  'Alhaji!',     'Ali!',        'Alieu!',      'Alisdair!',   'ALISTAIR!',
-  'Alister!',    'Allan!',      'Allen!',      'Allister!',   'Alphonse!',
-  'Alum!',       'Alvin!',      'Amaan!',      'Amani!',      'AMEER!',
-  'Ami!',        'Amir!',       'Ammar!',      'Amolpreet!',  'Amrinder!',
-  'Amro!',       'Andrea!',     'Andrei!',     'Andrew!',     'ANEES!',
-  'Angel!',      'Angus!',      'Anis!',       'Anmolpreet!', 'Anndra!',
-  'Anthony!',    'Antoine!',    'Antoni!',     'Antony!',     'ANUBHAV!',
-  'Aon!',        'Apisai!',     'Aran!',       'Arann!',      'Arayan!',
-  'Archie!',     'Ardal!',      'Areeb!',      'Aref!',       'ARGYLE!',
+  'AARAN!',      'Aarez!',      'Aaron!',      'Aarron!',     'Aaryn!',
+  'Aazaan!',     'Abbas!',      'Abdalroof!',  'Abdirahman!', 'Abdul!',
+  'ABDULBASIR!', 'Abdulkarem!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
+  'Abel!',       'Abhisumant!', 'Abir!',       'Abu!',        'Ace!',
+  'ADAM!',       'Addison!',    'Adegbola!',   'Aden!',       'Adie!',
+  'Aditya!',     'Adrian!',     'Aedan!',      'Aedyn!',      'Afonso!',
+  'AHMED!',      'Ahoua!',      'Aiadan!',     'Aiden!',      'Aidy!',
+  'Aiman!',      'Ainslie!',    'Airidas!',    'AJ!',         'Akan!',
+  'AL!',         'Alan!',       'Alasdair!',   'Alber!',      'Albie!',
+  'Alec!',       'Aleem!',      'Aleksander!', 'Aleksandrs!', 'Alessandro!',
+  'ALEX!',       'Alexei!',     'Alexzander!', 'Alfee!',      'Alfred!',
+  'Alhaji!',     'Ali!',        'Alieu!',      'Alisdair!',   'Alistair!',
+  'ALISTER!',    'Allan!',      'Allen!',      'Allister!',   'Alphonse!',
+  'Alum!',       'Alvin!',      'Amaan!',      'Amani!',      'Ameer!',
+  'AMI!',        'Amir!',       'Ammar!',      'Amolpreet!',  'Amrinder!',
+  'Amro!',       'Andrea!',     'Andrei!',     'Andrew!',     'Anees!',
+  'ANGEL!',      'Angus!',      'Anis!',       'Anmolpreet!', 'Anndra!',
+  'Anthony!',    'Antoine!',    'Antoni!',     'Antony!',     'Anubhav!',
+  'AON!',        'Apisai!',     'Aran!',       'Arann!',      'Arayan!',
+  'Archie!',     'Ardal!',      'Areeb!',      'Aref!',       'Argyle!',
+  ... 1215 more items
+]
+longest name (15 chars) : Oluwafikunayomi
+chars in array : 1.6385e+4
+
+-- Bonus 2 ---------------------------------------------------------------------
+[
+  'AARAN!',      'Aarez!',      'Aaron!',      'Aarron!',     'Aaryn!',
+  'Aazaan!',     'Abbas!',      'Abdalroof!',  'Abdirahman!', 'Abdul!',
+  'ABDULBASIR!', 'Abdulkarem!', 'Abdullah!',   'Abdulmalik!', 'Abdur!',
+  'Abel!',       'Abhisumant!', 'Abir!',       'Abu!',        'Ace!',
+  'ADAM!',       'Addison!',    'Adegbola!',   'Aden!',       'Adie!',
+  'Aditya!',     'Adrian!',     'Aedan!',      'Aedyn!',      'Afonso!',
+  'AHMED!',      'Ahoua!',      'Aiadan!',     'Aiden!',      'Aidy!',
+  'Aiman!',      'Ainslie!',    'Airidas!',    'AJ!',         'Akan!',
+  'AL!',         'Alan!',       'Alasdair!',   'Alber!',      'Albie!',
+  'Alec!',       'Aleem!',      'Aleksander!', 'Aleksandrs!', 'Alessandro!',
+  'ALEX!',       'Alexei!',     'Alexzander!', 'Alfee!',      'Alfred!',
+  'Alhaji!',     'Ali!',        'Alieu!',      'Alisdair!',   'Alistair!',
+  'ALISTER!',    'Allan!',      'Allen!',      'Allister!',   'Alphonse!',
+  'Alum!',       'Alvin!',      'Amaan!',      'Amani!',      'Ameer!',
+  'AMI!',        'Amir!',       'Ammar!',      'Amolpreet!',  'Amrinder!',
+  'Amro!',       'Andrea!',     'Andrei!',     'Andrew!',     'Anees!',
+  'ANGEL!',      'Angus!',      'Anis!',       'Anmolpreet!', 'Anndra!',
+  'Anthony!',    'Antoine!',    'Antoni!',     'Antony!',     'Anubhav!',
+  'AON!',        'Apisai!',     'Aran!',       'Arann!',      'Arayan!',
+  'Archie!',     'Ardal!',      'Areeb!',      'Aref!',       'Argyle!',
   ... 1215 more items
 ]
 longest name (15 chars) : Oluwafikunayomi
