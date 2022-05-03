@@ -25,6 +25,11 @@ console.log( even );
 *******************************************************************************/
 console.log( "\n-- Task 2 ".padEnd( 81, "-") )
 
+
+/*******************************************************************************
+* alternative that makes an array of arrays with the index of the second       *
+* array indicating how many characters there are in the name.                  *
+ 
 const result = [];
 
 for ( let name of names ) {
@@ -36,8 +41,13 @@ for ( let name of names ) {
   result[length].push( name );
 }
 
-console.log( `longest name (${result.length - 1} chars) : ${result.at(-1)}` );
+*******************************************************************************/
 
+const result = names.sort( ( a, b ) => {
+  return b.length - a.length;
+} );
+
+console.log( `longest name (${result[0].length} chars) : ${result[0]}` );
 
 /*******************************************************************************
 * 3. Utfør disse oppgavene ved å bruke bare 1 loop                             *
