@@ -67,8 +67,7 @@ const countBoomerangs4 = arr => {
   if ( arr.length === 3 )
     return ( arr[0] !== arr[1] && arr[0] === arr[2] ) ? 1 : 0;
   else
-    return countBoomerangs( arr.slice( 0, 3 ) )
-         + countBoomerangs( arr.slice( 1 ) );
+    return countBoomerangs( arr.slice( 0, 3 ) ) + countBoomerangs( arr.slice( 1 ) );
 };
 
 // regex

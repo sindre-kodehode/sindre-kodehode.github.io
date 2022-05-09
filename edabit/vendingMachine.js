@@ -37,27 +37,27 @@ const products = [
 ];
 
 const vendingMachine = ( products, amount, productNo ) => {
-  const selected = products.find( e => productNo === e.number );
+  const product = products.find( e => productNo === e.number );
 
-  if ( !selected               ) return "Enter a valid product number";
-  if ( selected.price > amount ) return "Not enough money for this product";
+  if ( !product                ) return "Enter a valid product number";
+  if (  product.price > amount ) return "Not enough money for this product";
 
-  const denominations = [500, 200, 100, 50, 20, 10];
-  const change = [];
+  const denominations = [ 500, 200, 100, 50, 20, 10 ];
+  const change        = [];
 
-  let remainder = amount - selected.price;
+  let remainder = amount - product.price;
 
-  while ( remainder > 0 ) {
-    for ( let denomination of denominations ) {
-      if ( remainder >= denomination ) {
-        change.push( denomination );
-        remainder -= denomination;
-        break;
-      }
+  for ( let denomination of denominations ) {
+    while ( denomination <= remainder ) {
+      change.push( denomination );
+      remainder -= denomination;
     }
   }
 
-  return { "product" : selected.name, "change" : change };
+  return {
+    "product" : product.name,
+    "change"  : change,
+  };
 };
 
 // Examples
