@@ -10,7 +10,7 @@
 ## kodehode tasks 
 - [task-01-html-formating](./task-01-html-formating)
 - [task-02-css-box-model](./task-02-css-box-model)
-- [task-03-html-lists](./html-lists)
+- [task-03-html-lists](./task-03-html-lists/)
 - [task-04-css-parallax-website](./task-04-css-parallax-website)
 - [task-05-html-tables](./task-05-html-tables)
 - [task-06-html-task-v1](./task-06-easter-task/v1)
@@ -19,6 +19,7 @@
 - [task-08-js-string-and-array-builtins](./task-08-js-string-and-array-builtins)
 - [task-09-css-transitions](./task-09-css-transitions)
 - [task-10-js-arrays-loops-and-methods](./task-10-js-arrays-loops-and-methods)
+- [task-11-css-animations](./task-11-css-animations/)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
