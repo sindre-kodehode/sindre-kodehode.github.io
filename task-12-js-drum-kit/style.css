@@ -1,0 +1,16 @@
+body {
+  background      : #222      ;
+}
+
+div {
+  align-items     : center    ;
+  background      : #777      ;
+  border-radius   : 0.5em     ;
+  display         : flex      ;
+  height          : 4em       ;
+  justify-content : center    ;
+  margin          : 1em auto  ;
+  max-width       : 40ch      ;
+  text-transform  : uppercase ;
+  user-select     : none      ;
+}
