@@ -1,14 +1,14 @@
 "use strict"
 
 const drums = [
-  { type : "clap"    , key : "a" , },
-  { type : "hihat"   , key : "s" , },
-  { type : "kick"    , key : "d" , },
-  { type : "openhat" , key : "f" , },
-  { type : "ride"    , key : "j" , },
-  { type : "snare"   , key : "k" , },
-  { type : "tink"    , key : "l" , },
-  { type : "tom"     , key : ";" , },
+  { type : "clap"    , key : "s" , },
+  { type : "hihat"   , key : "d" , },
+  { type : "kick"    , key : "f" , },
+  { type : "openhat" , key : "g" , },
+  { type : "ride"    , key : "h" , },
+  { type : "snare"   , key : "j" , },
+  { type : "tink"    , key : "k" , },
+  { type : "tom"     , key : "l" , },
 ];
 
 const playDrum = drum => new Audio( `./sound/${drum}.wav` ).play();
