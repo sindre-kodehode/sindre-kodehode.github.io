@@ -20,6 +20,7 @@
 - [task-09-css-transitions](./task-09-css-transitions)
 - [task-10-js-arrays-loops-and-methods](./task-10-js-arrays-loops-and-methods)
 - [task-11-css-animations](./task-11-css-animations/)
+- [task-12-js-drum-kit](./task-12-js-drum-kit)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
