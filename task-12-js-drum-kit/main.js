@@ -16,7 +16,7 @@ const playDrum = drum => new Audio( `./sound/${drum}.wav` ).play();
 drums.forEach( drum => {
   const element = document.createElement( "div" );
 
-  element.textContent = drum.type;
+  element.textContent = `${drum.type} [${drum.key}]`;
   element.addEventListener( "mousedown", () => playDrum( drum.type ) );
 
   document.body.appendChild( element );
@@ -32,7 +32,7 @@ drums.forEach( drum => {
 *     this.key  = key;                                                         * 
 *                                                                              * 
 *     this.element = document.createElement( "div" );                          * 
-*     this.element.textContent = this.type;                                    * 
+*     this.element.textContent = `${drum.type} [${drum.key}]`;                 * 
 *     this.element.addEventListener( "mousedown", () => this.play() );         * 
 *                                                                              * 
 *     document.body.appendChild( this.element );                               * 
