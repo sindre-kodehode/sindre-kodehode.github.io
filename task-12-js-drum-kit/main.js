@@ -1,5 +1,10 @@
 "use strict"
 
+
+/*******************************************************************************
+*  drums:                                                                      * 
+*  array of objects describing type of drum and which key to press             *
+*******************************************************************************/
 const drums = [
   { type : "clap"    , key : "s" , },
   { type : "hihat"   , key : "d" , },
@@ -11,21 +16,41 @@ const drums = [
   { type : "tom"     , key : "l" , },
 ];
 
+
+/*******************************************************************************
+*  playDrum:                                                                   *
+*  create and play the recieved type of drum                                   * 
+*******************************************************************************/
 const playDrum = drum => new Audio( `./sound/${drum}.wav` ).play();
 
+
+/*******************************************************************************
+*  loop trough the list of drums                                               *
+*******************************************************************************/
 drums.forEach( drum => {
+  // create new div element
   const element = document.createElement( "div" );
 
+  // add text to the element describing type and wich key to press
   element.textContent = `${drum.type} [${drum.key}]`;
+
+  // listen for a mouseclick and play respective drum
   element.addEventListener( "mousedown", () => playDrum( drum.type ) );
 
+  // append element to page
   document.body.appendChild( element );
+
+  // listen for keypress and play respective drum
   document.addEventListener( "keydown", e => {
     if ( e.key === drum.key ) playDrum( drum.type );
   });
 });
 
+
 /*******************************************************************************
+*  an OOP version using a Drum class                                           * 
+*  essentially the same as before, but a little neater, perhaps                * 
+******************************************************************************** 
 * class Drum {                                                                 * 
 *   constructor( type, key ) {                                                 * 
 *     this.type = type;                                                        * 
