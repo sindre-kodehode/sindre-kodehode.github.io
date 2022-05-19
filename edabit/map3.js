@@ -3,28 +3,28 @@
 
 const people = [
   {
-    name: "Thomas",
-    male: true,
-    age: 23,
-    hobbies: ["cycling", "football", "pool"],
+    n: "Thomas",
+    m: true,
+    a: 23,
+    h: ["cycling", "football", "pool"],
   },
   {
     name: "Susan",
-    male: false,
-    age: 26,
-    hobbies: ["jogging", "travelling", "dancing"],
+    m: false,
+    a: 26,
+    h: ["jogging", "travelling", "dancing"],
   },
   {
     name: "Monica",
-    male: false,
+    m: false,
     age: 21,
-    hobbies: ["skateboarding", "guitar", "concerts"],
+    h: ["skateboarding", "guitar", "concerts"],
   },
   {
     name: "Avery",
     male: true,
     age: 28,
-    hobbies: ["coding", "games", "memes"],
+    h: ["coding", "games", "memes"],
   },
   {
     name: "Phillip",
@@ -51,7 +51,7 @@ const mappedPeople = people.map( e => {
   return `${name} is a ${age} years old ${sex} and ${pronoun} likes ${hobby} among other things`;
 });
 
-console.log(mappedPeople);
+// console.log(mappedPeople);
  
 // one liner :p
 // console.log(people.map(e=>`${e.name} is a ${e.age} years old ${e.male?"man":"woman"} and ${e.male?"he":"she"} likes ${e.hobbies[Math.floor(Math.random()*e.hobbies.length)]} among other things`));
