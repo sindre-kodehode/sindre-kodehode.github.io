@@ -37,97 +37,8 @@ const hobbies = [
 *    hobbies: (randomly generate an array of 3 hobbies from the hobbies array  * 
 *              PS make sure the hobbies are 3 unique ones)                     * 
 *  }                                                                           * 
-*******************************************************************************/
-
-
-/*******************************************************************************
-* return a random integer between start and end argument                       * 
-* if no start vale is provided, returns a random integer between 0 and end     * 
-*******************************************************************************/
-const randomInt = ( end, start = 0 ) => {
-  return Math.floor( Math.random() * ( end - start ) ) + start;
-};
-
-
-/*******************************************************************************
-* return three random elements from an array                                   * 
-*******************************************************************************/
-const threeRandoms = arr => {
-  const result = [];
-
-  for ( let i = 0; i < 3; i++ ) {
-    result.push( arr.splice( randomInt( arr.length ), 1 )[0] );
-  }
-
-  return result;
-};
-
-
-/*******************************************************************************
-* check if the hobby already is added with buldtin method includes             *
-*******************************************************************************/
-const randomHobbies1 = () => {
-  const result = [];
-
-  while ( result.length < 3 ) {
-    const i = randomInt( hobbies.length );
-
-    if ( !result.includes( hobbies[i].toLowerCase() ) ) {
-      result.push( hobbies[i].toLowerCase() );
-    }
-  }
-
-  return result;
-};
-
-
-/*******************************************************************************
-* use Set to only accept unique hobbies                                        *
-*******************************************************************************/
-const randomHobbies2 = () => {
-  const result = new Set();
-
-  while ( result.size < 3 ) {
-    result.add( hobbies[ randomInt( hobbies.length ) ].toLowerCase() );
-  }
-
-  return Array.from( result );
-};
-
-
-/*******************************************************************************
-*  map all hobbies to lowercase, then filter out all the duplicates, then      * 
-*  return three random hobbies from the resulting array                        * 
-*******************************************************************************/
-const randomHobbies3 = () => {
-  let result = hobbies.map( e => e.toLowerCase() );
-  result     = result.filter( ( e, i ) => hobbies.indexOf( e ) === i );
-
-  return threeRandoms( result );
-}
-    
-
-/*******************************************************************************
-*  regex match every word only once and return three random hobbies            * 
-*******************************************************************************/
-const randomHobbies4 = () => 
-  threeRandoms( hobbies.join().match( /(\w+)(?!.*\1)/gi ) );
-
-
-/*******************************************************************************
-* print result                                                                 *
-*******************************************************************************/
-console.log( names.map( name => {
-  return {
-    name    : name,
-    age     : randomInt( 51, 18 ),
-    hobbies : randomHobbies4(),
-  };
-}));
-
-/*******************************************************************************
-*  example:                                                                    * 
 *                                                                              * 
+*  example:                                                                    * 
 *  {                                                                           * 
 *    name: "Scott"                                                             * 
 *    age: 31                                                                   * 
@@ -141,3 +52,74 @@ console.log( names.map( name => {
 *                                                                              * 
 *  Good luck!                                                                  * 
 *******************************************************************************/
+
+/*******************************************************************************
+* return a random integer between start and end argument                       * 
+* if no start vale is provided, returns a random integer between 0 and end     * 
+*******************************************************************************/
+const randomInt = ( end, start = 0 ) => {
+  return Math.floor( Math.random() * ( end - start ) ) + start;
+};
+
+
+/*******************************************************************************
+* return three unique random elements from an array                            * 
+*******************************************************************************/
+const randomHobbies1 = arr => {
+  const temp = [ ... arr ];
+  const result = [];
+
+  for ( let i = 0; i < 3; i++ ) {
+    // splice out a random element and push it into the result array
+    result.push( temp.splice( randomInt( temp.length ), 1 )[0] );
+  }
+
+  return result;
+};
+
+// using the Fisher-Yates shuffle algorithm
+const randomHobbies2 = arr => {
+  const temp = [ ... arr ];
+
+  for ( let i = 0; i < temp.length; i++ ) {
+    // pick a random index
+    const n = randomInt( temp.length );
+    
+    // swap the current index with the random one
+    [ temp[i], temp[n] ] = [ temp[n], temp[i] ];
+  }
+
+  // return the last three elements in the shuffled array
+  return temp.slice( -3 );
+};
+
+
+/*******************************************************************************
+* filter methods                                                               *
+*******************************************************************************/
+// map all hobbies to lowercase, then filter out all the duplicates
+const filterHobbies1 = arr => { 
+  return arr.map( e => e.toLowerCase() )
+            .filter( ( e, i ) => arr.indexOf( e ) === i );
+};
+
+// use Set to only accept unique hobbies
+const filterHobbies2 = arr => [ ... new Set( arr.map( e => e.toLowerCase() ) ) ];
+
+// regex match every word only once
+const filterHobbies3 = arr => arr.join().match( /(\w+)(?!.*\1)/gi );
+
+
+/*******************************************************************************
+* print result                                                                 *
+*******************************************************************************/
+const startAge = 18;
+const endAge   = 51;
+
+console.log( names.map( name => {
+  return {
+    name    : name,
+    age     : randomInt( endAge, startAge ),
+    hobbies : randomHobbies2( filterHobbies3( hobbies ) ),
+  };
+}));
