@@ -62,8 +62,8 @@ const people = [{
 *  Complete the .sort() to sort the people object array by age, from highest   * 
 *  to lowest age:                                                              * 
 *******************************************************************************/
-let sortedPeople1 = people.sort( ( a, b ) => b.age - a.age );
-console.log(sortedPeople1);
+people.sort( ( a, b ) => b.age - a.age );
+// console.log([...people]);
 
 /*******************************************************************************
 *  the console log should read:                                                * 
@@ -80,8 +80,8 @@ console.log(sortedPeople1);
 *  Complete the .sort() to sort the people object array by name length,
 *  from shortest to longest:
 *******************************************************************************/
-let sortedPeople2 = people.sort( ( a, b ) => a.name.length - b.name.length  );
-console.log(sortedPeople2);
+people.sort( ( a, b ) => a.name.length - b.name.length  );
+// console.log([...people]);
 
 
 /*******************************************************************************
@@ -100,12 +100,14 @@ console.log(sortedPeople2);
 *  from fewest to most, and make ties sorted by name, alphabetically from      * 
 *  a-z (this can be accomplished with just 1 sort method)                      * 
 *******************************************************************************/
-let sortedPeople3 = people.sort( ( a, b ) => {
-  return a.hobbies.length - b.hobbies.length || a.name.localeCompare( b.name );
-});
+// people.sort( ( a, b ) => {
+//   return a.hobbies.length - b.hobbies.length || a.name.localeCompare( b.name );
+// });
 
-console.log(sortedPeople3);
+people.sort( ( a, b ) => a.name > b.name ? 1 : -1 );
+people.sort( ( a, b ) => a.hobbies.length - b.hobbies.length );
 
+console.log([...people]);
 
 /*******************************************************************************
 *  this should console log the following:                                      * 
