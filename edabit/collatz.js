@@ -134,3 +134,48 @@ console.log( `The integer with most steps was ${maxStepsInt}, with ${maxSteps} t
 console.log( `The integer with the hightest peak was ${maxPeakInt}, with a peak of ${maxPeak} ` );
 console.log( `The total number of calculations was ${totalSteps}` );
 console.log( `The total number of calculations skipped was ${skippedSteps}` );
+
+
+/*******************************************************************************
+* output:                                                                      * 
+********************************************************************************
+>> /usr/bin/time -v node collatz.js 100000000
+Running the Collatz procedure on all numbers from 1 to 100000000:
+The integer with most steps was 63728127, with 949 total steps
+The integer with the hightest peak was 80049391, with a peak of 2185143829170100
+The total number of calculations was 17923493583
+The total number of calculations skipped was 17787204239
+
+	User time (seconds): 48.00
+	System time (seconds): 0.74
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:48.60
+
+	Maximum resident set size (kbytes): 1512384
+
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 476407
+
+	Voluntary context switches: 3473
+	Involuntary context switches: 206
+
+>> /usr/bin/time -v node collatz.js 100000000
+Running the Collatz procedure on all numbers from 1 to 100000000:
+The integer with most steps was 63728127, with 949 total steps
+The integer with the hightest peak was 80049391, with a peak of 2185143829170100
+The total number of calculations was 17923493583
+The total number of calculations skipped was 0
+
+	User time (seconds): 184.55
+	System time (seconds): 0.01
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:04.66
+
+	Maximum resident set size (kbytes): 40828
+
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3949
+
+	Voluntary context switches: 53
+	Involuntary context switches: 629
+*******************************************************************************/
