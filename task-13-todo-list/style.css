@@ -1,38 +1,107 @@
 * {
-  margin: 0;
-  padding: 0;
+  margin  : 0 ;
+  padding : 0 ;
 }
 
 body {
-  background : #333;
+  background : #222   ;
+  color      : #ccc   ;
+  margin     : 0 auto ;
+  max-width  : 80ch   ;
+}
+
+.todo-item, .input-container {
+  background            : #222           ;
+  border-top            : 1px solid #333 ;
+  color                 : #ccc           ;
+  display               : grid           ;
+  gap                   : 8px            ;
+  grid-template-columns : 24px auto 24px ;
+  padding               : 8px 0          ;
+}
+
+.date {
+  margin      : 0 8px ;
+  user-select : none  ;
+}
+
+.sort-container {
+  display         : flex     ;
+  gap             : 8px      ;
+  justify-content : flex-end ;
+}
+
+.sorted, .sorted-reverse {
+  background-repeat   : no-repeat ;
+  background-size     : 16px 16px ;
+}
+
+.sorted         { background-image : url("icons/chevron-down.svg") ; }
+.sorted-reverse { background-image : url("icons/chevron-up.svg")   ; }
+
+.content-container {
+  display        : flex   ;
+  flex-direction : column ;
+}
+
+input {
+  background : #222 ;
+  border     : none ;
+  color      : #ccc ;
+  font-size  : 1rem ;
+  padding    : 8px  ;
+}
+
+input:hover {
+  background : #1a1a1a ;
+  color      : #eee    ;
+}
+
+input:focus {
+  background : #111 ;
+  outline    : none ;
 }
 
 h1 {
-  text-align: center;
-  color: #ccc;
+  font-size : 3rem;
 }
 
-input[type="text"]{
-  display: block;
-  width: 20em;
-  height: 2em;
-  margin: 1em auto;
-  padding: 0 0.5em;
-  font-size: 2em;
+button {
+  background     : #222       ;
+  border         : none       ;
+  color          : #ccc       ;
+  cursor         : pointer    ;
+  font-weight    : bold       ;
+  padding        : 0 0 0 16px ;
+  text-transform : uppercase  ;
 }
 
-li {
-  background: #ccc;
-  color: #333;
-  display: flex;
-  gap: 1em;
-  list-style-type: none;
-  margin: 0.5em;
-  padding: 1em;
+button:hover {
+  color : #eee ;
 }
 
 .done {
-  background: #555;
-  color: #888;
-  text-decoration-line: line-through;
+  text-decoration-line : line-through ;
 }
+
+.done input {
+  text-decoration-line : line-through ;
+}
+.check, .uncheck, .remove, .pluss {
+  background-position : center    ;
+  background-repeat   : no-repeat ;
+  background-size     : contain   ;
+  cursor              : pointer   ;
+  height              : 24px      ;
+  margin              : 6px 0     ;
+  width               : 24px      ;
+}
+
+.check:hover, .uncheck:hover, .remove:hover, .pluss:hover {
+  filter : brightness( 150% ) ;
+}
+
+.check   { background-image : url( "icons/circle-check-solid.svg" ) ; }
+.pluss   { background-image : url( "icons/plus-solid.svg" )         ; }
+.remove  { background-image : url( "icons/xmark-solid.svg" )        ; }
+.uncheck { background-image : url( "icons/circle-regular.svg" )     ; }
