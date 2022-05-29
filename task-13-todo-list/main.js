@@ -68,21 +68,21 @@ const sortContainer = addElement( "div", document.body, {
 sorts.forEach( ({ name, sort }) => {
   const button = addElement( "button", sortContainer, {
     textContent : name,
-  });
-  button.addEventListener( "click", () => {
-    removeSortIcon();
+    onclick     : () => {
+      removeSortIcon();
 
-    if ( sorted === name ) {
-      button.classList.add( "sorted-reverse" );
-      todos.reverse();
-      renderList( name );
-    }
+      if ( sorted === name ) {
+        button.classList.add( "sorted-reverse" );
+        todos.reverse();
+        renderList( name );
+      }
 
-    else {
-      button.classList.add( "sorted" );
-      todos.sort( sort );
-      renderList( name );
-    }
+      else {
+        button.classList.add( "sorted" );
+        todos.sort( sort );
+        renderList( name );
+      }
+    },
   });
 });
 
@@ -108,48 +108,44 @@ const renderList = sortOrder => {
 
     const checkBoxEl = addElement( "div", listItemEl, {
       className : "uncheck",
+      onclick   : () => {
+        todo.done = !todo.done;
+        renderList( "none" );
+      },
     });
 
     if ( todo.done ) checkBoxEl.className = "check";
 
-    checkBoxEl.addEventListener( "click", () => {
-      todo.done = !todo.done;
-      renderList( "none" );
-    });
-
     const contentEl = addElement( "div", listItemEl, {
       className : "content-container",
+      onchange  : () => {
+        todo.desc = descEl.value;
+        removeSortIcon();
+      },
     });
 
     const descEl = addElement( "input", contentEl, {
       value : todo.desc,
     });
 
-    descEl.addEventListener( "change", () => {
-      todo.desc = descEl.value;
-      removeSortIcon();
-    });
-
     const timeEl = addElement( "span", contentEl, {
       className   : "date",
       textContent : todo.due.toDateString(),
+      onclick     : () => {
+        timeEl.remove();
+
+        const timePickerEl = addElement( "input", contentEl, {
+          type : "datetime-local",
+        });
+      },
     });
 
-    timeEl.addEventListener( "click", () => {
-      timeEl.remove();
-
-      const timePickerEl = addElement( "input", contentEl, {
-        type : "datetime-local",
-      });
-    });
-
-    const removeEl = addElement( "span", listItemEl, {
+    addElement( "span", listItemEl, {
       className : "remove",
-    });
-
-    removeEl.addEventListener( "click", () => {
-      todos.splice( todos.indexOf( todo ), 1 );
-      renderList( "none" );
+      onclick   : () => {
+        todos.splice( todos.indexOf( todo ), 1 );
+        renderList( "none" );
+      },
     });
   });
 };
@@ -166,34 +162,32 @@ const inputContainer = addElement( "div", document.body, {
 
 const plussIcon = addElement( "span", inputContainer, {
   className : "pluss",
-});
-
-plussIcon.addEventListener( "click", () => {
-  input.focus();
+  onclick   : () => {
+    input.focus();
+  },
 });
 
 const input = addElement( "input", inputContainer, {
   type        : "text",
   placeholder : "Add todo",
-});
+  onkeydown   : ({ key, target }) => {
+    if ( key === "Enter" ) {
 
-input.addEventListener( "keydown", ({ key, target }) => {
-  if ( key === "Enter" ) {
+      if ( target.value.match( /^ *$/ ) ) return;
 
-    if ( target.value.match( /^ *$/ ) ) return;
+      const day = 1000 * 60 * 60 * 24;
 
-    const day = 1000 * 60 * 60 * 24;
+      todos.push({
+        desc  : target.value,
+        due   : new Date( Date.now() + day ),
+        added : new Date(),
+        done  : false,
+      });
 
-    todos.push({
-      desc  : target.value,
-      due   : new Date( Date.now() + day ),
-      added : new Date(),
-      done  : false,
-    });
+      target.value = "";
+      target.focus();
 
-    target.value = "";
-    target.focus();
-
-    renderList( "none" );
-  }
+      renderList( "none" );
+    }
+  },
 });
