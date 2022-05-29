@@ -38,7 +38,9 @@ const addElement = ( type, parent, opts={} ) => {
   return element;
 };
 
-const header = addElement( "h1", document.body, { textContent: "Todo List" } );
+addElement( "h1", document.body, {
+  textContent : "Todo List",
+});
 
 /*******************************************************************************
 *  sort the task array by different criteria                                   *
@@ -59,11 +61,14 @@ const removeSortIcon = () => {
   });
 };
 
-const sortContainer = addElement( "div", document.body )
-sortContainer.classList.add( "sort-container" );
+const sortContainer = addElement( "div", document.body, {
+  className : "sort-container"
+});
 
 sorts.forEach( ({ name, sort }) => {
-  const button = addElement( "button", sortContainer, { textContent: name } );
+  const button = addElement( "button", sortContainer, {
+    textContent : name,
+  });
   button.addEventListener( "click", () => {
     removeSortIcon();
 
@@ -87,7 +92,7 @@ sorts.forEach( ({ name, sort }) => {
 *  current task array                                                          * 
 *******************************************************************************/
 let sorted = "";
-const listEl = addElement( "div", document.body )
+const listEl = addElement( "div", document.body );
 
 const renderList = sortOrder => {
   sorted = sortOrder;
@@ -95,39 +100,53 @@ const renderList = sortOrder => {
 
   listEl.textContent = "";
   todos.forEach( todo => {
-    const listItemEl = addElement( "div", listEl );
-    listItemEl.classList.add( "todo-item" );
+    const listItemEl = addElement( "div", listEl, {
+      className : "todo-item",
+    });
+
     if ( todo.done ) listItemEl.classList.add( "done" );
 
-    const checkBoxEl = addElement( "div", listItemEl );
-    if ( todo.done ) checkBoxEl.classList.add( "check" );
-    else checkBoxEl.classList.add( "uncheck" );
+    const checkBoxEl = addElement( "div", listItemEl, {
+      className : "uncheck",
+    });
+
+    if ( todo.done ) checkBoxEl.className = "check";
+
     checkBoxEl.addEventListener( "click", () => {
       todo.done = !todo.done;
       renderList( "none" );
     });
 
-    const contentEl = addElement( "div", listItemEl );
-    contentEl.classList.add( "content-container" );
+    const contentEl = addElement( "div", listItemEl, {
+      className : "content-container",
+    });
 
-    const descEl = addElement( "input", contentEl, { value: todo.desc } );
+    const descEl = addElement( "input", contentEl, {
+      value : todo.desc,
+    });
+
     descEl.addEventListener( "change", () => {
       todo.desc = descEl.value;
       removeSortIcon();
     });
 
-    const timeEl = addElement( "span", contentEl )
-    timeEl.classList.add( "date" );
-    timeEl.textContent = todo.due.toDateString();
+    const timeEl = addElement( "span", contentEl, {
+      className   : "date",
+      textContent : todo.due.toDateString(),
+    });
+
     timeEl.addEventListener( "click", () => {
       timeEl.remove();
 
-      const timePickerEl = addElement( "input", contentEl );
-      timePickerEl.type = "datetime-local"
+      const timePickerEl = addElement( "input", contentEl, {
+        type : "datetime-local",
+      });
     });
 
-    const removeEl = addElement( "span", listItemEl );
-    removeEl.classList.add( "remove" );
+    const removeEl = addElement( "span", listItemEl, {
+      className : "remove",
+    });
+
     removeEl.addEventListener( "click", () => {
       todos.splice( todos.indexOf( todo ), 1 );
       renderList( "none" );
@@ -141,18 +160,23 @@ renderList( "none" );
 /*******************************************************************************
 *  add a new task object to the array                                          *
 *******************************************************************************/
-const inputContainer = addElement( "div", document.body );
-inputContainer.classList.add( "input-container" );
+const inputContainer = addElement( "div", document.body, {
+  className : "input-container",
+});
 
-const plussIcon = addElement( "span", inputContainer );
-plussIcon.classList.add( "pluss" );
+const plussIcon = addElement( "span", inputContainer, {
+  className : "pluss",
+});
+
 plussIcon.addEventListener( "click", () => {
   input.focus();
 });
 
-const input = addElement( "input", inputContainer );
-input.type = "text";
-input.placeholder = "Add todo"
+const input = addElement( "input", inputContainer, {
+  type        : "text",
+  placeholder : "Add todo",
+});
+
 input.addEventListener( "keydown", ({ key, target }) => {
   if ( key === "Enter" ) {
 
@@ -173,4 +197,3 @@ input.addEventListener( "keydown", ({ key, target }) => {
     renderList( "none" );
   }
 });
-
