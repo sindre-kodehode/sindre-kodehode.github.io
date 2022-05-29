@@ -2,55 +2,31 @@
 
 
 /*******************************************************************************
-*  array of task objects                                                       *
+*  global vairables                                                            *
 *******************************************************************************/
-const todos = [
-  { 
-    desc  : "Yoga",
-    due   : new Date( "May,27,2022,11:30" ),
-    added : new Date( "May,26,2022" ), 
-    done  : true,
-  }, { 
-    desc  : "Water plants",
-    due   : new Date( "May,28,2022,17:30" ),
-    added : new Date( "May,26,2022" ),
-    done  : true,
-  }, { 
-    desc  : "Package delivery",
-    due   : new Date( "May,28,2022,15:00" ),
-    added : new Date( "May,27,2022" ), 
-    done  : false,
-  }, { 
-    desc  : "Send report",
-    due   : new Date( "May,30,2022,17:00" ),
-    added : new Date( "May,25,2022" ), 
-    done  : false,
-  },
-];
-
-const addElement = ( type, parent, opts={} ) => {
-  const element = document.createElement( type );
-  parent.append( element );
-
-  for ( const [ key, value ] of Object.entries( opts ) )
-    element[ `${key}` ] = value;
-
-  return element;
-};
-
-addElement( "h1", document.body, {
-  textContent : "Todo List",
-});
-
-/*******************************************************************************
-*  sort the task array by different criteria                                   *
-*******************************************************************************/
+let sorted = "none";
+const todos = [];
 const sorts = [
   { name : "done" , sort : ( a    ) => a.done ? -1 : 1               , },
   { name : "desc" , sort : ( a, b ) => a.desc.localeCompare( b.desc ), },
   { name : "due"  , sort : ( a, b ) => a.due - b.due                 , },
   { name : "added", sort : ( a, b ) => a.added - b.added             , },
 ];
+
+
+/*******************************************************************************
+*  helper functions                                                            *
+*******************************************************************************/
+const addElement = ( type, parent, opts = {} ) => {
+  const newEl = document.createElement( type );
+  parent.append( newEl );
+
+  Object.entries( opts ).forEach( ([ key, value ]) => {
+    newEl[ `${key}` ] = value;
+  });
+
+  return newEl;
+};
 
 const removeSortIcon = () => {
   [ ...document.querySelectorAll( ".sorted" ),
@@ -60,6 +36,14 @@ const removeSortIcon = () => {
     e.classList.remove( "sorted" );
   });
 };
+
+
+/*******************************************************************************
+*  Add elements to the body of the document                                    * 
+*******************************************************************************/
+addElement( "h1", document.body, {
+  textContent : "Todo List",
+});
 
 const sortContainer = addElement( "div", document.body, {
   className : "sort-container"
@@ -86,25 +70,127 @@ sorts.forEach( ({ name, sort }) => {
   });
 });
 
-
-/*******************************************************************************
-*  clear the old view of the list and create a new one representing the        * 
-*  current task array                                                          * 
-*******************************************************************************/
-let sorted = "";
 const listEl = addElement( "div", document.body );
 
+const inputContainerEl = addElement( "div", document.body, {
+  className : "input-container",
+});
+
+addElement( "span", inputContainerEl, {
+  className : "pluss",
+  onclick   : () => inputEl.focus(),
+});
+
+const inputEl = addElement( "input", inputContainerEl, {
+  type        : "text",
+  placeholder : "Add todo",
+  onkeydown   : ({ key, target }) => {
+    if ( key === "Enter" ) {
+
+      if ( target.value.match( /^ *$/ ) ) return;
+
+      todos.push({
+        desc  : target.value,
+        due   : null,
+        added : new Date(),
+        done  : false,
+      });
+
+      target.value = "";
+      target.focus();
+
+      renderList( "none" );
+    }
+  },
+});
+
+
+/*******************************************************************************
+*  format the displayed due date                                               * 
+*******************************************************************************/
+const formatDate = date => {
+  if ( !date ) return "Pick a date...";
+
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate( tomorrow.getDate() + 1 )
+
+  if ( date.toDateString() === today.toDateString() ) {
+    return date.toLocaleString( undefined, {
+      hour   : "numeric",
+      minute : "numeric",
+    });
+  }
+
+  if ( date.toDateString() === tomorrow.toDateString() ) {
+    return "Tomorrow " + date.toLocaleString( undefined, {
+      hour   : "numeric",
+      minute : "numeric",
+    });
+  }
+
+  return date.toLocaleString( undefined, {
+    weekday : "short",
+    month   : "short",
+    day     : "numeric",
+  });
+};
+
+
+/*******************************************************************************
+*  show a date and time field to pick a due date                               * 
+*******************************************************************************/
+const datePicker = todo => {
+  const setDueDate = () => {
+    if ( !todo.due ) todo.due = new Date();
+
+    if ( datePickerEl.valueAsDate ) {
+      todo.due.setDate( datePickerEl.valueAsDate.getDate() );
+    }
+    if ( timePickerEl.valueAsDate ) {
+      todo.due.setHours( timePickerEl.valueAsDate.getHours() );
+      todo.due.setMinutes( timePickerEl.valueAsDate.getMinutes() );
+    }
+
+    datePickerModal.remove();
+    renderList( "none" );
+  };
+
+  const datePickerModal = addElement( "div", document.body, {
+    className : "date-picker-modal",
+    onkeydown : ({ key }) =>  { 
+      if ( key === "Enter" ) setDueDate()
+    }, 
+  });
+
+  const datePickerEl = addElement( "input", datePickerModal, {
+    type : "date",
+  });
+
+  const timePickerEl = addElement( "input", datePickerModal, {
+    type : "time",
+  });
+
+  addElement( "button", datePickerModal, {
+    textContent : "Set due time",
+    onclick     : setDueDate,
+  });
+};
+
+
+/*******************************************************************************
+*  update the view of the todo list items                                      * 
+*******************************************************************************/
 const renderList = sortOrder => {
   sorted = sortOrder;
   if ( sorted === "none" ) removeSortIcon();
 
   listEl.textContent = "";
+
   todos.forEach( todo => {
     const listItemEl = addElement( "div", listEl, {
       className : "todo-item",
     });
-
-    if ( todo.done ) listItemEl.classList.add( "done" );
 
     const checkBoxEl = addElement( "div", listItemEl, {
       className : "uncheck",
@@ -114,30 +200,27 @@ const renderList = sortOrder => {
       },
     });
 
-    if ( todo.done ) checkBoxEl.className = "check";
+    if ( todo.done ) {
+      listItemEl.classList.add( "done" );
+      checkBoxEl.className = "check";
+    }
 
     const contentEl = addElement( "div", listItemEl, {
       className : "content-container",
+    });
+
+    const descEl = addElement( "input", contentEl, {
+      value     : todo.desc,
       onchange  : () => {
         todo.desc = descEl.value;
         removeSortIcon();
       },
     });
 
-    const descEl = addElement( "input", contentEl, {
-      value : todo.desc,
-    });
-
-    const timeEl = addElement( "span", contentEl, {
+    addElement( "span", contentEl, {
       className   : "date",
-      textContent : todo.due.toDateString(),
-      onclick     : () => {
-        timeEl.remove();
-
-        const timePickerEl = addElement( "input", contentEl, {
-          type : "datetime-local",
-        });
-      },
+      textContent : formatDate( todo.due ),
+      onclick     : () => datePicker( todo ),
     });
 
     addElement( "span", listItemEl, {
@@ -150,44 +233,33 @@ const renderList = sortOrder => {
   });
 };
 
-renderList( "none" );
-
 
 /*******************************************************************************
-*  add a new task object to the array                                          *
+*  add example items and render list                                           * 
 *******************************************************************************/
-const inputContainer = addElement( "div", document.body, {
-  className : "input-container",
-});
-
-const plussIcon = addElement( "span", inputContainer, {
-  className : "pluss",
-  onclick   : () => {
-    input.focus();
+const example = [
+  { 
+    desc  : "Yoga",
+    due   : new Date( "May,27,2022,11:30" ),
+    added : new Date( "May,26,2022" ), 
+    done  : true,
+  }, { 
+    desc  : "Water plants",
+    due   : new Date( "May,28,2022,17:30" ),
+    added : new Date( "May,26,2022" ),
+    done  : true,
+  }, { 
+    desc  : "Package delivery",
+    due   : new Date( "May,28,2022,15:00" ),
+    added : new Date( "May,27,2022" ), 
+    done  : false,
+  }, { 
+    desc  : "Send report",
+    due   : new Date( "May,30,2022,17:00" ),
+    added : new Date( "May,25,2022" ), 
+    done  : false,
   },
-});
+];
 
-const input = addElement( "input", inputContainer, {
-  type        : "text",
-  placeholder : "Add todo",
-  onkeydown   : ({ key, target }) => {
-    if ( key === "Enter" ) {
-
-      if ( target.value.match( /^ *$/ ) ) return;
-
-      const day = 1000 * 60 * 60 * 24;
-
-      todos.push({
-        desc  : target.value,
-        due   : new Date( Date.now() + day ),
-        added : new Date(),
-        done  : false,
-      });
-
-      target.value = "";
-      target.focus();
-
-      renderList( "none" );
-    }
-  },
-});
+example.forEach( todo => todos.push( todo ) );
+renderList( "none" );
