@@ -28,10 +28,17 @@ const todos = [
   },
 ];
 
+const addElement = ( type, parent, opts={} ) => {
+  const element = document.createElement( type );
+  parent.append( element );
 
-const header = document.createElement( "h1" );
-header.textContent = "Todo List";
-document.body.append( header );
+  for ( const [ key, value ] of Object.entries( opts ) )
+    element[ `${key}` ] = value;
+
+  return element;
+};
+
+const header = addElement( "h1", document.body, { textContent: "Todo List" } );
 
 /*******************************************************************************
 *  sort the task array by different criteria                                   *
@@ -43,10 +50,6 @@ const sorts = [
   { name : "added", sort : ( a, b ) => a.added - b.added             , },
 ];
 
-const sortContainer = document.createElement( "div" );
-sortContainer.classList.add( "sort-container" );
-document.body.append( sortContainer );
-
 const removeSortIcon = () => {
   [ ...document.querySelectorAll( ".sorted" ),
     ...document.querySelectorAll( ".sorted-reverse" )
@@ -56,11 +59,11 @@ const removeSortIcon = () => {
   });
 };
 
-sorts.forEach( ({ name, sort }) => {
-  const button = document.createElement( "button" );
-  button.textContent = name;
-  sortContainer.append( button );
+const sortContainer = addElement( "div", document.body )
+sortContainer.classList.add( "sort-container" );
 
+sorts.forEach( ({ name, sort }) => {
+  const button = addElement( "button", sortContainer, { textContent: name } );
   button.addEventListener( "click", () => {
     removeSortIcon();
 
@@ -84,8 +87,7 @@ sorts.forEach( ({ name, sort }) => {
 *  current task array                                                          * 
 *******************************************************************************/
 let sorted = "";
-const listEl = document.createElement( "div" );
-document.body.append( listEl );
+const listEl = addElement( "div", document.body )
 
 const renderList = sortOrder => {
   sorted = sortOrder;
@@ -93,45 +95,39 @@ const renderList = sortOrder => {
 
   listEl.textContent = "";
   todos.forEach( todo => {
-    const listItemEl = document.createElement( "div" );
+    const listItemEl = addElement( "div", listEl );
     listItemEl.classList.add( "todo-item" );
-    listEl.append( listItemEl );
-
     if ( todo.done ) listItemEl.classList.add( "done" );
 
-    const checkBoxEl = document.createElement( "div" );
-    listItemEl.append( checkBoxEl );
-
+    const checkBoxEl = addElement( "div", listItemEl );
     if ( todo.done ) checkBoxEl.classList.add( "check" );
     else checkBoxEl.classList.add( "uncheck" );
-
     checkBoxEl.addEventListener( "click", () => {
       todo.done = !todo.done;
       renderList( "none" );
     });
 
-    const contentEl = document.createElement( "div" );
+    const contentEl = addElement( "div", listItemEl );
     contentEl.classList.add( "content-container" );
-    listItemEl.append( contentEl  );
 
-    const descEl = document.createElement( "input" );
-    descEl.value = todo.desc;
-    contentEl.append( descEl );
-
+    const descEl = addElement( "input", contentEl, { value: todo.desc } );
     descEl.addEventListener( "change", () => {
       todo.desc = descEl.value;
       removeSortIcon();
     });
 
-    const timeEl = document.createElement( "span" );
+    const timeEl = addElement( "span", contentEl )
     timeEl.classList.add( "date" );
     timeEl.textContent = todo.due.toDateString();
-    contentEl.append( timeEl );
+    timeEl.addEventListener( "click", () => {
+      timeEl.remove();
 
-    const removeEl = document.createElement( "span" );
+      const timePickerEl = addElement( "input", contentEl );
+      timePickerEl.type = "datetime-local"
+    });
+
+    const removeEl = addElement( "span", listItemEl );
     removeEl.classList.add( "remove" );
-    listItemEl.append( removeEl );
-
     removeEl.addEventListener( "click", () => {
       todos.splice( todos.indexOf( todo ), 1 );
       renderList( "none" );
@@ -145,23 +141,18 @@ renderList( "none" );
 /*******************************************************************************
 *  add a new task object to the array                                          *
 *******************************************************************************/
-const inputContainer = document.createElement( "div" );
+const inputContainer = addElement( "div", document.body );
 inputContainer.classList.add( "input-container" );
-document.body.append( inputContainer );
 
-const plussIcon = document.createElement( "div" );
+const plussIcon = addElement( "span", inputContainer );
 plussIcon.classList.add( "pluss" );
-inputContainer.append( plussIcon );
-
 plussIcon.addEventListener( "click", () => {
   input.focus();
 });
 
-const input = document.createElement( "input" );
+const input = addElement( "input", inputContainer );
 input.type = "text";
 input.placeholder = "Add todo"
-inputContainer.append( input );
-
 input.addEventListener( "keydown", ({ key, target }) => {
   if ( key === "Enter" ) {
 
