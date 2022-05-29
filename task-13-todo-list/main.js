@@ -58,9 +58,8 @@ const removeSortIcon = () => {
 
 sorts.forEach( ({ name, sort }) => {
   const button = document.createElement( "button" );
-  sortContainer.append( button );
-
   button.textContent = name;
+  sortContainer.append( button );
 
   button.addEventListener( "click", () => {
     removeSortIcon();
@@ -94,53 +93,49 @@ const renderList = sortOrder => {
 
   listEl.textContent = "";
   todos.forEach( todo => {
-    const listItemEl = document.createElement( "div"   );
-    const checkBoxEl = document.createElement( "div"   );
-    const contentEl  = document.createElement( "div"   );
-    const descEl     = document.createElement( "input" );
-    const timeEl     = document.createElement( "span"  );
-    const removeEl   = document.createElement( "span"  );
-
+    const listItemEl = document.createElement( "div" );
     listItemEl.classList.add( "todo-item" );
+    listEl.append( listItemEl );
 
-    if ( todo.done ) {
-      listItemEl.classList.add( "done" );
-      checkBoxEl.classList.add( "check" );
-    }
-    else {
-      checkBoxEl.classList.add( "uncheck" );
-    }
+    if ( todo.done ) listItemEl.classList.add( "done" );
+
+    const checkBoxEl = document.createElement( "div" );
+    listItemEl.append( checkBoxEl );
+
+    if ( todo.done ) checkBoxEl.classList.add( "check" );
+    else checkBoxEl.classList.add( "uncheck" );
 
     checkBoxEl.addEventListener( "click", () => {
       todo.done = !todo.done;
       renderList( "none" );
     });
 
+    const contentEl = document.createElement( "div" );
     contentEl.classList.add( "content-container" );
+    listItemEl.append( contentEl  );
 
+    const descEl = document.createElement( "input" );
     descEl.value = todo.desc;
+    contentEl.append( descEl );
+
     descEl.addEventListener( "change", () => {
       todo.desc = descEl.value;
       removeSortIcon();
     });
 
-    timeEl.textContent = todo.due.toDateString();
+    const timeEl = document.createElement( "span" );
     timeEl.classList.add( "date" );
+    timeEl.textContent = todo.due.toDateString();
+    contentEl.append( timeEl );
 
+    const removeEl = document.createElement( "span" );
     removeEl.classList.add( "remove" );
+    listItemEl.append( removeEl );
+
     removeEl.addEventListener( "click", () => {
       todos.splice( todos.indexOf( todo ), 1 );
       renderList( "none" );
     });
-
-    listEl.append( listItemEl );
-
-    contentEl.append( descEl );
-    contentEl.append( timeEl );
-
-    listItemEl.append( checkBoxEl );
-    listItemEl.append( contentEl  );
-    listItemEl.append( removeEl   );
   });
 };
 
@@ -152,18 +147,20 @@ renderList( "none" );
 *******************************************************************************/
 const inputContainer = document.createElement( "div" );
 inputContainer.classList.add( "input-container" );
+document.body.append( inputContainer );
 
 const plussIcon = document.createElement( "div" );
 plussIcon.classList.add( "pluss" );
+inputContainer.append( plussIcon );
 
 plussIcon.addEventListener( "click", () => {
   input.focus();
 });
 
 const input = document.createElement( "input" );
-
 input.type = "text";
 input.placeholder = "Add todo"
+inputContainer.append( input );
 
 input.addEventListener( "keydown", ({ key, target }) => {
   if ( key === "Enter" ) {
@@ -186,6 +183,3 @@ input.addEventListener( "keydown", ({ key, target }) => {
   }
 });
 
-inputContainer.append( plussIcon );
-inputContainer.append( input     );
-document.body.append( inputContainer );
