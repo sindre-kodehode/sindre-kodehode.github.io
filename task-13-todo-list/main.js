@@ -21,13 +21,15 @@ const sorts = [
 
 
 /*******************************************************************************
-*  global functions                                                            *
+*  addElement:                                                                 * 
+*  add a new element to the document                                           * 
+*                                                                              * 
+*  type   : string, type of html element                                       * 
+*  parent : Node, the parent to append the new element to                      * 
+*  opts   : object, extra options to add to the new element                    * 
+*                                                                              * 
+*  return : Node, the new element created                                      * 
 *******************************************************************************/
-// addElement:
-// type   : string, type of html element
-// parent : Node, the parent to append the new element to
-// opts   : object, extra options to add to the new element
-// return : Node, the new element created
 const addElement = ( type, parent, opts = {} ) => {
   const newEl = document.createElement( type );
   parent.append( newEl );
@@ -40,14 +42,191 @@ const addElement = ( type, parent, opts = {} ) => {
   return newEl;
 };
 
-// removeSortIcon:
+
+/*******************************************************************************
+*  removeSortIcon:                                                             * 
+* finds all the elements with a sort icon and removes them                     * 
+*******************************************************************************/
 const removeSortIcon = () => {
-  // finds all the elements with a sort icon and removes them
   [ ...document.querySelectorAll( ".sorted" ),
     ...document.querySelectorAll( ".sorted-reverse" )
   ].forEach( e => {
     e.classList.remove( "sorted-reverse" );
     e.classList.remove( "sorted" );
+  });
+};
+
+
+/*******************************************************************************
+*  formatDate:                                                                 * 
+*  format the displayed due date                                               * 
+*                                                                              * 
+*  date   : Date, the todo due date to format                                  * 
+*  return : string, formated date                                              * 
+*******************************************************************************/
+const formatDate = date => {
+  // if no due date, return prompt text
+  if ( !date ) return "Pick a date...";
+
+  // today's date
+  const today = new Date();
+
+  // tomorrow's date
+  const tomorrow = new Date();
+  tomorrow.setDate( tomorrow.getDate() + 1 )
+
+  // if the due date is today, only show the time
+  if ( date.toDateString() === today.toDateString() ) {
+    return date.toLocaleString( undefined, {
+      hour   : "numeric",
+      minute : "numeric",
+    });
+  }
+
+  // if the due date is tomorrow, show "Tomorrow" and the time
+  if ( date.toDateString() === tomorrow.toDateString() ) {
+    return "Tomorrow " + date.toLocaleString( undefined, {
+      hour   : "numeric",
+      minute : "numeric",
+    });
+  }
+
+  // else show the weekday, month and day
+  return date.toLocaleString( undefined, {
+    weekday : "short",
+    month   : "short",
+    day     : "numeric",
+  });
+};
+
+
+/*******************************************************************************
+*  datePicker:                                                                 * 
+*  show a modal to pick a due date for the selected todo                       * 
+*                                                                              * 
+*  todo : object, the todo item to set a new due date on                       * 
+*******************************************************************************/
+const datePicker = todo => {
+  // verify and set the due date on selected todo
+  const setDueDate = () => {
+    // if there is no previous due date, create a new Date object
+    if ( !todo.due ) todo.due = new Date();
+
+    // if a date is entered, add it to the todo object
+    if ( datePickerEl.valueAsDate ) {
+      todo.due.setDate( datePickerEl.valueAsDate.getDate() );
+    }
+
+    // if a time is entered, add it to the todo object
+    if ( timePickerEl.valueAsDate ) {
+      todo.due.setHours( timePickerEl.valueAsDate.getHours() );
+      todo.due.setMinutes( timePickerEl.valueAsDate.getMinutes() );
+    }
+
+    // remove the modal and rerender the todos
+    datePickerModal.remove();
+    renderTodos( "none" );
+  };
+
+  // container for the date picker
+  const datePickerModal = addElement( "div", document.body, {
+    className : "date-picker-modal",
+    onkeydown : ({ key }) =>  { 
+      // add the entered date if enter is pressed
+      if ( key === "Enter" ) setDueDate()
+    }, 
+  });
+
+  // date picker input field
+  const datePickerEl = addElement( "input", datePickerModal, {
+    type : "date",
+  });
+
+  // time picker input field
+  const timePickerEl = addElement( "input", datePickerModal, {
+    type : "time",
+  });
+
+  // confirm button
+  addElement( "button", datePickerModal, {
+    textContent : "Set due time",
+    onclick     : setDueDate,
+  });
+};
+
+
+/*******************************************************************************
+*  renderTodos:                                                                * 
+*  take all the todos and render them on the page                              * 
+*                                                                              * 
+*  sortOrder : string, the sort order of the todos                             * 
+*******************************************************************************/
+const renderTodos = sortOrder => {
+  // set the sorted order
+  sorted = sortOrder;
+  // if the sorted order is "none", remove the sort icon
+  if ( sorted === "none" ) removeSortIcon();
+
+  // empty the todo container
+  todosContainerEl.textContent = "";
+
+  // for each todo object in the list, add the todo to the todo container
+  todos.forEach( todo => {
+    // todo item container
+    const listItemEl = addElement( "div", todosContainerEl, {
+      className : "todo-item",
+    });
+
+    // checkbox icon
+    const checkBoxEl = addElement( "div", listItemEl, {
+      className : "uncheck",
+      // toggle the done state of the todo object and rerender todos
+      onclick   : () => {
+        todo.done = !todo.done;
+        renderTodos( "none" );
+      },
+    });
+
+    // if the todo object is set to done, add styling to the text and
+    // change to a checked icon
+    if ( todo.done ) {
+      listItemEl.classList.add( "done" );
+      checkBoxEl.className = "check";
+    }
+
+    // container for the description and due date
+    const contentEl = addElement( "div", listItemEl, {
+      className : "content-container",
+    });
+
+    // add todo description
+    const descEl = addElement( "input", contentEl, {
+      value     : todo.desc,
+      // change the description of the todo when the text has changed
+      onchange  : () => {
+        todo.desc = descEl.value;
+        removeSortIcon();
+      },
+    });
+
+    // show the due date of the todo
+    addElement( "span", contentEl, {
+      className   : "date",
+      // format the due date
+      textContent : formatDate( todo.due ),
+      // show a date picker modal on click
+      onclick     : () => datePicker( todo ),
+    });
+
+    // remove todo icon
+    addElement( "span", listItemEl, {
+      className : "remove",
+      // remove selected todo from list and rerender todos
+      onclick   : () => {
+        todos.splice( todos.indexOf( todo ), 1 );
+        renderTodos( "none" );
+      },
+    });
   });
 };
 
@@ -135,177 +314,6 @@ const inputEl = addElement( "input", inputContainerEl, {
     renderTodos( "none" );
   },
 });
-
-
-/*******************************************************************************
-*  format the displayed due date                                               * 
-*******************************************************************************/
-// formatDate:
-// date   : Date, the todo due date to format
-// return : string, formated date
-const formatDate = date => {
-  // if no due date, return prompt text
-  if ( !date ) return "Pick a date...";
-
-  // today's date
-  const today = new Date();
-
-  // tomorrow's date
-  const tomorrow = new Date();
-  tomorrow.setDate( tomorrow.getDate() + 1 )
-
-  // if the due date is today, only show the time
-  if ( date.toDateString() === today.toDateString() ) {
-    return date.toLocaleString( undefined, {
-      hour   : "numeric",
-      minute : "numeric",
-    });
-  }
-
-  // if the due date is tomorrow, show "Tomorrow" and the time
-  if ( date.toDateString() === tomorrow.toDateString() ) {
-    return "Tomorrow " + date.toLocaleString( undefined, {
-      hour   : "numeric",
-      minute : "numeric",
-    });
-  }
-
-  // else show the weekday, month and day
-  return date.toLocaleString( undefined, {
-    weekday : "short",
-    month   : "short",
-    day     : "numeric",
-  });
-};
-
-
-/*******************************************************************************
-*  show a date and time field to pick a due date                               * 
-*******************************************************************************/
-// datePicker:
-// todo : object, the todo item to set a new due date on
-const datePicker = todo => {
-
-  // verify and set the due date on selected todo
-  const setDueDate = () => {
-    // if there is no previous due date, create a new Date object
-    if ( !todo.due ) todo.due = new Date();
-
-    // if a date is entered, add it to the todo object
-    if ( datePickerEl.valueAsDate ) {
-      todo.due.setDate( datePickerEl.valueAsDate.getDate() );
-    }
-
-    // if a time is entered, add it to the todo object
-    if ( timePickerEl.valueAsDate ) {
-      todo.due.setHours( timePickerEl.valueAsDate.getHours() );
-      todo.due.setMinutes( timePickerEl.valueAsDate.getMinutes() );
-    }
-
-    // remove the modal and rerender the todos
-    datePickerModal.remove();
-    renderTodos( "none" );
-  };
-
-  // container for the date picker
-  const datePickerModal = addElement( "div", document.body, {
-    className : "date-picker-modal",
-    onkeydown : ({ key }) =>  { 
-      // add the entered date if enter is pressed
-      if ( key === "Enter" ) setDueDate()
-    }, 
-  });
-
-  // date picker input field
-  const datePickerEl = addElement( "input", datePickerModal, {
-    type : "date",
-  });
-
-  // time picker input field
-  const timePickerEl = addElement( "input", datePickerModal, {
-    type : "time",
-  });
-
-  // confirm button
-  addElement( "button", datePickerModal, {
-    textContent : "Set due time",
-    onclick     : setDueDate,
-  });
-};
-
-
-/*******************************************************************************
-*  update the view of the todo list items                                      * 
-*******************************************************************************/
-const renderTodos = sortOrder => {
-
-  // set the sorted order
-  sorted = sortOrder;
-  // if the sorted order is "none", remove the sort icon
-  if ( sorted === "none" ) removeSortIcon();
-
-  // empty the todo container
-  todosContainerEl.textContent = "";
-
-  // for each todo object in the list, add the todo to the todo container
-  todos.forEach( todo => {
-    // todo item container
-    const listItemEl = addElement( "div", todosContainerEl, {
-      className : "todo-item",
-    });
-
-    // checkbox icon
-    const checkBoxEl = addElement( "div", listItemEl, {
-      className : "uncheck",
-      // toggle the done state of the todo object and rerender todos
-      onclick   : () => {
-        todo.done = !todo.done;
-        renderTodos( "none" );
-      },
-    });
-
-    // if the todo object is set to done, add styling to the text and
-    // change to a checked icon
-    if ( todo.done ) {
-      listItemEl.classList.add( "done" );
-      checkBoxEl.className = "check";
-    }
-
-    // container for the description and due date
-    const contentEl = addElement( "div", listItemEl, {
-      className : "content-container",
-    });
-
-    // add todo description
-    const descEl = addElement( "input", contentEl, {
-      value     : todo.desc,
-      // change the description of the todo when the text has changed
-      onchange  : () => {
-        todo.desc = descEl.value;
-        removeSortIcon();
-      },
-    });
-
-    // show the due date of the todo
-    addElement( "span", contentEl, {
-      className   : "date",
-      // format the due date
-      textContent : formatDate( todo.due ),
-      // show a date picker modal on click
-      onclick     : () => datePicker( todo ),
-    });
-
-    // remove todo icon
-    addElement( "span", listItemEl, {
-      className : "remove",
-      // remove selected todo from list and rerender todos
-      onclick   : () => {
-        todos.splice( todos.indexOf( todo ), 1 );
-        renderTodos( "none" );
-      },
-    });
-  });
-};
 
 
 /*******************************************************************************
