@@ -1,10 +1,22 @@
 :root {
+  --neutral-100 : #ffffff ;
   --neutral-200 : #eeeeee ;
   --neutral-400 : #cccccc ;
   --neutral-600 : #333333 ;
   --neutral-700 : #222222 ;
   --neutral-750 : #1a1a1a ;
   --neutral-800 : #111111 ;
+  --neutral-900 : #000000 ;
+
+  --sizing-100  :   1px ;
+  --sizing-200  :   2px ;
+  --sizing-300  :   4px ;
+  --sizing-400  :   8px ;
+  --sizing-500  :  16px ;
+  --sizing-600  :  32px ;
+  --sizing-700  :  64px ;
+  --sizing-800  : 128px ;
+  --sizing-900  : 265px ;
 }
 
 * {
@@ -28,7 +40,7 @@ input {
   border     : none                 ;
   color      : var( --neutral-400 ) ;
   font-size  : 1rem                 ;
-  padding    : 8px                  ;
+  padding    : var( --sizing-400 )  ;
 }
 
 input:hover {
@@ -42,13 +54,13 @@ input:focus {
 }
 
 button {
-  background     : var( --neutral-700 ) ;
-  border         : none                 ;
-  color          : var( --neutral-400 ) ;
-  cursor         : pointer              ;
-  font-weight    : bold                 ;
-  padding        : 0 0 0 16px           ;
-  text-transform : uppercase            ;
+  background     : var( --neutral-700 )      ;
+  border         : none                      ;
+  color          : var( --neutral-400 )      ;
+  cursor         : pointer                   ;
+  font-weight    : bold                      ;
+  padding        : 0 0 0 var( --sizing-500 ) ;
+  text-transform : uppercase                 ;
 }
 
 button:hover {
@@ -56,23 +68,23 @@ button:hover {
 }
 
 .sort-container {
-  display         : flex     ;
-  gap             : 8px      ;
-  justify-content : flex-end ;
+  display         : flex                ;
+  gap             : var( --sizing-400 ) ;
+  justify-content : flex-end            ;
 }
 
 .todo-item, .input-container {
-  background            : var( --neutral-700 )           ;
-  border-top            : 1px solid var( --neutral-600 ) ;
-  color                 : var( --neutral-400 )           ;
-  display               : grid                           ;
-  gap                   : 8px                            ;
-  grid-template-columns : 24px auto 24px                 ;
-  padding               : 8px 0                          ;
+  background            : var( --neutral-700 )                           ;
+  border-top            : var( --sizing-100 ) solid var( --neutral-600 ) ;
+  color                 : var( --neutral-400 )                           ;
+  display               : grid                                           ;
+  gap                   : var( --sizing-400 )                            ;
+  grid-template-columns : var( --sizing-600 ) auto var( --sizing-600 )   ;
+  padding               : var( --sizing-400 ) 0                          ;
 }
 
 .date {
-  margin      : 0 8px ;
+  margin      : 0 var( --sizing-400 ) ;
   user-select : none  ;
 }
 
@@ -87,17 +99,17 @@ button:hover {
 
 .sorted, .sorted-reverse {
   background-repeat   : no-repeat ;
-  background-size     : 16px 16px ;
+  background-size     : var( --sizing-500 ) var( --sizing-500 ) ;
 }
 
 .check, .uncheck, .remove, .pluss {
-  background-position : center    ;
-  background-repeat   : no-repeat ;
-  background-size     : contain   ;
-  cursor              : pointer   ;
-  height              : 24px      ;
-  margin              : 6px 0     ;
-  width               : 24px      ;
+  background-position : center                ;
+  background-repeat   : no-repeat             ;
+  background-size     : contain               ;
+  cursor              : pointer               ;
+  height              : var( --sizing-600 )   ;
+  margin              : var( --sizing-300 ) 0 ;
+  width               : var( --sizing-600 )   ;
 }
 
 .check:hover, .uncheck:hover, .remove:hover, .pluss:hover {
