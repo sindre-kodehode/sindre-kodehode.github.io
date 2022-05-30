@@ -1,13 +1,22 @@
+:root {
+  --neutral-200 : #eeeeee ;
+  --neutral-400 : #cccccc ;
+  --neutral-600 : #333333 ;
+  --neutral-700 : #222222 ;
+  --neutral-750 : #1a1a1a ;
+  --neutral-800 : #111111 ;
+}
+
 * {
   margin  : 0 ;
   padding : 0 ;
 }
 
 body {
-  background : #222   ;
-  color      : #ccc   ;
-  margin     : 0 auto ;
-  max-width  : 80ch   ;
+  background : var( --neutral-700 ) ;
+  color      : var( --neutral-400 ) ;
+  margin     : 0 auto               ;
+  max-width  : 80ch                 ;
 }
 
 h1 {
@@ -15,35 +24,35 @@ h1 {
 }
 
 input {
-  background : #222 ;
-  border     : none ;
-  color      : #ccc ;
-  font-size  : 1rem ;
-  padding    : 8px  ;
+  background : var( --neutral-700 ) ;
+  border     : none                 ;
+  color      : var( --neutral-400 ) ;
+  font-size  : 1rem                 ;
+  padding    : 8px                  ;
 }
 
 input:hover {
-  background : #1a1a1a ;
-  color      : #eee    ;
+  background : var( --neutral-750 ) ;
+  color      : var( --neutral-200 ) ;
 }
 
 input:focus {
-  background : #111 ;
-  outline    : none ;
+  background : var( --neutral-800 ) ;
+  outline    : none                 ;
 }
 
 button {
-  background     : #222       ;
-  border         : none       ;
-  color          : #ccc       ;
-  cursor         : pointer    ;
-  font-weight    : bold       ;
-  padding        : 0 0 0 16px ;
-  text-transform : uppercase  ;
+  background     : var( --neutral-700 ) ;
+  border         : none                 ;
+  color          : var( --neutral-400 ) ;
+  cursor         : pointer              ;
+  font-weight    : bold                 ;
+  padding        : 0 0 0 16px           ;
+  text-transform : uppercase            ;
 }
 
 button:hover {
-  color : #eee ;
+  color : var( --neutral-200 ) ;
 }
 
 .sort-container {
@@ -53,13 +62,13 @@ button:hover {
 }
 
 .todo-item, .input-container {
-  background            : #222           ;
-  border-top            : 1px solid #333 ;
-  color                 : #ccc           ;
-  display               : grid           ;
-  gap                   : 8px            ;
-  grid-template-columns : 24px auto 24px ;
-  padding               : 8px 0          ;
+  background            : var( --neutral-700 )           ;
+  border-top            : 1px solid var( --neutral-600 ) ;
+  color                 : var( --neutral-400 )           ;
+  display               : grid                           ;
+  gap                   : 8px                            ;
+  grid-template-columns : 24px auto 24px                 ;
+  padding               : 8px 0                          ;
 }
 
 .date {
@@ -101,4 +110,3 @@ button:hover {
 .sorted          { background-image : url("icons/chevron-down.svg") ; }
 .sorted-reverse  { background-image : url("icons/chevron-up.svg")   ; }
 .uncheck { background-image : url( "icons/circle-regular.svg" )     ; }
-
