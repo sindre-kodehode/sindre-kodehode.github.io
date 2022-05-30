@@ -1,24 +1,26 @@
 :root {
   /* colors */
-  --neutral-100 : #ffffff ;
-  --neutral-200 : #eeeeee ;
-  --neutral-400 : #cccccc ;
-  --neutral-600 : #333333 ;
-  --neutral-700 : #222222 ;
-  --neutral-750 : #1a1a1a ;
-  --neutral-800 : #111111 ;
-  --neutral-900 : #000000 ;
+  --color-100 : #ffffff ;
+  --color-200 : #eeeeee ;
+  --color-300 : #cccccc ;
+  --color-400 : #aaaaaa ;
+  --color-500 : #888888 ;
+  --color-600 : #666666 ;
+  --color-700 : #444444 ;
+  --color-800 : #222222 ;
+  --color-850 : #111111 ;
+  --color-900 : #000000 ;
   
   /* sizes */
-  --sizing-100  :   1px ;
-  --sizing-200  :   2px ;
-  --sizing-300  :   4px ;
-  --sizing-400  :   8px ;
-  --sizing-500  :  16px ;
-  --sizing-600  :  32px ;
-  --sizing-700  :  64px ;
-  --sizing-800  : 128px ;
-  --sizing-900  : 265px ;
+  --size-100  :   1px ;
+  --size-200  :   2px ;
+  --size-300  :   4px ;
+  --size-400  :   8px ;
+  --size-500  :  16px ;
+  --size-600  :  32px ;
+  --size-700  :  64px ;
+  --size-800  : 128px ;
+  --size-900  : 265px ;
 }
 
 * {
@@ -31,8 +33,8 @@
 *  dark background and light text color                                        *
 *******************************************************************************/
 body, input, button, .todo-item, .input-container {
-  background : var( --neutral-700 ) ;
-  color      : var( --neutral-400 ) ;
+  background : var( --color-850 ) ;
+  color      : var( --color-400 ) ;
 }
 
 
@@ -45,21 +47,20 @@ body {
 }
 
 h1 {
-  font-size : var( --sizing-700 );
+  font-size : var( --size-700 ) ;
 }
 
 input {
-  border    : none                ;
-  font-size : var( --sizing-500 ) ;
-  padding   : var( --sizing-400 ) ;
+  border    : none              ;
+  font-size : var( --size-500 ) ;
+  padding   : var( --size-400 ) ;
 }
 
 button {
-  border         : none                      ;
-  cursor         : pointer                   ;
-  font-weight    : bold                      ;
-  padding        : 0 0 0 var( --sizing-500 ) ;
-  text-transform : uppercase                 ;
+  border         : none      ;
+  cursor         : pointer   ;
+  font-weight    : bold      ;
+  text-transform : uppercase ;
 }
 
 
@@ -67,17 +68,17 @@ button {
 *  element hover                                                               *
 *******************************************************************************/
 input:hover {
-  background : var( --neutral-750 ) ;
-  color      : var( --neutral-200 ) ;
+  background : var( --color-800 ) ;
+  color      : var( --color-200 ) ;
 }
 
 input:focus {
-  background : var( --neutral-800 ) ;
-  outline    : none                 ;
+  background : var( --color-800 ) ;
+  outline    : none               ;
 }
 
 button:hover {
-  color : var( --neutral-200 ) ;
+  color : var( --color-200 ) ;
 }
 
 
@@ -85,17 +86,17 @@ button:hover {
 *  containers and items                                                        *
 *******************************************************************************/
 .sort-container {
-  display         : flex                ;
-  gap             : var( --sizing-400 ) ;
-  justify-content : flex-end            ;
+  display         : flex              ;
+  gap             : var( --size-500 ) ;
+  justify-content : flex-end          ;
 }
 
 .todo-container {
-  border-top            : var( --sizing-100 ) solid var( --neutral-600 ) ;
-  display               : grid                                           ;
-  gap                   : var( --sizing-400 )                            ;
-  grid-template-columns : var( --sizing-600 ) auto var( --sizing-600 )   ;
-  padding               : var( --sizing-400 ) 0                          ;
+  border-top            : var( --size-100 ) solid var( --color-600 ) ;
+  display               : grid                                       ;
+  gap                   : var( --size-400 )                          ;
+  grid-template-columns : var( --size-600 ) auto var( --size-600 )   ;
+  padding               : var( --size-400 ) 0                        ;
 }
 
 .content-container {
@@ -104,8 +105,9 @@ button:hover {
 }
 
 .date {
-  margin : 0 var( --sizing-400 ) ;
-  cursor : pointer               ;
+  cursor      : pointer             ;
+  margin      : 0 var( --size-400 ) ;
+  user-select : none                ;
 }
 
 .done, .done input {
@@ -117,18 +119,17 @@ button:hover {
 *  icons                                                                       *
 *******************************************************************************/
 .sorted, .reverse {
-  background-repeat : no-repeat                               ;
-  background-size   : var( --sizing-500 ) var( --sizing-500 ) ;
+  background-repeat : no-repeat                           ;
+  background-size   : var( --size-500 ) var( --size-500 ) ;
 }
 
 .check, .uncheck, .remove, .pluss {
-  background-position : center                ;
-  background-repeat   : no-repeat             ;
-  background-size     : contain               ;
-  cursor              : pointer               ;
-  height              : var( --sizing-600 )   ;
-  margin              : var( --sizing-300 ) 0 ;
-  width               : var( --sizing-600 )   ;
+  background-position : center            ;
+  background-repeat   : no-repeat         ;
+  background-size     : contain           ;
+  cursor              : pointer           ;
+  height              : var( --size-600 ) ;
+  width               : var( --size-600 ) ;
 }
 
 .check:hover, .uncheck:hover, .remove:hover, .pluss:hover {
