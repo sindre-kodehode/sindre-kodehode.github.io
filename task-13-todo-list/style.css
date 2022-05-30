@@ -32,14 +32,14 @@ body {
 }
 
 h1 {
-  font-size : 3rem;
+  font-size : var( --sizing-700 );
 }
 
 input {
   background : var( --neutral-700 ) ;
   border     : none                 ;
   color      : var( --neutral-400 ) ;
-  font-size  : 1rem                 ;
+  font-size  : var( --sizing-500 )  ;
   padding    : var( --sizing-400 )  ;
 }
 
