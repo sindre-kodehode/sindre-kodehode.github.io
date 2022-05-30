@@ -295,7 +295,7 @@ const inputEl = addElement( "input", inputContainerEl, {
     // regex:
     // ^  : start of line anchor
     //  * : selects any numer of spaces
-    // $  : endof line anchor
+    // $  : end of line anchor
     if ( target.value.match( /^ *$/ ) ) return;
 
     // add a new todo object to the end of the list with the entered text

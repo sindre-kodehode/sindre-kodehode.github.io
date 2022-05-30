@@ -10,38 +10,8 @@ body {
   max-width  : 80ch   ;
 }
 
-.todo-item, .input-container {
-  background            : #222           ;
-  border-top            : 1px solid #333 ;
-  color                 : #ccc           ;
-  display               : grid           ;
-  gap                   : 8px            ;
-  grid-template-columns : 24px auto 24px ;
-  padding               : 8px 0          ;
-}
-
-.date {
-  margin      : 0 8px ;
-  user-select : none  ;
-}
-
-.sort-container {
-  display         : flex     ;
-  gap             : 8px      ;
-  justify-content : flex-end ;
-}
-
-.sorted, .sorted-reverse {
-  background-repeat   : no-repeat ;
-  background-size     : 16px 16px ;
-}
-
-.sorted         { background-image : url("icons/chevron-down.svg") ; }
-.sorted-reverse { background-image : url("icons/chevron-up.svg")   ; }
-
-.content-container {
-  display        : flex   ;
-  flex-direction : column ;
+h1 {
+  font-size : 3rem;
 }
 
 input {
@@ -62,10 +32,6 @@ input:focus {
   outline    : none ;
 }
 
-h1 {
-  font-size : 3rem;
-}
-
 button {
   background     : #222       ;
   border         : none       ;
@@ -80,13 +46,41 @@ button:hover {
   color : #eee ;
 }
 
-.done {
+.sort-container {
+  display         : flex     ;
+  gap             : 8px      ;
+  justify-content : flex-end ;
+}
+
+.todo-item, .input-container {
+  background            : #222           ;
+  border-top            : 1px solid #333 ;
+  color                 : #ccc           ;
+  display               : grid           ;
+  gap                   : 8px            ;
+  grid-template-columns : 24px auto 24px ;
+  padding               : 8px 0          ;
+}
+
+.date {
+  margin      : 0 8px ;
+  user-select : none  ;
+}
+
+.content-container {
+  display        : flex   ;
+  flex-direction : column ;
+}
+
+.done, .done input {
   text-decoration-line : line-through ;
 }
 
-.done input {
-  text-decoration-line : line-through ;
+.sorted, .sorted-reverse {
+  background-repeat   : no-repeat ;
+  background-size     : 16px 16px ;
 }
+
 .check, .uncheck, .remove, .pluss {
   background-position : center    ;
   background-repeat   : no-repeat ;
@@ -104,4 +98,7 @@ button:hover {
 .check   { background-image : url( "icons/circle-check-solid.svg" ) ; }
 .pluss   { background-image : url( "icons/plus-solid.svg" )         ; }
 .remove  { background-image : url( "icons/xmark-solid.svg" )        ; }
+.sorted          { background-image : url("icons/chevron-down.svg") ; }
+.sorted-reverse  { background-image : url("icons/chevron-up.svg")   ; }
 .uncheck { background-image : url( "icons/circle-regular.svg" )     ; }
+
