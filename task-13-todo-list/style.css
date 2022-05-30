@@ -1,4 +1,5 @@
 :root {
+  /* colors */
   --neutral-100 : #ffffff ;
   --neutral-200 : #eeeeee ;
   --neutral-400 : #cccccc ;
@@ -7,7 +8,8 @@
   --neutral-750 : #1a1a1a ;
   --neutral-800 : #111111 ;
   --neutral-900 : #000000 ;
-
+  
+  /* sizes */
   --sizing-100  :   1px ;
   --sizing-200  :   2px ;
   --sizing-300  :   4px ;
@@ -24,11 +26,22 @@
   padding : 0 ;
 }
 
-body {
+
+/*******************************************************************************
+*  dark background and light text color                                        *
+*******************************************************************************/
+body, input, button, .todo-item, .input-container {
   background : var( --neutral-700 ) ;
   color      : var( --neutral-400 ) ;
-  margin     : 0 auto               ;
-  max-width  : 80ch                 ;
+}
+
+
+/*******************************************************************************
+*  elements                                                                    *
+*******************************************************************************/
+body {
+  margin     : 0 auto ;
+  max-width  : 80ch   ;
 }
 
 h1 {
@@ -36,13 +49,23 @@ h1 {
 }
 
 input {
-  background : var( --neutral-700 ) ;
-  border     : none                 ;
-  color      : var( --neutral-400 ) ;
-  font-size  : var( --sizing-500 )  ;
-  padding    : var( --sizing-400 )  ;
+  border    : none                ;
+  font-size : var( --sizing-500 ) ;
+  padding   : var( --sizing-400 ) ;
 }
 
+button {
+  border         : none                      ;
+  cursor         : pointer                   ;
+  font-weight    : bold                      ;
+  padding        : 0 0 0 var( --sizing-500 ) ;
+  text-transform : uppercase                 ;
+}
+
+
+/*******************************************************************************
+*  element hover                                                               *
+*******************************************************************************/
 input:hover {
   background : var( --neutral-750 ) ;
   color      : var( --neutral-200 ) ;
@@ -53,39 +76,26 @@ input:focus {
   outline    : none                 ;
 }
 
-button {
-  background     : var( --neutral-700 )      ;
-  border         : none                      ;
-  color          : var( --neutral-400 )      ;
-  cursor         : pointer                   ;
-  font-weight    : bold                      ;
-  padding        : 0 0 0 var( --sizing-500 ) ;
-  text-transform : uppercase                 ;
-}
-
 button:hover {
   color : var( --neutral-200 ) ;
 }
 
+
+/*******************************************************************************
+*  containers and items                                                        *
+*******************************************************************************/
 .sort-container {
   display         : flex                ;
   gap             : var( --sizing-400 ) ;
   justify-content : flex-end            ;
 }
 
-.todo-item, .input-container {
-  background            : var( --neutral-700 )                           ;
+.todo-container {
   border-top            : var( --sizing-100 ) solid var( --neutral-600 ) ;
-  color                 : var( --neutral-400 )                           ;
   display               : grid                                           ;
   gap                   : var( --sizing-400 )                            ;
   grid-template-columns : var( --sizing-600 ) auto var( --sizing-600 )   ;
   padding               : var( --sizing-400 ) 0                          ;
-}
-
-.date {
-  margin      : 0 var( --sizing-400 ) ;
-  user-select : none  ;
 }
 
 .content-container {
@@ -93,13 +103,22 @@ button:hover {
   flex-direction : column ;
 }
 
+.date {
+  margin : 0 var( --sizing-400 ) ;
+  cursor : pointer               ;
+}
+
 .done, .done input {
   text-decoration-line : line-through ;
 }
 
-.sorted, .sorted-reverse {
-  background-repeat   : no-repeat ;
-  background-size     : var( --sizing-500 ) var( --sizing-500 ) ;
+
+/*******************************************************************************
+*  icons                                                                       *
+*******************************************************************************/
+.sorted, .reverse {
+  background-repeat : no-repeat                               ;
+  background-size   : var( --sizing-500 ) var( --sizing-500 ) ;
 }
 
 .check, .uncheck, .remove, .pluss {
@@ -117,8 +136,8 @@ button:hover {
 }
 
 .check   { background-image : url( "icons/circle-check-solid.svg" ) ; }
-.pluss   { background-image : url( "icons/plus-solid.svg" )         ; }
-.remove  { background-image : url( "icons/xmark-solid.svg" )        ; }
-.sorted          { background-image : url("icons/chevron-down.svg") ; }
-.sorted-reverse  { background-image : url("icons/chevron-up.svg")   ; }
-.uncheck { background-image : url( "icons/circle-regular.svg" )     ; }
+.pluss   { background-image : url( "icons/plus-solid.svg"         ) ; }
+.remove  { background-image : url( "icons/xmark-solid.svg"        ) ; }
+.reverse { background-image : url( "icons/chevron-up.svg"         ) ; }
+.sorted  { background-image : url( "icons/chevron-down.svg"       ) ; }
+.uncheck { background-image : url( "icons/circle-regular.svg"     ) ; }

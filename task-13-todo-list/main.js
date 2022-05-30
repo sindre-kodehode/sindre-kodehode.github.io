@@ -49,9 +49,9 @@ const addElement = ( type, parent, opts = {} ) => {
 *******************************************************************************/
 const removeSortIcon = () => {
   [ ...document.querySelectorAll( ".sorted" ),
-    ...document.querySelectorAll( ".sorted-reverse" )
+    ...document.querySelectorAll( ".reverse" )
   ].forEach( e => {
-    e.classList.remove( "sorted-reverse" );
+    e.classList.remove( "reverse" );
     e.classList.remove( "sorted" );
   });
 };
@@ -174,7 +174,7 @@ const renderTodos = sortOrder => {
   todos.forEach( todo => {
     // todo item container
     const listItemEl = addElement( "div", todosContainerEl, {
-      className : "todo-item",
+      className : "todo-container",
     });
 
     // checkbox icon
@@ -195,12 +195,12 @@ const renderTodos = sortOrder => {
     }
 
     // container for the description and due date
-    const contentEl = addElement( "div", listItemEl, {
+    const contentContainerEl = addElement( "div", listItemEl, {
       className : "content-container",
     });
 
     // add todo description
-    const descEl = addElement( "input", contentEl, {
+    const descEl = addElement( "input", contentContainerEl, {
       value     : todo.desc,
       // change the description of the todo when the text has changed
       onchange  : () => {
@@ -210,7 +210,7 @@ const renderTodos = sortOrder => {
     });
 
     // show the due date of the todo
-    addElement( "span", contentEl, {
+    addElement( "span", contentContainerEl, {
       className   : "date",
       // format the due date
       textContent : formatDate( todo.due ),
@@ -254,7 +254,7 @@ sorts.forEach( ({ name, sort }) => {
 
       // if the todos are already sorted by this method, reverse the sort
       if ( sorted === name ) {
-        button.classList.add( "sorted-reverse" );
+        button.classList.add( "reverse" );
         todos.reverse();
         renderTodos( name );
       }
@@ -274,7 +274,7 @@ const todosContainerEl = addElement( "div", document.body );
 
 // container for the input to add a new todo
 const inputContainerEl = addElement( "div", document.body, {
-  className : "input-container",
+  className : "todo-container",
 });
 
 // add icon before input field
