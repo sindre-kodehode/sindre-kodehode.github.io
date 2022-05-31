@@ -22,6 +22,7 @@
 - [task-11-css-animations](task-11-css-animations)
 - [task-12-js-drum-kit](task-12-js-drum-kit)
 - [task-13-todo-list](task-13-todo-list)
+- [task-14-pokeapi](task-14-pokeapi)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
