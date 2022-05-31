@@ -44,20 +44,6 @@ const addElement = ( type, parent, opts = {} ) => {
 
 
 /*******************************************************************************
-*  removeSortIcon:                                                             * 
-* finds all the elements with a sort icon and removes them                     * 
-*******************************************************************************/
-const removeSortIcon = () => {
-  [ ...document.querySelectorAll( ".sorted" ),
-    ...document.querySelectorAll( ".reverse" )
-  ].forEach( e => {
-    e.classList.remove( "reverse" );
-    e.classList.remove( "sorted" );
-  });
-};
-
-
-/*******************************************************************************
 *  formatDate:                                                                 * 
 *  format the displayed due date                                               * 
 *                                                                              * 
@@ -164,8 +150,6 @@ const datePicker = todo => {
 const renderTodos = sortOrder => {
   // set the sorted order
   sorted = sortOrder;
-  // if the sorted order is "none", remove the sort icon
-  if ( sorted === "none" ) removeSortIcon();
 
   // empty the todo container
   todosContainerEl.textContent = "";
@@ -205,7 +189,6 @@ const renderTodos = sortOrder => {
       // change the description of the todo when the text has changed
       onchange  : () => {
         todo.desc = descEl.value;
-        removeSortIcon();
       },
     });
 
@@ -247,21 +230,23 @@ const sortContainer = addElement( "div", document.body, {
 // goes through all the sort objects ,adds a button and attaches a sort
 // function on click
 sorts.forEach( ({ name, sort }) => {
-  const button = addElement( "button", sortContainer, {
+  // add sort icon indicator
+  addElement( "div", sortContainer, {
+    className : "sorted",
+  });
+
+  // add sort button
+  addElement( "button", sortContainer, {
     textContent : name,
     onclick     : () => {
-      removeSortIcon();
-
       // if the todos are already sorted by this method, reverse the sort
       if ( sorted === name ) {
-        button.classList.add( "reverse" );
         todos.reverse();
         renderTodos( name );
       }
 
       // sort the todos, add a sort indicator icon and rernder the list
       else {
-        button.classList.add( "sorted" );
         todos.sort( sort );
         renderTodos( name );
       }
