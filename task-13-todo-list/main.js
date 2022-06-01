@@ -4,11 +4,12 @@
 /*******************************************************************************
 *  global vairables                                                            *
 *******************************************************************************/
-// store the sorted order
-let sorted = "none";
-
 // an array of the todos
 const todos = [];
+
+// store the sorted order
+let currentSort = undefined;
+let reversed    = false;
 
 // an array of objects containing the name and function of different sort
 // methods
@@ -111,7 +112,7 @@ const datePicker = todo => {
 
     // remove the modal and rerender the todos
     datePickerModal.remove();
-    renderTodos( "none" );
+    renderTodos();
   };
 
   // container for the date picker
@@ -147,9 +148,39 @@ const datePicker = todo => {
 *                                                                              * 
 *  sortOrder : string, the sort order of the todos                             * 
 *******************************************************************************/
-const renderTodos = sortOrder => {
+const renderTodos = newSortOrder => {
   // set the sorted order
-  sorted = sortOrder;
+  currentSort = newSortOrder;
+
+  // empty the sort container
+  sortContainer.textContent = "";
+
+  // goes through all the sort objects ,adds a button and attaches a sort
+  // function on click
+  sorts.forEach( ({ name, sort }) => {
+
+    // add the appropriate sort indicator icon
+    addElement( "div", sortContainer, {
+      className : ( currentSort === name ) ? 
+        reversed ? "reverse" : "sorted" : "unsorted",
+    });
+
+    addElement( "button", sortContainer, {
+      textContent : name,
+      onclick     : () => {
+        if ( currentSort === name ) {
+          todos.reverse();
+          reversed = !reversed;
+        }
+        else {
+          todos.sort( sort );
+          reversed = false;
+        }
+
+        renderTodos( name );
+      },
+    });
+  });
 
   // empty the todo container
   todosContainerEl.textContent = "";
@@ -167,7 +198,7 @@ const renderTodos = sortOrder => {
       // toggle the done state of the todo object and rerender todos
       onclick   : () => {
         todo.done = !todo.done;
-        renderTodos( "none" );
+        renderTodos();
       },
     });
 
@@ -189,6 +220,7 @@ const renderTodos = sortOrder => {
       // change the description of the todo when the text has changed
       onchange  : () => {
         todo.desc = descEl.value;
+        renderTodos();
       },
     });
 
@@ -207,7 +239,7 @@ const renderTodos = sortOrder => {
       // remove selected todo from list and rerender todos
       onclick   : () => {
         todos.splice( todos.indexOf( todo ), 1 );
-        renderTodos( "none" );
+        renderTodos();
       },
     });
   });
@@ -225,33 +257,6 @@ addElement( "h1", document.body, {
 // container for the sort buttons
 const sortContainer = addElement( "div", document.body, {
   className : "sort-container"
-});
-
-// goes through all the sort objects ,adds a button and attaches a sort
-// function on click
-sorts.forEach( ({ name, sort }) => {
-  // add sort icon indicator
-  addElement( "div", sortContainer, {
-    className : "sorted",
-  });
-
-  // add sort button
-  addElement( "button", sortContainer, {
-    textContent : name,
-    onclick     : () => {
-      // if the todos are already sorted by this method, reverse the sort
-      if ( sorted === name ) {
-        todos.reverse();
-        renderTodos( name );
-      }
-
-      // sort the todos, add a sort indicator icon and rernder the list
-      else {
-        todos.sort( sort );
-        renderTodos( name );
-      }
-    },
-  });
 });
 
 // container for the todos
@@ -296,7 +301,7 @@ const inputEl = addElement( "input", inputContainerEl, {
     target.focus();
 
     // rerender todos
-    renderTodos( "none" );
+    renderTodos();
   },
 });
 
@@ -329,4 +334,4 @@ const example = [
 ];
 
 example.forEach( todo => todos.push( todo ) );
-renderTodos( "none" );
+renderTodos();
