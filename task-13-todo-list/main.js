@@ -32,6 +32,7 @@ const sorts = [
 *  return : Node, the new element created                                      * 
 *******************************************************************************/
 const addElement = ( type, parent, opts = {} ) => {
+
   const newEl = document.createElement( type );
   parent.append( newEl );
 
@@ -45,13 +46,106 @@ const addElement = ( type, parent, opts = {} ) => {
 
 
 /*******************************************************************************
-*  formatDate:                                                                 * 
+*  sortTodos:                                                                  * 
+*  sort the todo list with the selected sort method                            * 
+*                                                                              * 
+*  name : string, the name of the selected sort                                * 
+*  sort : function, the sort function to use                                   * 
+*******************************************************************************/
+const sortTodos = ( name, sort ) => {
+
+  if ( currentSort === name ) {
+    todos.reverse();
+    reversed = !reversed;
+  }
+
+  else {
+    todos.sort( sort );
+    reversed = false;
+  }
+
+  renderTodos( name );
+};
+
+
+/*******************************************************************************
+*  toggleDone:                                                                 * 
+*  toggle the done state of the selected todo on/off                           * 
+*                                                                              * 
+*  todo : object, the selected todo                                            * 
+*******************************************************************************/
+const toggleDone = ( todo ) => {
+  todo.done = !todo.done;
+  renderTodos();
+};
+
+
+/*******************************************************************************
+*  changeDesc:                                                                 * 
+*  change the description of the selected todo                                 * 
+*                                                                              * 
+*  todo    : object, the selected todo                                         * 
+*  newDesc : string, new description                                           * 
+*******************************************************************************/
+const changeDesc = ( todo, newDesc ) => {
+  todo.desc = newDesc;
+  renderTodos();
+};
+
+
+/*******************************************************************************
+*  removeTodo:                                                                 * 
+*  remove selected todo from the list                                          * 
+*                                                                              * 
+*  todo : object, the selected todo                                            * 
+*******************************************************************************/
+const removeTodo = ( todo ) => {
+  todos.splice( todos.indexOf( todo ), 1 );
+  renderTodos();
+};
+
+
+/*******************************************************************************
+*  handle adding a new todo                                                    * 
+*******************************************************************************/
+const addTodo = ({ key, target }) => {
+
+  // do nothing if the key is not enter
+  if ( key !== "Enter" ) return;
+
+  // do nothing if the field is empty or only contains space
+  // regex:
+  // ^  : start of line anchor
+  //  * : selects any numer of spaces
+  // $  : end of line anchor
+  if ( target.value.match( /^ *$/ ) ) return;
+
+  // add a new todo object to the end of the list with the entered text
+  todos.push({
+    desc  : target.value,
+    due   : null,
+    added : new Date(),
+    done  : false,
+  });
+
+  // refocus and empty input field
+  target.value = "";
+  target.focus();
+
+  // rerender todos
+  renderTodos();
+};
+
+
+/*******************************************************************************
+*  renderDate:                                                                 * 
 *  format the displayed due date                                               * 
 *                                                                              * 
 *  date   : Date, the todo due date to format                                  * 
 *  return : string, formated date                                              * 
 *******************************************************************************/
-const formatDate = date => {
+const renderDate = date => {
+
   // if no due date, return prompt text
   if ( !date ) return "Pick a date...";
 
@@ -88,14 +182,16 @@ const formatDate = date => {
 
 
 /*******************************************************************************
-*  datePicker:                                                                 * 
+*  pickDate:                                                                   * 
 *  show a modal to pick a due date for the selected todo                       * 
 *                                                                              * 
 *  todo : object, the todo item to set a new due date on                       * 
 *******************************************************************************/
-const datePicker = todo => {
+const pickDate = todo => {
+
   // verify and set the due date on selected todo
   const setDueDate = () => {
+
     // if there is no previous due date, create a new Date object
     if ( !todo.due ) todo.due = new Date();
 
@@ -149,14 +245,15 @@ const datePicker = todo => {
 *  sortOrder : string, the sort order of the todos                             * 
 *******************************************************************************/
 const renderTodos = newSortOrder => {
+
   // set the sorted order
   currentSort = newSortOrder;
 
-  // empty the sort container
-  sortContainer.textContent = "";
+  // empty the sort and todo container
+  sortContainer.textContent    = "";
+  todosContainerEl.textContent = "";
 
-  // goes through all the sort objects ,adds a button and attaches a sort
-  // function on click
+  // for each sort method, add a sort button and sort indicator
   sorts.forEach( ({ name, sort }) => {
 
     // add the appropriate sort indicator icon
@@ -165,28 +262,16 @@ const renderTodos = newSortOrder => {
         reversed ? "reverse" : "sorted" : "unsorted",
     });
 
+    // add a sort button
     addElement( "button", sortContainer, {
       textContent : name,
-      onclick     : () => {
-        if ( currentSort === name ) {
-          todos.reverse();
-          reversed = !reversed;
-        }
-        else {
-          todos.sort( sort );
-          reversed = false;
-        }
-
-        renderTodos( name );
-      },
+      onclick     : () => { sortTodos( name, sort ) },
     });
   });
 
-  // empty the todo container
-  todosContainerEl.textContent = "";
-
   // for each todo object in the list, add the todo to the todo container
   todos.forEach( todo => {
+
     // todo item container
     const listItemEl = addElement( "div", todosContainerEl, {
       className : "todo-container",
@@ -196,10 +281,7 @@ const renderTodos = newSortOrder => {
     const checkBoxEl = addElement( "div", listItemEl, {
       className : "uncheck",
       // toggle the done state of the todo object and rerender todos
-      onclick   : () => {
-        todo.done = !todo.done;
-        renderTodos();
-      },
+      onclick   : () => { toggleDone( todo ) },
     });
 
     // if the todo object is set to done, add styling to the text and
@@ -215,32 +297,26 @@ const renderTodos = newSortOrder => {
     });
 
     // add todo description
-    const descEl = addElement( "input", contentContainerEl, {
+    addElement( "input", contentContainerEl, {
       value     : todo.desc,
       // change the description of the todo when the text has changed
-      onchange  : () => {
-        todo.desc = descEl.value;
-        renderTodos();
-      },
+      onchange  : ({ target }) => { changeDesc( todo, target.value ) },
     });
 
     // show the due date of the todo
     addElement( "span", contentContainerEl, {
       className   : "date",
       // format the due date
-      textContent : formatDate( todo.due ),
+      textContent : renderDate( todo.due ),
       // show a date picker modal on click
-      onclick     : () => datePicker( todo ),
+      onclick     : () => pickDate( todo ),
     });
 
     // remove todo icon
     addElement( "span", listItemEl, {
       className : "remove",
       // remove selected todo from list and rerender todos
-      onclick   : () => {
-        todos.splice( todos.indexOf( todo ), 1 );
-        renderTodos();
-      },
+      onclick   : () => removeTodo( todo ),
     });
   });
 };
@@ -267,42 +343,17 @@ const inputContainerEl = addElement( "div", document.body, {
   className : "todo-container",
 });
 
-// add icon before input field
+// icon before input field
 addElement( "span", inputContainerEl, {
   className : "pluss",
   onclick   : () => inputEl.focus(),
 });
 
-// add an input field and function to handle adding a new todo
+// input field for adding a new todo
 const inputEl = addElement( "input", inputContainerEl, {
   type        : "text",
   placeholder : "Add todo",
-  onkeydown   : ({ key, target }) => {
-    // do nothing if the key is not enter
-    if ( key !== "Enter" ) return;
-
-    // do nothing if the field is empty or only contains space
-    // regex:
-    // ^  : start of line anchor
-    //  * : selects any numer of spaces
-    // $  : end of line anchor
-    if ( target.value.match( /^ *$/ ) ) return;
-
-    // add a new todo object to the end of the list with the entered text
-    todos.push({
-      desc  : target.value,
-      due   : null,
-      added : new Date(),
-      done  : false,
-    });
-
-    // refocus and empty input field
-    target.value = "";
-    target.focus();
-
-    // rerender todos
-    renderTodos();
-  },
+  onkeydown   : addTodo,
 });
 
 
