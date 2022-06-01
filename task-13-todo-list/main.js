@@ -54,11 +54,13 @@ const addElement = ( type, parent, opts = {} ) => {
 *******************************************************************************/
 const sortTodos = ( name, sort ) => {
 
+  // if the list is already sorted with this method, just reverse the list
   if ( currentSort === name ) {
     todos.reverse();
     reversed = !reversed;
   }
 
+  // sort the todos with the selected method
   else {
     todos.sort( sort );
     reversed = false;
@@ -122,17 +124,16 @@ const addTodo = ({ key, target }) => {
 
   // add a new todo object to the end of the list with the entered text
   todos.push({
-    desc  : target.value,
-    due   : null,
     added : new Date(),
+    desc  : target.value,
     done  : false,
+    due   : null,
   });
 
   // refocus and empty input field
   target.value = "";
   target.focus();
 
-  // rerender todos
   renderTodos();
 };
 
@@ -144,7 +145,7 @@ const addTodo = ({ key, target }) => {
 *  date   : Date, the todo due date to format                                  * 
 *  return : string, formated date                                              * 
 *******************************************************************************/
-const renderDate = date => {
+const renderDate = ( date ) => {
 
   // if no due date, return prompt text
   if ( !date ) return "Pick a date...";
@@ -174,9 +175,9 @@ const renderDate = date => {
 
   // else show the weekday, month and day
   return date.toLocaleString( undefined, {
-    weekday : "short",
-    month   : "short",
     day     : "numeric",
+    month   : "short",
+    weekday : "short",
   });
 };
 
@@ -187,10 +188,13 @@ const renderDate = date => {
 *                                                                              * 
 *  todo : object, the todo item to set a new due date on                       * 
 *******************************************************************************/
-const pickDate = todo => {
+const pickDate = ( todo ) => {
 
   // verify and set the due date on selected todo
-  const setDueDate = () => {
+  const setDueDate = ({ key }) => {
+
+    // check if a key was pressed and if that key was enter
+    if ( key !== "Enter" ) return;
 
     // if there is no previous due date, create a new Date object
     if ( !todo.due ) todo.due = new Date();
@@ -214,10 +218,7 @@ const pickDate = todo => {
   // container for the date picker
   const datePickerModal = addElement( "div", document.body, {
     className : "date-picker-modal",
-    onkeydown : ({ key }) =>  { 
-      // add the entered date if enter is pressed
-      if ( key === "Enter" ) setDueDate()
-    }, 
+    onkeydown : setDueDate, 
   });
 
   // date picker input field
@@ -232,8 +233,8 @@ const pickDate = todo => {
 
   // confirm button
   addElement( "button", datePickerModal, {
-    textContent : "Set due time",
     onclick     : setDueDate,
+    textContent : "Set due time",
   });
 };
 
@@ -264,8 +265,8 @@ const renderTodos = newSortOrder => {
 
     // add a sort button
     addElement( "button", sortContainer, {
+      onclick     : () => sortTodos( name, sort ),
       textContent : name,
-      onclick     : () => { sortTodos( name, sort ) },
     });
   });
 
@@ -280,16 +281,8 @@ const renderTodos = newSortOrder => {
     // checkbox icon
     const checkBoxEl = addElement( "div", listItemEl, {
       className : "uncheck",
-      // toggle the done state of the todo object and rerender todos
-      onclick   : () => { toggleDone( todo ) },
+      onclick   : () => toggleDone( todo ),
     });
-
-    // if the todo object is set to done, add styling to the text and
-    // change to a checked icon
-    if ( todo.done ) {
-      listItemEl.classList.add( "done" );
-      checkBoxEl.className = "check";
-    }
 
     // container for the description and due date
     const contentContainerEl = addElement( "div", listItemEl, {
@@ -297,27 +290,36 @@ const renderTodos = newSortOrder => {
     });
 
     // add todo description
-    addElement( "input", contentContainerEl, {
+    const descEl = addElement( "input", contentContainerEl, {
+      className : "input-active",
       value     : todo.desc,
-      // change the description of the todo when the text has changed
-      onchange  : ({ target }) => { changeDesc( todo, target.value ) },
+      onchange  : ({ target }) => changeDesc( todo, target.value ),
     });
 
     // show the due date of the todo
-    addElement( "span", contentContainerEl, {
-      className   : "date",
-      // format the due date
-      textContent : renderDate( todo.due ),
-      // show a date picker modal on click
+    const dateEl = addElement( "span", contentContainerEl, {
+      className   : "date-active",
       onclick     : () => pickDate( todo ),
+      textContent : renderDate( todo.due ),
     });
 
     // remove todo icon
     addElement( "span", listItemEl, {
       className : "remove",
-      // remove selected todo from list and rerender todos
       onclick   : () => removeTodo( todo ),
     });
+
+    // if the todo object is set to done, add styling to the text and
+    // change to a checked icon
+    if ( todo.done ) {
+      descEl.className = "input-inactive";
+      descEl.readOnly = true;
+
+      dateEl.className = "date-inactive";
+      dateEl.onclick = "";
+
+      checkBoxEl.className = "check";
+    }
   });
 };
 
@@ -351,9 +353,10 @@ addElement( "span", inputContainerEl, {
 
 // input field for adding a new todo
 const inputEl = addElement( "input", inputContainerEl, {
-  type        : "text",
-  placeholder : "Add todo",
+  className   : "input-active",
   onkeydown   : addTodo,
+  placeholder : "Add todo",
+  type        : "text",
 });
 
 
@@ -362,25 +365,25 @@ const inputEl = addElement( "input", inputContainerEl, {
 *******************************************************************************/
 const example = [
   { 
-    desc  : "Yoga",
-    due   : new Date( "May,27,2022,11:30" ),
     added : new Date( "May,26,2022" ), 
+    desc  : "Yoga",
     done  : true,
+    due   : new Date( "May,27,2022,11:30" ),
   }, { 
-    desc  : "Water plants",
-    due   : new Date( "May,28,2022,17:30" ),
     added : new Date( "May,26,2022" ),
+    desc  : "Water plants",
     done  : true,
+    due   : new Date( "May,28,2022,17:30" ),
   }, { 
-    desc  : "Package delivery",
-    due   : new Date( "May,28,2022,15:00" ),
     added : new Date( "May,27,2022" ), 
+    desc  : "Package delivery",
     done  : false,
+    due   : new Date( "May,28,2022,15:00" ),
   }, { 
-    desc  : "Send report",
-    due   : new Date( "May,30,2022,17:00" ),
     added : new Date( "May,25,2022" ), 
+    desc  : "Send report",
     done  : false,
+    due   : new Date( "May,30,2022,17:00" ),
   },
 ];
 

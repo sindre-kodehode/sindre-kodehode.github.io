@@ -63,27 +63,13 @@ button {
   text-transform : uppercase ;
 }
 
-
-/*******************************************************************************
-*  element hover                                                               *
-*******************************************************************************/
-input:hover {
-  background : var( --color-800 ) ;
-  color      : var( --color-200 ) ;
-}
-
-input:focus {
-  background : var( --color-800 ) ;
-  outline    : none               ;
-}
-
 button:hover {
   color : var( --color-200 ) ;
 }
 
 
 /*******************************************************************************
-*  containers and items                                                        *
+*  containers                                                                  *
 *******************************************************************************/
 .sort-container {
   display         : flex     ;
@@ -103,14 +89,39 @@ button:hover {
   flex-direction : column ;
 }
 
-.date {
-  cursor      : pointer             ;
-  margin      : 0 var( --size-400 ) ;
-  user-select : none                ;
+
+/*******************************************************************************
+*  components                                                                  *
+*******************************************************************************/
+.date-inactive, .input-inactive, .date-inactive {
+  user-select : none ;
 }
 
-.done, .done input {
-  text-decoration-line : line-through ;
+.date-inactive, .input-inactive{
+  color                : var( --color-600 ) ;
+  cursor               : default            ;
+  text-decoration-line : line-through       ;
+}
+
+.date-active, .date-inactive {
+  padding : 0 var( --size-400 ) ;
+}
+
+.date-active {
+  cursor : pointer ;
+}
+
+.input-active:hover, .date-active:hover {
+  color : var( --color-200 ) ;
+}
+
+.input-inactive:focus, .input-active:focus {
+  outline : none ;
+}
+
+.input-active:focus {
+  background : var( --color-800 ) ;
+  outline    : none               ;
 }
 
 
@@ -125,21 +136,22 @@ button:hover {
 }
 
 .check, .uncheck, .pluss {
-  height : var( --size-600 )   ;
-  margin : var( --size-300 ) 0 ;
-  width  : var( --size-600 )   ;
+  height  : var( --size-600 )   ;
+  padding : var( --size-300 ) 0 ;
+  width   : var( --size-600 )   ;
+}
+
+.remove, .sorted, .reverse, .unsorted {
+  height : var( --size-500 ) ;
+  width  : var( --size-500 ) ;
 }
 
 .remove {
-  height : var( --size-500 )   ;
-  margin : var( --size-300 ) 0 ;
-  width  : var( --size-500 )   ;
+  padding : var( --size-300 ) 0 ;
 }
 
 .sorted, .reverse, .unsorted {
-  height : var( --size-500 )                       ;
   margin : 0 var( --size-300 ) 0 var( --size-500 ) ;
-  width  : var( --size-500 )                       ;
 }
 
 .check:hover, .uncheck:hover, .remove:hover, .pluss:hover {
