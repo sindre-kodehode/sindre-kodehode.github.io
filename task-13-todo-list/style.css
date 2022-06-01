@@ -86,9 +86,8 @@ button:hover {
 *  containers and items                                                        *
 *******************************************************************************/
 .sort-container {
-  display         : flex              ;
-  gap             : var( --size-500 ) ;
-  justify-content : flex-end          ;
+  display         : flex     ;
+  justify-content : flex-end ;
 }
 
 .todo-container {
@@ -125,14 +124,22 @@ button:hover {
   cursor              : pointer   ;
 }
 
-.check, .uncheck, .remove, .pluss {
-  height : var( --size-600 ) ;
-  width  : var( --size-600 ) ;
+.check, .uncheck, .pluss {
+  height : var( --size-600 )   ;
+  margin : var( --size-300 ) 0 ;
+  width  : var( --size-600 )   ;
+}
+
+.remove {
+  height : var( --size-500 )   ;
+  margin : var( --size-300 ) 0 ;
+  width  : var( --size-500 )   ;
 }
 
 .sorted, .reverse, .unsorted {
-  height : var( --size-500 ) ;
-  width  : var( --size-500 ) ;
+  height : var( --size-500 )                       ;
+  margin : 0 var( --size-300 ) 0 var( --size-500 ) ;
+  width  : var( --size-500 )                       ;
 }
 
 .check:hover, .uncheck:hover, .remove:hover, .pluss:hover {
