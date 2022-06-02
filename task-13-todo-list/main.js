@@ -108,12 +108,16 @@ const removeTodo = ( todo ) => {
 
 
 /*******************************************************************************
+*  addTodo:                                                                    * 
 *  handle adding a new todo                                                    * 
+*                                                                              * 
+*  key    : string, the key that was pressed                                   * 
+*  target : Node, the element that triggered the event                         * 
 *******************************************************************************/
 const addTodo = ({ key, target }) => {
 
   // do nothing if the key is not enter
-  if ( key !== "Enter" ) return;
+  if ( key && key !== "Enter" ) return;
 
   // do nothing if the field is empty or only contains space
   // regex:
@@ -348,7 +352,7 @@ const inputContainerEl = addElement( "div", document.body, {
 // icon before input field
 addElement( "span", inputContainerEl, {
   className : "pluss",
-  onclick   : () => inputEl.focus(),
+  onclick   : () => addTodo({ target : inputEl }),
 });
 
 // input field for adding a new todo
