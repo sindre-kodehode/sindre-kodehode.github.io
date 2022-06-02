@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  padding : 0 ;
+  margin  : 0 ;
+}
+
+body {
+  image-rendering : pixelated        ;
+  margin          : 16px auto        ;
+  max-width       : calc( 8px * 20 ) ;
+}
+
+pre {
+  color       : #000             ;
+  font-family : "Press Start 2P" ;
+  font-size   :  8px             ;
+  line-height :  8px             ;
+}
+
+img { transform : scaleX( -1 ) ; }
+
+.top {
+  background-image : url( "top.png" ) ;
+}
+
+.bottom {
+  background-image : url( "bottom.png" ) ;
+}
+
+.middle,
+.middle-reverse {
+  background-image : url( "middle.png" ) ;
+}
+
+.wall,
+.wall-reverse {
+  background-image : url( "wall.png" ) ;
+}
+
+.top-corner,
+.top-corner-reverse {
+  background-image : url( "top-corner.png" ) ;
+}
+
+.bottom-corner,
+.bottom-corner-reverse {
+  background-image : url( "bottom-corner.png" ) ;
+}
+
+.middle-reverse,
+.wall-reverse,
+.top-corner-reverse,
+.bottom-corner-reverse {
+  transform : scaleX( -1 ) ;
+}
+
+.divider     { background-image : url( "divider.png" )    ; }
+.symbol-down { background-image : url( "down-arrow.png" ) ; }
+
+/*******************************************************************************
+*  layout                                                                      *
+/******************************************************************************/
+
+body {
+  display               : grid              ;
+  grid-template-columns : repeat( 20, 8px ) ;
+  grid-template-rows    : repeat( 18, 8px ) ;
+}
+
+.top                   { grid-area:  1 /  2 / span  1 / span 18 ; }
+.top-corner            { grid-area:  1 /  1 / span  1 / span  1 ; }
+.top-corner-reverse    { grid-area:  1 / 20 / span  1 / span  1 ; }
+
+.poke-sprite           { grid-area:  4 /  3 / span  5 / span  5 ; }
+.poke-number           { grid-area:  9 /  2 / span  1 / span  5 ; }
+.poke-data             { grid-area:  2 / 10 / span  7 / span 10 ; }
+
+.middle                { grid-area: 10 /  1 / span  1 / span  1 ; }
+.wall                  { grid-area:  2 /  1 / span 16 / span  1 ; }
+
+.divider               { grid-area: 10 /  2 / span  1 / span 18 ; }
+
+.middle-reverse        { grid-area: 10 / 20 / span  1 / span  1 ; }
+.wall-reverse          { grid-area:  2 / 20 / span 16 / span  1 ; }
+
+.description           { grid-area: 12 /  2 / span  5 / span 18 ; }
+.symbol-down           { grid-area: 17 / 19 / span  1 / span  1 ; }
+
+.bottom                { grid-area: 18 /  2 / span  1 / span 18 ; }
+.bottom-corner         { grid-area: 18 /  1 / span  1 / span  1 ; }
+.bottom-corner-reverse { grid-area: 18 / 20 / span  1 / span  1 ; }
