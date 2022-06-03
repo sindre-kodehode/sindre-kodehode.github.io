@@ -18,41 +18,30 @@ pre {
   line-height :  8px             ;
 }
 
-img { transform : scaleX( -1 ) ; }
-
-.top {
-  background-image : url( "top.png" ) ;
-}
-
-.bottom {
-  background-image : url( "bottom.png" ) ;
-}
+.top    { background-image : url( "top.png" )    ; }
+.bottom { background-image : url( "bottom.png" ) ; }
 
 .middle,
-.middle-reverse {
-  background-image : url( "middle.png" ) ;
-}
+.middle-reverse        { background-image : url( "middle.png" )        ; }
 
 .wall,
-.wall-reverse {
-  background-image : url( "wall.png" ) ;
-}
+.wall-reverse          { background-image : url( "wall.png" )          ; }
 
 .top-corner,
-.top-corner-reverse {
-  background-image : url( "top-corner.png" ) ;
-}
+.top-corner-reverse    { background-image : url( "top-corner.png" )    ; }
 
 .bottom-corner,
-.bottom-corner-reverse {
-  background-image : url( "bottom-corner.png" ) ;
-}
+.bottom-corner-reverse { background-image : url( "bottom-corner.png" ) ; }
 
 .middle-reverse,
 .wall-reverse,
 .top-corner-reverse,
-.bottom-corner-reverse {
-  transform : scaleX( -1 ) ;
+.bottom-corner-reverse { transform : scaleX( -1 ) ; }
+
+.poke-sprite { 
+  background-position : bottom center ;
+  background-repeat   : no-repeat     ;
+  transform           : scaleX( -1 )  ; 
 }
 
 .divider     { background-image : url( "divider.png" )    ; }
@@ -72,7 +61,7 @@ body {
 .top-corner            { grid-area:  1 /  1 / span  1 / span  1 ; }
 .top-corner-reverse    { grid-area:  1 / 20 / span  1 / span  1 ; }
 
-.poke-sprite           { grid-area:  2 /  2 / span  5 / span  5 ; }
+.poke-sprite           { grid-area:  2 /  2 / span  7 / span  7 ; }
 .poke-number           { grid-area:  9 /  2 / span  1 / span  5 ; }
 .poke-data             { grid-area:  2 / 10 / span  7 / span 10 ; }
 

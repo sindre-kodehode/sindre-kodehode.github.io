@@ -1,6 +1,6 @@
 "use strict"
 
-const pokeNo = Math.floor( Math.random() * 149 );
+const pokeNo = Math.floor( Math.random() * 151 ) + 1;
 
 const pokeReq     = new Request( `https://pokeapi.co/api/v2/pokemon/${pokeNo}` );
 const pokeSpecReq = new Request( `https://pokeapi.co/api/v2/pokemon-species/${pokeNo}` );
@@ -20,13 +20,15 @@ const pokeFetch = async () => {
   pokeDataEl.textContent += `\nHT  ${pokeData.height}"\n`;
   pokeDataEl.textContent += `\nWT  ${pokeData.weight}lb\n`;
 
-  pokeSpriteEl.src = pokeData.sprites.versions["generation-i"]["red-blue"]["front_default"];
+  pokeSpriteEl.style.backgroundImage  = 
+    `url(${pokeData.sprites.versions["generation-i"]["red-blue"]["front_default"]})`;
 
   const pokeSpecRes  = await fetch( pokeSpecReq );
   const pokeSpecData = await pokeSpecRes.json();
 
-  pokeDescEl.textContent = pokeSpecData.flavor_text_entries[0].flavor_text.split("\u000c")[0].replaceAll("\n", "\n\n");
+  pokeDescEl.textContent = pokeSpecData.flavor_text_entries.find( ({ language, version }) => {
+    return language.name === "en" && version.name === "red";
+  }).flavor_text.split("\u000c")[0].replaceAll("\n", "\n\n");
 };
 
 pokeFetch();
-
