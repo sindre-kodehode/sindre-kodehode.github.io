@@ -72,7 +72,7 @@ body {
 .top-corner            { grid-area:  1 /  1 / span  1 / span  1 ; }
 .top-corner-reverse    { grid-area:  1 / 20 / span  1 / span  1 ; }
 
-.poke-sprite           { grid-area:  4 /  3 / span  5 / span  5 ; }
+.poke-sprite           { grid-area:  2 /  2 / span  5 / span  5 ; }
 .poke-number           { grid-area:  9 /  2 / span  1 / span  5 ; }
 .poke-data             { grid-area:  2 / 10 / span  7 / span 10 ; }
 
@@ -84,7 +84,7 @@ body {
 .middle-reverse        { grid-area: 10 / 20 / span  1 / span  1 ; }
 .wall-reverse          { grid-area:  2 / 20 / span 16 / span  1 ; }
 
-.description           { grid-area: 12 /  2 / span  5 / span 18 ; }
+.poke-desc             { grid-area: 12 /  2 / span  5 / span 18 ; }
 .symbol-down           { grid-area: 17 / 19 / span  1 / span  1 ; }
 
 .bottom                { grid-area: 18 /  2 / span  1 / span 18 ; }
