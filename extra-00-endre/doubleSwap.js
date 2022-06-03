@@ -21,6 +21,14 @@
 // const doubleSwap = ( string, charA, charB ) =>
 //   string.split( charA ).map( e => e.split( charB ).join( charA ) ).join( charB );
 
+// const doubleSwap = ( string, charA, charB ) =>
+//   [...string].map( e => {
+//     switch (e) { 
+//       case charA: return charB;
+//       case charB: return charA;
+//       default: return e;
+//     }}).join("");
+
 const doubleSwap = ( string, charA, charB ) =>
   string.replace( RegExp( `${charA}|${charB}`, "g" ), e => e === charA ? charB : charA );
 
