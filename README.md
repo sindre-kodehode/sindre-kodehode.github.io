@@ -20,9 +20,8 @@
 - [task-09-css-transitions](task-09-css-transitions)
 - [task-10-js-arrays-loops-and-methods](task-10-js-arrays-loops-and-methods)
 - [task-11-css-animations](task-11-css-animations)
-- [task-12-js-drum-kit](task-12-js-drum-kit)
+- [task-12-js-drumkit](task-12-js-drumkit)
 - [task-13-todo-list](task-13-todo-list)
-- [task-14-pokeapi](task-14-pokeapi)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
@@ -30,4 +29,4 @@
 ## extra tasks
 - [extra-01-tip-calculator-app-main](extra-01-tip-calculator-app-main)
 - [extra-02-nrk-newsfeed](extra-02-nrk-newsfeed)
- 
+- [extra-04-pokeapi](extra-04-pokeapi)
