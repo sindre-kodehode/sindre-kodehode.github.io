@@ -1,5 +1,3 @@
-# sindre-kodehode
-
 ## scrimba tasks
 - [scrimba-01-passenger-counter](scrimba-01-passenger-counter)
 - [scrimba-02-unit-conversion](scrimba-02-unit-conversion)
@@ -22,6 +20,8 @@
 - [task-11-css-animations](task-11-css-animations)
 - [task-12-js-drumkit](task-12-js-drumkit)
 - [task-13-todo-list](task-13-todo-list)
+- [task-14-react-import-export](task-14-react-import-export/build)
+- [task-15-react-styled-components](task-15-react-styled-components/build)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
