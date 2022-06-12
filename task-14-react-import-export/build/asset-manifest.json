@@ -1,13 +1,10 @@
 {
   "files": {
-    "main.css": "/task-14-react-import-export/build/static/css/main.a240c550.css",
-    "main.js": "/task-14-react-import-export/build/static/js/main.c7a78e31.js",
+    "main.js": "/task-14-react-import-export/build/static/js/main.07037623.js",
     "index.html": "/task-14-react-import-export/build/index.html",
-    "main.a240c550.css.map": "/task-14-react-import-export/build/static/css/main.a240c550.css.map",
-    "main.c7a78e31.js.map": "/task-14-react-import-export/build/static/js/main.c7a78e31.js.map"
+    "main.07037623.js.map": "/task-14-react-import-export/build/static/js/main.07037623.js.map"
   },
   "entrypoints": [
-    "static/css/main.a240c550.css",
-    "static/js/main.c7a78e31.js"
+    "static/js/main.07037623.js"
   ]
 }
