@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/task-15-react-styled-components/build/static/js/main.07037623.js",
+    "main.js": "/task-15-react-styled-components/build/static/js/main.64f770f2.js",
+    "static/media/react-logo.png": "/task-15-react-styled-components/build/static/media/react-logo.20adfb35ae6a6e5817bf.png",
     "index.html": "/task-15-react-styled-components/build/index.html",
-    "main.07037623.js.map": "/task-15-react-styled-components/build/static/js/main.07037623.js.map"
+    "main.64f770f2.js.map": "/task-15-react-styled-components/build/static/js/main.64f770f2.js.map"
   },
   "entrypoints": [
-    "static/js/main.07037623.js"
+    "static/js/main.64f770f2.js"
   ]
 }
