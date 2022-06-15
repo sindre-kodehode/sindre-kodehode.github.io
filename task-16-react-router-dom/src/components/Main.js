@@ -17,22 +17,27 @@ const StyledMain = styled.main`
   padding    : 32px ;
 `;
 
+const routes = [{
+    path    : "/task-16-react-router-dom/build",
+    element : <SectionHome />
+  }, { 
+    path    : "/task-16-react-router-dom/build/section-one",
+    element : <SectionOne />
+  }, { 
+    path    : "/task-16-react-router-dom/build/section-two",
+    element : <SectionTwo />
+  }, { 
+    path    : "/task-16-react-router-dom/build/section-three",
+    element : <SectionThree />
+},];
+
 export default function Main() {
   return (
     <StyledMain>
       <Routes>
-        <Route
-          path="/task-16-react-router-dom/build"
-          element={<SectionHome  />} />
-        <Route
-          path="/task-16-react-router-dom/build/section-one"
-          element={<SectionOne   />} />
-        <Route
-          path="/task-16-react-router-dom/build/section-two"
-          element={<SectionTwo   />} />
-        <Route
-          path="/task-16-react-router-dom/build/section-three"
-          element={<SectionThree />} />
+        { routes.map( ({ path, element }) => 
+          <Route path={ path } element={ element } />
+        )}
       </Routes>
     </StyledMain>
   );
