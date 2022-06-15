@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/task-16-react-router-dom/build/static/js/main.4dd2eb6f.js",
+    "main.js": "/task-16-react-router-dom/build/static/js/main.84527049.js",
     "static/media/react-logo.png": "/task-16-react-router-dom/build/static/media/react-logo.20adfb35ae6a6e5817bf.png",
     "index.html": "/task-16-react-router-dom/build/index.html",
-    "main.4dd2eb6f.js.map": "/task-16-react-router-dom/build/static/js/main.4dd2eb6f.js.map"
+    "main.84527049.js.map": "/task-16-react-router-dom/build/static/js/main.84527049.js.map"
   },
   "entrypoints": [
-    "static/js/main.4dd2eb6f.js"
+    "static/js/main.84527049.js"
   ]
 }
