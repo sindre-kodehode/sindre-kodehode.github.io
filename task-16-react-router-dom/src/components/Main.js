@@ -21,10 +21,18 @@ export default function Main() {
   return (
     <StyledMain>
       <Routes>
-        <Route path="/"              element={<SectionHome  />} />
-        <Route path="/section-one"   element={<SectionOne   />} />
-        <Route path="/section-two"   element={<SectionTwo   />} />
-        <Route path="/section-three" element={<SectionThree />} />
+        <Route
+          path="/task-16-react-router-dom/build"
+          element={<SectionHome  />} />
+        <Route
+          path="/task-16-react-router-dom/build/section-one"
+          element={<SectionOne   />} />
+        <Route
+          path="/task-16-react-router-dom/build/section-two"
+          element={<SectionTwo   />} />
+        <Route
+          path="/task-16-react-router-dom/build/section-three"
+          element={<SectionThree />} />
       </Routes>
     </StyledMain>
   );
