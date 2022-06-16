@@ -23,6 +23,7 @@
 - [task-14-react-import-export](task-14-react-import-export/build)
 - [task-15-react-styled-components](task-15-react-styled-components/build)
 - [task-16-react-router-dom](task-16-react-router-dom/build)
+- [task-17-react-hooks](task-17-react-hooks/build)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
