@@ -24,6 +24,8 @@
 - [task-15-react-styled-components](task-15-react-styled-components/build)
 - [task-16-react-router-dom](task-16-react-router-dom/build)
 - [task-17-react-hooks](task-17-react-hooks/build)
+- [task-18-react-api-calls](task-18-react-api-calls/build)
+- [task-19-ts-react-props](task-19-ts-react-props/build)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
