@@ -4,6 +4,8 @@
 - [scrimba-03-black-jack-game](scrimba-03-black-jack-game)
 - [scrimba-04-password-manager](scrimba-04-password-manager)
 - [scrimba-05-chrome-extension](scrimba-05-chrome-extension)
+- [scrimba-06-invoice-generator](scrimba-06-invoice-generator)
+- [scrimba-07-first-react](scrimba-07-first-react)
 
 ## kodehode tasks 
 - [task-01-html-formating](task-01-html-formating)
