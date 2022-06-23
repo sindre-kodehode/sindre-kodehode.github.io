@@ -56,7 +56,9 @@ const Main = (): JSX.Element => {
   return (
     <StyledMain>
       <Section header="input" >
-        <StyledInputNumber ref={ inputEl } type="number" />
+        <StyledInputNumber onKeyDown={ (e) => {
+          e.key === "Enter" && clickHandler()
+        }} defaultValue={ 0 } ref={ inputEl } type="number" />
         <Button onClick={ clickHandler }> submit </Button>
       </Section>
       <Section header="output" >
