@@ -11,7 +11,8 @@ const StyledButton = styled.button`
   transition    : background 200ms 0s ;
   transition    : filter 200ms 0s     ;
 
-  &:hover  { background : #fff              ; }
+  &:hover  { background : #fff           ; }
+  &:focus  { outline    : #20232a solid 4px ; }
   &:active { 
     box-shadow : 0px 1px 1px black inset ;
     transform  : translateY( 1px )       ; 
