@@ -84,7 +84,7 @@ Error generating stack: `+o.message+`
   border-radius   : 0 0 8px 8px ;
   color           : #fff        ;
   display         : flex        ;
-  gap             : 32px        ;
+  gap             : 16px        ;
   justify-content : center      ;
   padding         : 16px        ;
 `,Dm=({children:e})=>Bn(Mm,{children:[" ",e," "]}),jm=ft.section`
@@ -129,7 +129,7 @@ Error generating stack: `+o.message+`
   gap             : 64px   ;
   justify-content : center ;
   padding         : 32px   ;
-`,Wm=()=>{const[e,t]=We.exports.useState(""),n=We.exports.useRef(null);return Bn(Vm,{children:[Bn($a,{header:"input",children:[se(Bm,{defaultValue:1234,ref:n,type:"number"}),se(Um,{onClick:()=>{let l=n.current.valueAsNumber,o=0;for(;l>0;){const i=l%10;o+=i,l=(l-i)/10}t(o.toString())},children:" submit "})]}),se($a,{header:"output",children:se(Hm,{children:e||0})})]})},Qm=ft.footer`
+`,Wm=()=>{const[e,t]=We.exports.useState(""),n=We.exports.useRef(null);return Bn(Vm,{children:[Bn($a,{header:"input",children:[se(Bm,{ref:n,type:"number"}),se(Um,{onClick:()=>{let l=n.current.valueAsNumber,o=0;for(;l>0;){const i=l%10;o+=i,l=(l-i)/10}t(o.toString())},children:" submit "})]}),se($a,{header:"output",children:se(Hm,{children:e||0})})]})},Qm=ft.footer`
   align-items : center  ;
   background  : #20232a ;
   color       : #999    ;

@@ -56,7 +56,7 @@ const Main = (): JSX.Element => {
   return (
     <StyledMain>
       <Section header="input" >
-        <StyledInputNumber defaultValue={ 1234 } ref={ inputEl } type="number" />
+        <StyledInputNumber ref={ inputEl } type="number" />
         <Button onClick={ clickHandler }> submit </Button>
       </Section>
       <Section header="output" >

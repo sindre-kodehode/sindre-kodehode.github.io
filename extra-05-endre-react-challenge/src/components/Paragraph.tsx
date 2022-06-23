@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
   border-radius   : 0 0 8px 8px ;
   color           : #fff        ;
   display         : flex        ;
-  gap             : 32px        ;
+  gap             : 16px        ;
   justify-content : center      ;
   padding         : 16px        ;
 `;
