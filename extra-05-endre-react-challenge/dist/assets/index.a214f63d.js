@@ -129,7 +129,7 @@ Error generating stack: `+o.message+`
   gap             : 64px   ;
   justify-content : center ;
   padding         : 32px   ;
-`,Wm=()=>{const[e,t]=We.exports.useState(""),n=We.exports.useRef(null),r=()=>{let l=n.current.valueAsNumber,o=0;for(;l>0;){const i=l%10;o+=i,l=(l-i)/10}t(o.toString())};return Bn(Vm,{children:[Bn($a,{header:"input",children:[se(Bm,{onKeyDown:l=>{l.key==="Enter"&&r()},defaultValue:0,ref:n,type:"number"}),se(Um,{onClick:r,children:" submit "})]}),se($a,{header:"output",children:se(Hm,{children:e||0})})]})},Qm=ft.footer`
+`,Wm=()=>{const[e,t]=We.exports.useState(0),n=We.exports.useRef(null),r=()=>{const l=[...n.current.value].map(o=>+o).reduce((o,i)=>o+i,0);t(l)};return Bn(Vm,{children:[Bn($a,{header:"input",children:[se(Bm,{onKeyDown:l=>{l.key==="Enter"&&r()},defaultValue:0,ref:n,type:"number"}),se(Um,{onClick:r,children:" submit "})]}),se($a,{header:"output",children:se(Hm,{children:e})})]})},Qm=ft.footer`
   align-items : center  ;
   background  : #20232a ;
   color       : #999    ;

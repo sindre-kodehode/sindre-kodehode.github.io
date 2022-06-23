@@ -35,22 +35,24 @@ const StyledMain = styled.main`
 `;
 
 const Main = (): JSX.Element => {
-  const [ digitSum, setDigitSum ] = useState( "" );
+  const [ digitSum, setDigitSum ] = useState( 0 );
   const inputEl                   = useRef<HTMLInputElement>( null! );
 
   const clickHandler = () => {
-    let digits : number = inputEl.current.valueAsNumber;
-    let sum    : number = 0;
+    // let digits : number = inputEl.current.valueAsNumber;
+    // let sum    : number = 0;
+    //
+    // while ( digits > 0 ) {
+    //   const digit = digits % 10;
+    //
+    //   sum += digit;
+    //
+    //   digits = ( digits - digit ) / 10 ;
+    // }
 
-    while ( digits > 0 ) {
-      const digit = digits % 10;
+    const sum = [ ...inputEl.current.value ].map( e => +e ).reduce( (p,c) => p+c, 0 );
 
-      sum += digit;
-
-      digits = ( digits - digit ) / 10 ;
-    }
-
-    setDigitSum( sum.toString() );
+    setDigitSum( sum );
   };
 
   return (
@@ -63,7 +65,7 @@ const Main = (): JSX.Element => {
       </Section>
       <Section header="output" >
         <StyledOutput>
-          { digitSum || 0 }
+          { digitSum }
         </StyledOutput>
       </Section>
     </StyledMain>
