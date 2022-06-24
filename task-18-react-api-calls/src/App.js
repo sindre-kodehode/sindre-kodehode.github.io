@@ -6,9 +6,10 @@ import Footer                from "./components/Footer";
 
 const GlobalStyles = createGlobalStyle`
   * {
-    box-sizing : border-box ;
-    margin     : 0          ;
-    padding    : 0          ;
+    box-sizing      : border-box ;
+    margin          : 0          ;
+    padding         : 0          ;
+    image-rendering : pixelated  ;
   }
   
   body {
