@@ -1,4 +1,10 @@
-const App = (): JSX.Element =>
-  <h1>It's working!</h1>
+import GlobalStyle  from "./GlobalStyle";
+import BusinessCard from "./components/BusinessCard";
+
+const App = () =>
+  <>
+    <GlobalStyle />
+    <BusinessCard />
+  </>
 
 export default App
