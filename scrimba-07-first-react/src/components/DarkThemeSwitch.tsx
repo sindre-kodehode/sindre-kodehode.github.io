@@ -19,14 +19,15 @@ const StyledInput = styled.input`
 `;
 
 const StyledLabel = styled.label`
-    background     : #1a1b21           ;
-    border         : 2px solid #fff    ;
-    border-radius  : 16px              ;
-    content        : ""                ;
-    height         : 28px              ;
-    margin         : 0px 0px 12px auto ;
-    padding        : 2px 4px           ;
-    width          : 48px              ;
+    align-self     : end              ;
+    background     : #1a1b21          ;
+    border         : 2px solid #fff   ;
+    border-radius  : 16px             ;
+    content        : ""               ;
+    height         : 28px             ;
+    margin         : 0px 0px 12px 0px ;
+    padding        : 2px 4px          ;
+    width          : 48px             ;
 
   &::before {
     border-radius : 10px  ;
