@@ -6,6 +6,7 @@
 - [scrimba-05-chrome-extension](scrimba-05-chrome-extension)
 - [scrimba-06-invoice-generator](scrimba-06-invoice-generator)
 - [scrimba-07-first-react](scrimba-07-first-react/dist)
+- [scrimba-08-travel-journal](scrimba-08-travel-journal/dist)
 
 ## kodehode tasks 
 - [task-01-html-formating](task-01-html-formating)
@@ -37,3 +38,4 @@
 - [extra-01-tip-calculator-app-main](extra-01-tip-calculator-app-main)
 - [extra-02-nrk-newsfeed](extra-02-nrk-newsfeed)
 - [extra-04-pokeapi](extra-04-pokeapi)
+- [extra-05-endre-react-challenge](extra-05-endre-react-challenge/dist)
