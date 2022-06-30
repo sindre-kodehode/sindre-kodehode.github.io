@@ -25,9 +25,9 @@ const theme: DefaultTheme = {
   },
   
   sizing : {
-    size300    : "16px",
-    size500    : "24px",
-    size700    : "64px",
+    size300    : "1.00rem",
+    size500    : "1.50rem",
+    size700    : "4.00rem",
   }
 };
 

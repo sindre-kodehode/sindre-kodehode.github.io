@@ -17,23 +17,29 @@ const StyledArticle = styled.article`
   grid : 
   "image .          " 1fr
   "image location   " 1fr
-  "image name       " 2fr
+  "image title      " 2fr
   "image .          " 1fr
   "image date       " 1fr
   "image description" 5fr / 9fr 20fr ;
 
   & > :nth-child( 1 ) { grid-area : image       ; }
   & > :nth-child( 2 ) { grid-row  : location    ; }
-  & > :nth-child( 3 ) { grid-row  : name        ; }
+  & > :nth-child( 3 ) { grid-row  : title       ; }
   & > :nth-child( 4 ) { grid-row  : date        ; }
   & > :nth-child( 5 ) { grid-row  : description ; }
 `;
 
 type CardProps = { data : CardType };
 
+const opts: Intl.DateTimeFormatOptions = {
+  day   : "numeric",
+  month : "short",
+  year  : "numeric",
+}
+
 const Card = ({ 
   data: {
-    name,
+    title,
     location,
     map,
     description,
@@ -49,9 +55,13 @@ const Card = ({
 
     <LocationContainer location={ location } map={ map } />
 
-    <Heading1>{ name }</Heading1>
+    <Heading1>{ title }</Heading1>
 
-    <Heading3>{ `${ startDate } - ${ endDate }`}</Heading3>
+    <Heading3>{ 
+      `${ startDate.toLocaleDateString( "gb", opts ) }
+       - ${ endDate.toLocaleDateString( "gb", opts ) }`
+    }</Heading3>
+
     <Paragraph>{ description }</Paragraph>
 
   </StyledArticle>
