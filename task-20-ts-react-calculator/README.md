@@ -2,9 +2,11 @@
 
 **live-site:**
 [task-20-ts-react-calculator/dist](https://sindre-kodehode.github.io/task-20-ts-react-calculator/dist/)
+![calc](./scrot/calc.png)
 
 **figma-design-file:**
 [Kodehode - Calculator](https://www.figma.com/file/cpNH1J9QgcZiW36VaChw0X/Kodehode---Calculator?node-id=0%3A1)
+![figma](./scrot/calc.png)
 
 ## technology: 
 ```
@@ -56,3 +58,10 @@ src/
     ├── ThemeContext.tsx
     └── themes.ts
 ```
+
+##TODO:
+- theme toggle styling
+- correct colors for theme 2 and 3
+- add responsive mobile style
+- formating of number in display
+- add memory and operation text in display
