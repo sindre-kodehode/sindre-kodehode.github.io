@@ -59,7 +59,7 @@ src/
     └── themes.ts
 ```
 
-## TODO:
+## todo:
 - theme toggle styling
 - correct colors for theme 2 and 3
 - add responsive mobile style
