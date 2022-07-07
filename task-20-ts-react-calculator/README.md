@@ -9,7 +9,7 @@
 ## technology: 
 ```
 Front End Library     : React            
-toolkit State Manager : Redux            
+Toolkit State Manager : Redux            
 CSS in JS             : Styled Components
 Static Typing         : Typescript       
 Build tool            : Vite             
