@@ -29,6 +29,7 @@
 - [task-17-react-hooks](task-17-react-hooks/build)
 - [task-18-react-api-calls](task-18-react-api-calls/build)
 - [task-19-ts-react-props](task-19-ts-react-props/build)
+- [task-20-ts-react-calculator](task-20-ts-react-calculator/dist)
 
 ## kodehode projects
 - [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
