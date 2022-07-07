@@ -7,11 +7,13 @@
 [Kodehode - Calculator](https://www.figma.com/file/cpNH1J9QgcZiW36VaChw0X/Kodehode---Calculator?node-id=0%3A1)
 
 ## technology: 
-- React : Front End Library 
-- Redux : toolkit State Manager
-- Styled Components : CSS in JS
-- Typescript : Static Typing
-- Vite : Build tool
+```
+Front End Library     : React            
+toolkit State Manager : Redux            
+CSS in JS             : Styled Components
+Static Typing         : Typescript       
+Build tool            : Vite             
+```
 
 ## code-structure:
 ```
