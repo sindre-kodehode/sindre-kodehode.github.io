@@ -6,7 +6,7 @@
 
 **figma-design-file:**
 [Kodehode - Calculator](https://www.figma.com/file/cpNH1J9QgcZiW36VaChw0X/Kodehode---Calculator?node-id=0%3A1)
-![figma](./scrot/calc.png)
+![figma](./scrot/figma.png)
 
 ## technology: 
 ```
