@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import type { RootState   } from "./store/store";
 import type { ProductType } from "./store/productsSlice"; 
 
@@ -8,22 +6,6 @@ import { emptyCart      } from "./store/cartSlice";
 import { removeFromCart } from "./store/cartSlice";
 import { useDispatch    } from "react-redux";
 import { useSelector    } from "react-redux";
-
-const StyledApp = styled.main`
-  display               : grid        ;
-  grid-template-columns : 1fr 1fr 1fr ;
-
-  & :first-child    { grid-area : 1 / span 3 ; }
-  & :nth-child( 2 ) { grid-area : 2 / span 3 ; }
-  & :nth-child( 3 ) { grid-area : 3 / span 3 ; }
-`;
-
-const StyledProduct = styled.section`
-  & img { 
-    max-width : 16rem;
-    height    : 16rem;
-  }
-`;
 
 const App = () => { 
   const products = useSelector(
@@ -46,7 +28,7 @@ const App = () => {
     dispatch( removeFromCart( id ) );
 
   return(
-    <StyledApp>
+    <main>
 
       <h1> Webshop </h1>
       <ul>
@@ -63,15 +45,15 @@ const App = () => {
       <p> sum: $ { cart.reduce( ( sum, curr ) => sum + curr.price, 0 ) } </p>
 
       { products.map( product =>
-        <StyledProduct key={ product.id } >
+        <section key={ product.id } >
           <img src={ product.image } alt={ product.title } />
           <h3>{ product.title }</h3>
           <p>{ `$ ${ product.price }` }</p>
           <button onClick={ () => handleAddToCart( product ) }> buy </button>
-        </StyledProduct>
+        </section>
       )}
 
-    </StyledApp>
+    </main>
 )};
 
 export default App;
