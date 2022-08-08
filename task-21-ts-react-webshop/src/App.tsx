@@ -14,6 +14,7 @@ const StyledApp = styled.main`
 
   & :first-child    { grid-area : 1 / span 3 ; }
   & :nth-child( 2 ) { grid-area : 2 / span 3 ; }
+  & :nth-child( 3 ) { grid-area : 3 / span 3 ; }
 `;
 
 const StyledProduct = styled.section`
@@ -44,6 +45,7 @@ const App = () => {
     <StyledApp>
 
       <h1> Webshop </h1>
+      <p> sum: $ { cart.reduce( ( sum, curr ) => sum + curr.price, 0 ) } </p>
       <ul>
         { cart.map( ({ title }) => <li>{ title }</li> ) }
         <li> <button onClick={ handleEmptyCart }> empty cart </button> </li>
