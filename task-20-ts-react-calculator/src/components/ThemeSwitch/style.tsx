@@ -8,7 +8,7 @@ const StyledSection = styled.section`
   grid-template-rows    : 1rem 1rem           ;
   justify-items         : center              ;
 
-  & input { display : none ; }
+  & input { opacity : 0 ; }
 `;
 
 export default StyledSection;
