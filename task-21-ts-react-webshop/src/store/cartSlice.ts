@@ -17,6 +17,11 @@ const cartSlice = createSlice( {
     addToCart : ( state, action: PayloadAction< ProductType > ) => {
       state.cart.push( { ...action.payload, id : Date.now() } );
     },
+    removeFromCart : ( state, action: PayloadAction< number > ) => {
+      state.cart.splice( state.cart.findIndex( product =>
+        product.id === action.payload
+      ), 1 );
+    },
     emptyCart : state => {
       state.cart = [];
     },
@@ -25,6 +30,7 @@ const cartSlice = createSlice( {
 
 export const { 
   addToCart, 
+  removeFromCart,
   emptyCart
 } = cartSlice.actions;
 

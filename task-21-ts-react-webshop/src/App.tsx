@@ -3,10 +3,11 @@ import styled from "styled-components";
 import type { RootState   } from "./store/store";
 import type { ProductType } from "./store/productsSlice"; 
 
-import { addToCart   } from "./store/cartSlice";
-import { emptyCart   } from "./store/cartSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { addToCart      } from "./store/cartSlice";
+import { emptyCart      } from "./store/cartSlice";
+import { removeFromCart } from "./store/cartSlice";
+import { useDispatch    } from "react-redux";
+import { useSelector    } from "react-redux";
 
 const StyledApp = styled.main`
   display               : grid        ;
@@ -41,15 +42,25 @@ const App = () => {
   const handleAddToCart = ( product: ProductType ) =>
     dispatch( addToCart( product ) );
 
+  const handleRemoveFromCart = ( id: number ) =>
+    dispatch( removeFromCart( id ) );
+
   return(
     <StyledApp>
 
       <h1> Webshop </h1>
-      <p> sum: $ { cart.reduce( ( sum, curr ) => sum + curr.price, 0 ) } </p>
       <ul>
-        { cart.map( ({ title }) => <li>{ title }</li> ) }
+        { cart.map( ({ title, id }) => 
+          <li key={ id } >
+            { title }
+            <button onClick={ () => handleRemoveFromCart( id ) }>
+              remove
+            </button> 
+          </li>
+        )}
         <li> <button onClick={ handleEmptyCart }> empty cart </button> </li>
       </ul>
+      <p> sum: $ { cart.reduce( ( sum, curr ) => sum + curr.price, 0 ) } </p>
 
       { products.map( product =>
         <StyledProduct key={ product.id } >
