@@ -7,7 +7,7 @@ import Label              from "../Label";
 
 import styled from "styled-components";
 
-const StyledDiv = styled.div`
+const StyledSpan = styled.span`
   background    : ${ ({ theme }) => theme.palette.backgroundDark } ;
   border-radius : 1rem                                             ;
   grid-column   : span 3                                           ;
@@ -45,7 +45,7 @@ const ThemeSwitch = () => {
         </div>
       )}
 
-    <StyledDiv />
+    <StyledSpan />
 
     </StyledSection>
   </>
