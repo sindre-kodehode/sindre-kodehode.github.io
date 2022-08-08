@@ -15,7 +15,7 @@ const cartSlice = createSlice( {
   initialState,
   reducers : {
     addToCart : ( state, action: PayloadAction< ProductType > ) => {
-      state.cart.push( action.payload );
+      state.cart.push( { ...action.payload, id : Date.now() } );
     },
     emptyCart : state => {
       state.cart = [];
