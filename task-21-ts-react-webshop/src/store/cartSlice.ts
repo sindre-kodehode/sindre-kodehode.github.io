@@ -14,13 +14,11 @@ const cartSlice = createSlice( {
   name : "cart",
   initialState,
   reducers : {
-    addToCart : ( state, action: PayloadAction< ProductType > ) => {
-      state.cart.push( { ...action.payload, id : Date.now() } );
+    addToCart : ( { cart }, action: PayloadAction< ProductType > ) => {
+      cart.push( { ...action.payload, id : Date.now() } );
     },
     removeFromCart : ( state, action: PayloadAction< number > ) => {
-      state.cart.splice( state.cart.findIndex( product =>
-        product.id === action.payload
-      ), 1 );
+      state.cart = state.cart.filter( ({ id }) => id !== action.payload );
     },
     emptyCart : state => {
       state.cart = [];
