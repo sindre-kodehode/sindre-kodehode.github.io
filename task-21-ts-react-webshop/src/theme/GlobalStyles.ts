@@ -7,13 +7,6 @@ const GlobalStyle = createGlobalStyle`
     margin     : 0          ;
   }
 
-  main {
-    display               : grid        ;
-    grid-template-columns : 1fr 1fr 1fr ;
-
-    & :first-child { grid-area : 1 / span 3 ; }
-  }
-
   img { 
     max-width : 16rem;
     height    : 16rem;

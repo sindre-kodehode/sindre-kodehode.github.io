@@ -1,30 +1,27 @@
 import { createSlice   } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ProductType   } from "./productsSlice";
+import { ProductType   } from "./store";
 
-type CartState = {
-  cart : ProductType[],
-}
+const initialState: ProductType[] = JSON.parse( localStorage.getItem( "cart" ) || "[]" );
 
-const initialState: CartState = {
-  cart : JSON.parse( localStorage.getItem( "cart" ) || "[]" ),
-};
+const saveCart = ( cart:ProductType[] ) =>
+  localStorage.setItem( "cart", JSON.stringify( cart ) );
 
 const cartSlice = createSlice( {
   name : "cart",
   initialState,
   reducers : {
-    addToCart : ( state, action: PayloadAction< ProductType > ) => {
-      state.cart.push( { ...action.payload, id : Date.now() } );
-      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
+    addToCart : ( cart, { payload }: PayloadAction< ProductType > ) => {
+      cart.push( { ...payload, id: Date.now() } )
+      saveCart( cart );
     },
-    removeFromCart : ( state, action: PayloadAction< number > ) => {
-      state.cart = state.cart.filter( ({ id }) => id !== action.payload );
-      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
+    removeFromCart : ( cart, { payload }: PayloadAction< number > ) => {
+      cart.splice( cart.findIndex( ({ id }) => id === payload ), 1 );
+      saveCart( cart );
     },
-    emptyCart : state => {
-      state.cart = [];
-      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
+    emptyCart : cart => {
+      cart.splice( 0 );
+      saveCart( cart );
     },
   },
 });
