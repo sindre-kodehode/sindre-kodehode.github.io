@@ -30,19 +30,24 @@ const App = () => {
   return(
     <main>
 
-      <h1> Webshop </h1>
-      <ul>
+      <nav>
+        <h1> Webshop </h1>
+
         { cart.map( ({ title, id }) => 
-          <li key={ id } >
+          <p key={ id } >
             { title }
             <button onClick={ () => handleRemoveFromCart( id ) }>
               remove
             </button> 
-          </li>
+          </p>
         )}
-        <li> <button onClick={ handleEmptyCart }> empty cart </button> </li>
-      </ul>
-      <p> sum: $ { cart.reduce( ( sum, curr ) => sum + curr.price, 0 ) } </p>
+
+        <button onClick={ handleEmptyCart }> empty cart </button>
+        <p> sum: $ {
+          cart.reduce( ( sum, curr ) => sum + curr.price, 0 ).toFixed( 2 )
+        }</p>
+
+      </nav>
 
       { products.map( product =>
         <section key={ product.id } >

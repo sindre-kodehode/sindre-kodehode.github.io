@@ -7,21 +7,24 @@ type CartState = {
 }
 
 const initialState: CartState = {
-  cart : [],
+  cart : JSON.parse( localStorage.getItem( "cart" ) || "[]" ),
 };
 
 const cartSlice = createSlice( {
   name : "cart",
   initialState,
   reducers : {
-    addToCart : ( { cart }, action: PayloadAction< ProductType > ) => {
-      cart.push( { ...action.payload, id : Date.now() } );
+    addToCart : ( state, action: PayloadAction< ProductType > ) => {
+      state.cart.push( { ...action.payload, id : Date.now() } );
+      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
     },
     removeFromCart : ( state, action: PayloadAction< number > ) => {
       state.cart = state.cart.filter( ({ id }) => id !== action.payload );
+      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
     },
     emptyCart : state => {
       state.cart = [];
+      localStorage.setItem( "cart", JSON.stringify( state.cart ) );
     },
   },
 });

@@ -11,9 +11,7 @@ const GlobalStyle = createGlobalStyle`
     display               : grid        ;
     grid-template-columns : 1fr 1fr 1fr ;
 
-    & :first-child    { grid-area : 1 / span 3 ; }
-    & :nth-child( 2 ) { grid-area : 2 / span 3 ; }
-    & :nth-child( 3 ) { grid-area : 3 / span 3 ; }
+    & :first-child { grid-area : 1 / span 3 ; }
   }
 
   img { 
