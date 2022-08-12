@@ -1,34 +1,41 @@
-import { ProductType } from "../store/store";
-import { useEffect, useState } from "react";
+import { useEffect    } from "react";
+import { useFetchType } from "./useFetch.type";
+import { useState     } from "react";
 
-const useFetch = () => {
-  const [ products , setProducts  ] = useState< ProductType[] >( [] );
-  const [ isLoading, setIsloading ] = useState< boolean >( false );
-  const [ errorMsg , setErrorMsg  ] = useState< string >( "" );
+export default () => {
+  const [ fetchState, setFetchState ] = useState< useFetchType >( {
+    products  : [],
+    isLoading : false,
+    errorMsg  : "",
+  })
 
   const fetchProducts = async () => {
-    setIsloading( true );
+    setFetchState( {
+      products  : [],
+      isLoading : true,
+      errorMsg  : "",
+    })
 
     try {
       const res  = await fetch( "https://fakestoreapi.com/products" );
       const data = await res.json();
-      setProducts( data );
+
+      setFetchState( {
+        products  : data, 
+        isLoading : false,
+        errorMsg  : "",
+      });
 
     } catch ( err ) {
-      err instanceof Error && setErrorMsg( err.message );
-
-    } finally {
-      setIsloading( false );
+      err instanceof Error && setFetchState( {
+        products  : [],
+        isLoading : false,
+        errorMsg : err.message,
+      });
     }
   }
 
   useEffect( () => { fetchProducts() }, [] );
   
-  return {
-    products  : products,
-    isLoading : isLoading,
-    errorMsg  : errorMsg,
-  }
+  return fetchState;
 };
-
-export default useFetch;

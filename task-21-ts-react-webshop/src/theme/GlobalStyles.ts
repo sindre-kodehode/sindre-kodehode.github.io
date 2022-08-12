@@ -1,10 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export default createGlobalStyle`
   * {
     box-sizing : border-box ;
     padding    : 0          ;
     margin     : 0          ;
+  }
+
+  body {
+    --color-bg      : #282c34 ;
+    --color-primary : #61dafb ;
   }
 
   img { 
@@ -12,5 +17,3 @@ const GlobalStyle = createGlobalStyle`
     height    : 16rem;
   }
 `;
-
-export { GlobalStyle };

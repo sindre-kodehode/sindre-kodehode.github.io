@@ -1,12 +1,27 @@
-import Header   from "./components/Header";
-import Products from "./components/Products";
+import Cart           from "./components/Cart";
+import Navbar         from "./components/Navbar";
+import Products       from "./components/Products";
 
-const App = () => { 
-  return (
-    <>
-      <Header />
-      <Products filter=""/>
-    </>
-)};
+import { CATEGORIES } from "./const/categories";
+import { Route  }     from "react-router-dom";
+import { Routes }     from "react-router-dom";
 
-export default App;
+export default () => <>
+  <Navbar />
+  <Routes>
+
+  { CATEGORIES.map( cat =>
+      <Route 
+        key={ cat.id }
+        path={`/task-21-ts-react-webshop/dist/${ cat.link }`}
+        element={ <Products filter={ cat.filter } /> }
+      />
+  )}
+
+  <Route 
+    path={"/task-21-ts-react-webshop/dist/cart"}
+    element={ <Cart /> }
+  />
+
+  </Routes>
+</>;

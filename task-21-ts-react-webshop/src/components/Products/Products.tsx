@@ -1,35 +1,32 @@
+import Button             from "../Button";
+import StyledProducts     from "./Products.style";
 import type ProductsProps from "./Products.type";
+import useFetch           from "../../hooks/useFetch";
 
-import { addToCart   } from "../../store/cartSlice";
-import { useDispatch } from "react-redux";
-
-import useFetch        from "../../hooks/useFetch";
-
-import StyledProducts from "./Products.style";
-
-const Products = ( { filter }: ProductsProps ) => {
+export default ( { filter }: ProductsProps ) => {
   const { products, isLoading, errorMsg } = useFetch();
-  const dispatch = useDispatch();
 
   const applyFilter = () => filter 
     ? products.filter( product => product.category === filter )
     : products
 
-  return (
-    <StyledProducts>
-      { isLoading && <p> Loading... </p> }
-      { errorMsg  && <p>{ errorMsg }</p> }
+  return <StyledProducts>
+    { isLoading && <p> Loading... </p> }
+    { errorMsg  && <p>{ errorMsg }</p> }
 
-      { products && applyFilter().map( product =>
-        <section key={ product.id } >
-          <img src={ product.image } alt={ product.title } />
-          <h3>{ product.title }</h3>
-          <p>{ `$ ${ product.price }` }</p>
-          <button onClick={ () => dispatch( addToCart( product ) ) }> buy </button>
+    { products && applyFilter().map( product => {
+        const { id, image, title, price } = product;
+
+        return <section key={ id } >
+            <img src={ image } alt={ title } />
+
+            <h3>{ title }</h3>
+
+            <p> $ { price } </p>
+
+            <Button product={ product } > buy </Button>
         </section>
-      )}
-    </StyledProducts>
-  )
-}
-
-export default Products;
+      }
+    )}
+  </StyledProducts>
+};
