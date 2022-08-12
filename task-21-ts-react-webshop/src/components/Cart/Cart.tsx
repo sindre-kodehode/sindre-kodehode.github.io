@@ -1,4 +1,4 @@
-import Button             from "../Button";
+import StyledCart         from "./Cart.style"
 
 import { emptyCart      } from "../../store/cartSlice";
 import { removeFromCart } from "../../store/cartSlice";
@@ -13,7 +13,7 @@ export default () => {
   const cartTotal = () =>
     cart.reduce( ( sum, product ) => sum + product.price, 0 ).toFixed( 2 )
   
-  return <>
+  return <StyledCart>
     <p> items: { cart.length } </p>
     <p> total: $ { cartTotal() } </p>
 
@@ -32,5 +32,5 @@ export default () => {
         </li>
       )}
     </ul>
-  </>
+  </StyledCart>
 };
