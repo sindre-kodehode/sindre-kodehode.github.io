@@ -1,4 +1,4 @@
-import Button             from "../Button";
+import Product            from "../Product/Product";
 import StyledProducts     from "./Products.style";
 import type ProductsProps from "./Products.type";
 import useFetch           from "../../hooks/useFetch";
@@ -14,19 +14,8 @@ export default ( { filter }: ProductsProps ) => {
     { isLoading && <p> Loading... </p> }
     { errorMsg  && <p>{ errorMsg }</p> }
 
-    { products && applyFilter().map( product => {
-        const { id, image, title, price } = product;
-
-        return <section key={ id } >
-            <img src={ image } alt={ title } />
-
-            <h3>{ title }</h3>
-
-            <p> $ { price } </p>
-
-            <Button product={ product } > buy </Button>
-        </section>
-      }
+    { products && applyFilter().map( product =>
+        <Product product={ product } />
     )}
   </StyledProducts>
 };

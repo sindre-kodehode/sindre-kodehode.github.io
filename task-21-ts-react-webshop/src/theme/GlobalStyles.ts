@@ -8,12 +8,9 @@ export default createGlobalStyle`
   }
 
   body {
-    --color-bg      : #282c34 ;
-    --color-primary : #61dafb ;
-  }
-
-  img { 
-    max-width : 16rem;
-    height    : 16rem;
+    --color-bg       : #20232a ;
+    --color-bg-light : #282c34 ;
+    --color-fg       : #999999 ;
+    --color-primary  : #61dafb ;
   }
 `;

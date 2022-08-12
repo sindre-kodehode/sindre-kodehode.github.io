@@ -3,6 +3,7 @@ import styled from "styled-components";
 export default styled.button`
   background     : var( --color-primary )  ;
   border         : none                    ;
+  border-radius  : 0.5rem                  ;
   color          : var( --color-bg )       ;
   font-size      : 1rem                    ;
   font-weight    : 800                     ;
