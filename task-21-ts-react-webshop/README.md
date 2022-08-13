@@ -2,7 +2,10 @@
 
 **live-site:**
 [./task-21-ts-react-webshop/dist](https://sindre-kodehode.github.io/task-21-ts-react-webshop/dist/)
-![calc](./scrot/calc.png)
+
+**screenshots:**
+![calc](./scrot/webshop-1.png)
+![calc](./scrot/webshop-2.png)
 
 ## task:
 
@@ -37,3 +40,6 @@ Build tool        : Vite
 ```
 
 ## todo:
+
+- Add an info page for each individual item
+- Show amount of each item added to cart

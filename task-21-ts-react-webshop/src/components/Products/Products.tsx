@@ -1,7 +1,8 @@
-import Product            from "../Product/Product";
-import StyledProducts     from "./Products.style";
-import type ProductsProps from "./Products.type";
-import useFetch           from "../../hooks/useFetch";
+import Banner            from "../Banner"            ;
+import Product           from "../Product/Product"   ;
+import { ProductsProps } from "./Products.type"      ;
+import StyledProducts    from "./Products.style"     ;
+import useFetch          from "../../hooks/useFetch" ;
 
 export default ( { filter }: ProductsProps ) => {
   const { products, isLoading, errorMsg } = useFetch();
@@ -10,12 +11,14 @@ export default ( { filter }: ProductsProps ) => {
     ? products.filter( product => product.category === filter )
     : products
 
-  return <StyledProducts>
-    { isLoading && <p> Loading... </p> }
-    { errorMsg  && <p>{ errorMsg }</p> }
+  return <>
+    { errorMsg  && <Banner error> <h4>{ errorMsg }</h4> </Banner> }
+    { isLoading && <Banner      > <h4>  Loading...</h4> </Banner> }
 
-    { products && applyFilter().map( product =>
-        <Product product={ product } />
-    )}
-  </StyledProducts>
+    <StyledProducts>
+      { products && applyFilter().map( product =>
+          <Product product={ product } />
+      )}
+    </StyledProducts>
+  </>
 };

@@ -1,20 +1,18 @@
-import Button           from "../Button";
-import StyledProduct    from "./Product.style";
-
-import { ProductProps } from "./Product.type"
+import { addToCart    } from "../../store/cartSlice" ;
+import Button           from "../Button"             ;
+import Image            from "../Image"              ;
+import Price            from "../Price"              ;
+import { ProductProps } from "./Product.type"        ;
+import StyledProduct    from "./Product.style"       ;
+import Title            from "../Title"              ;
 
 export default ( { product }: ProductProps ) => { 
   const { id, image, title, price } = product;
 
   return <StyledProduct key={ id } >
-    <h3>{ title }</h3>
-
-    <picture>
-      <img src={ image } alt={ title } />
-    </picture>
-
-    <p> $ { price } </p>
-
-    <Button product={ product } > buy </Button>
+    <Title title={ title } />
+    <Image src={ image } alt={ title } />
+    <Price price={ price } />
+    <Button action={ addToCart( product ) } text="buy" />
   </StyledProduct>
 };

@@ -1,7 +1,8 @@
-import { ProductType } from "../store/store";
+import { ProductI  } from "../type/product.type" ;
+import { ReactNode } from "react"                ;
 
-export type useFetchType = {
-  products: ProductType[],
-  isLoading: boolean,
-  errorMsg: string,
+export interface useFetchType {
+  products  : ProductI[] ,
+  isLoading : boolean    ,
+  errorMsg  : ReactNode  ,
 };

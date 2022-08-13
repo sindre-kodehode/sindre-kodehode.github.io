@@ -1,5 +1,3 @@
-type ProductsProps = {
-  filter: string,
-}
-
-export default ProductsProps;
+export interface ProductsProps {
+  filter : string ,
+};
