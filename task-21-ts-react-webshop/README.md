@@ -37,6 +37,80 @@ Build tool        : Vite
 
 ## code-structure:
 ```
+./task-21-ts-react-webshop/src/
+├── App.tsx
+├── components/
+│   ├── Banner/
+│   │   ├── Banner.style.tsx
+│   │   ├── Banner.tsx
+│   │   ├── Banner.type.ts
+│   │   └── index.tsx
+│   ├── Button/
+│   │   ├── Button.style.tsx
+│   │   ├── Button.tsx
+│   │   ├── Button.type.ts
+│   │   └── index.tsx
+│   ├── Cart/
+│   │   ├── Cart.style.tsx
+│   │   ├── Cart.tsx
+│   │   └── index.tsx
+│   ├── CartBanner/
+│   │   ├── CartBanner.style.tsx
+│   │   ├── CartBanner.tsx
+│   │   ├── CartBanner.type.ts
+│   │   └── index.tsx
+│   ├── CartItem/
+│   │   ├── CartItem.style.tsx
+│   │   ├── CartItem.tsx
+│   │   ├── CartItem.type.ts
+│   │   └── index.tsx
+│   ├── Image/
+│   │   ├── Image.style.tsx
+│   │   ├── Image.tsx
+│   │   ├── Image.type.ts
+│   │   └── index.tsx
+│   ├── Link/
+│   │   ├── index.tsx
+│   │   ├── Link.style.tsx
+│   │   └── Link.tsx
+│   ├── Navbar/
+│   │   ├── index.tsx
+│   │   ├── Navbar.style.tsx
+│   │   └── Navbar.tsx
+│   ├── Price/
+│   │   ├── index.tsx
+│   │   ├── Price.style.tsx
+│   │   ├── Price.tsx
+│   │   └── Price.type.ts
+│   ├── Product/
+│   │   ├── index.tsx
+│   │   ├── Product.style.tsx
+│   │   ├── Product.tsx
+│   │   └── Product.type.ts
+│   ├── Products/
+│   │   ├── index.tsx
+│   │   ├── Products.style.tsx
+│   │   ├── Products.tsx
+│   │   └── Products.type.ts
+│   └── Title/
+│       ├── index.tsx
+│       ├── Title.style.tsx
+│       ├── Title.tsx
+│       └── Title.type.ts
+├── const/
+│   ├── categories.ts
+│   └── prducts.json
+├── hooks/
+│   ├── useFetch.ts
+│   └── useFetch.type.ts
+├── main.tsx
+├── store/
+│   ├── cartSlice.ts
+│   └── store.ts
+├── theme/
+│   └── GlobalStyles.ts
+└── type/
+    └── product.type.ts
 ```
 
 ## todo:
