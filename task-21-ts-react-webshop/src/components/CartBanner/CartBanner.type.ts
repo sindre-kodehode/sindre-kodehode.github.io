@@ -1,4 +1,4 @@
 export interface CartBannerProps {
-  total : number ;
+  total : string ;
   items : number ;
 };

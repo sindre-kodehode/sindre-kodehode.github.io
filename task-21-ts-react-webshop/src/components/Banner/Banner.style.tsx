@@ -1,6 +1,6 @@
 import styled from "styled-components" ;
 
-export default styled.header<{ error: boolean }>`
+export default styled.header<{ error?: boolean }>`
   ${ ({ error }) => error && 
     "--color-fg : var( --color-error ) ;"
   }
