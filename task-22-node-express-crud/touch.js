@@ -2,38 +2,35 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { argv  } from "node:process";
-import { exit  } from "node:process";
-import { rmdir } from "node:fs/promises";
+import { utimes, writeFile } from "node:fs/promises";
+import { argv   } from "node:process";
+import { exit   } from "node:process";
 
 
 /*******************************************************************************
 *  constants                                                                   *
 *******************************************************************************/
 const missingText =
-`rmdir.js: missing operand
-Try 'rmdir.js --help' for more information.
+`touch.js: missing file operand
+Try 'touch.js --help' for more information.
 `;
 
 const helpText =
-`Usage: rmdir.js [OPTION]... DIRECTORY...
-Remove the DIRECTORY(ies), if they are empty.
+`Usage: mkdir.js [OPTION]... DIRECTORY...
+Usage: touch [OPTION]... FILE...
+Update the access and modification times of each FILE to the current time.
+
+A FILE argument that does not exist is created empty
 
 Options:
-  -v, --verbose     output a diagnostic for every directory processed
+  -v, --verbose     print a message for each touched file
       --help        display this help and exit
 `
-const removedText = name =>
-  `rmdir.js: removing directory '${ name }'`
+const createdText = name =>
+  `touch.js: created file '${ name }'`
 
-const notEmptyText = name =>
-  `rmdir.js: failed to remove '${ name }': Directory not empty`
-
-const noDirectoryText = name =>
-  `rmdir.js: failed to remove '${ name }': No such file or directory`
-
-const notADirectory = name =>
-  `rmdir.js: failed to remove '${ name }': Not a directory`
+const updatedText = name =>
+  `touch.js: updated file '${ name }'`
 
 
 /*******************************************************************************
@@ -59,35 +56,41 @@ if ( argv[2].match( /--help/ ) ) {
   exit( 1 );
 }
 
-// --verbose or -v: print message when creating a file
+// --verbose or -v: print message when touching a file
 if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
 
 
 /*******************************************************************************
-*  remove directory(ies)                                                       *
+*  create new directory(ies)                                                   *
 *******************************************************************************/
 
 // run for each argument, skip first if an option is given
 for ( let path of argv.slice( options ? 3 : 2 ) ) {
   try {
+    // get current time
+    const time = new Date();
+
     // create a new URL with the current directory and the name given
-    await rmdir( new URL( path, import.meta.url ) );
+    await utimes( new URL( path, import.meta.url ), time, time );
 
     // show message if verbose
-    verbose && console.log( removedText( path ) ); 
+    verbose && console.log( updatedText( path ) ); 
 
   } catch ( err ) {
-    // error if the directory already exists
-    err.code === "ENOTEMPTY" && console.error( notEmptyText( path ) );
+    if ( err.code === "ENOENT" ) {
+      // create empty file if it does not exist
+      await writeFile( new URL( path, import.meta.url ), "", "utf8" );
 
-    // error if the path does not exist
-    err.code === "ENOENT" && console.error( noDirectoryText( path ) );
+      // show message if verbose
+      verbose && console.log( createdText( path ) ); 
 
-    // error if the path is not a directory
-    err.code === "ENOTDIR" && console.error( notADirectory( path ) );
+    } else {
+      // print error message
+      console.log( err );
 
-    // exit with error
-    exit( 1 );
+      // exit with error
+      exit( 1 );
+    }
   }
 }
 

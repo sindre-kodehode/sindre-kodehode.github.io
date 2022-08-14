@@ -74,6 +74,7 @@ for ( let path of argv.slice( options ? 3 : 2 ) ) {
   try {
     // create a new URL with the current directory and the name given
     await mkdir( new URL( path, import.meta.url ), { recursive : parents } );
+
     // show message if verbose
     verbose && console.log( createdText( path ) ); 
 
