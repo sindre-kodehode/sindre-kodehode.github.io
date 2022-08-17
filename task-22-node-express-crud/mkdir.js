@@ -50,14 +50,14 @@ let verbose = false;
 // check if there are any arguments given, exit and display message if not
 if ( proc.argv.length < 3 ) {
   console.error( missingText );
-  exit( 0 );
+  proc.exit( 0 );
 }
 
 const sources = proc.argv.slice( 2 ).filter( arg => {
   // --help: exit displaying a helpful message
   if ( arg.match( /--help/ ) ) {
     console.log( helpText );
-    exit( 1 );
+    proc.exit( 1 );
   }
 
   // --parents or -p: create parent directoy(ies) if the path does not exist
@@ -103,9 +103,9 @@ for ( const source of sources ) {
     if ( err.code === "ENOENT" ) console.error( pathExistText( source ) );
 
     // exit with error
-    exit( 1 );
+    proc.exit( 1 );
   }
 }
 
 // exit with no error after successfully creating directories
-exit( 0 );
+proc.exit( 0 );

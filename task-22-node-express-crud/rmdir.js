@@ -2,9 +2,8 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { argv  } from "node:process";
-import { exit  } from "node:process";
-import { rmdir } from "node:fs/promises";
+import * as fs   from "node:fs/promises";
+import * as proc from "node:process";
 
 
 /*******************************************************************************
@@ -35,11 +34,13 @@ const noDirectoryText = name =>
 const notADirectory = name =>
   `rmdir.js: failed to remove '${ name }': Not a directory`
 
+const invalidText = opt =>
+  `mv.js: invalid option -- '${ opt.replace( /^-*/, "" ) }'`
+
 
 /*******************************************************************************
 *  variables                                                                   *
 *******************************************************************************/
-let options = false;
 let verbose = false;
 
 
@@ -48,19 +49,32 @@ let verbose = false;
 *******************************************************************************/
 
 // check if there are any arguments given, exit and display message if not
-if ( argv.length < 3 ) {
+if ( proc.argv.length < 3 ) {
   console.error( missingText );
-  exit( 0 );
+  proc.exit( 0 );
 }
 
-// --help: exit displaying a helpful message
-if ( argv[2].match( /--help/ ) ) {
-  console.log( helpText );
-  exit( 1 );
-}
+const sources = proc.argv.slice( 2 ).filter( arg => {
+  // --help: exit displaying a helpful message
+  if ( proc.arg.match( /--help/ ) ) {
+    console.log( helpText );
+    proc.exit( 1 );
+  }
 
-// --verbose or -v: print message when creating a file
-if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
+  // --verbose or -v: print message when creating a file
+  if ( proc.arg.match( /-v|--verbose/ ) ) {
+    verbose = true;
+    return false;
+  }
+
+  // exit and display message if invalid option was given
+  else if ( arg.match( /^-/ ) ) {
+    console.error( invalidText( arg ) );
+    proc.exit( 0 );
+  }
+
+  return true;
+});
 
 
 /*******************************************************************************
@@ -68,28 +82,28 @@ if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
 *******************************************************************************/
 
 // run for each argument, skip first if an option is given
-for ( let path of argv.slice( options ? 3 : 2 ) ) {
+for ( const source of sources ) {
   try {
     // create a new URL with the current directory and the name given
-    await rmdir( new URL( path, import.meta.url ) );
+    await fs.rmdir( new URL( source, import.meta.url ) );
 
     // show message if verbose
-    verbose && console.log( removedText( path ) ); 
+    if ( verbose ) console.log( removedText( source) ); 
 
   } catch ( err ) {
     // error if the directory already exists
-    err.code === "ENOTEMPTY" && console.error( notEmptyText( path ) );
+    if ( err.code === "ENOTEMPTY" ) console.error( notEmptyText( source) );
 
     // error if the path does not exist
-    err.code === "ENOENT" && console.error( noDirectoryText( path ) );
+    if ( err.code === "ENOENT" ) console.error( noDirectoryText( source ) );
 
     // error if the path is not a directory
-    err.code === "ENOTDIR" && console.error( notADirectory( path ) );
+    if ( err.code === "ENOTDIR" ) console.error( notADirectory( source ) );
 
     // exit with error
-    exit( 1 );
+    proc.exit( 1 );
   }
 }
 
 // exit with no error after successfully creating directories
-exit( 0 );
+proc.exit( 0 );
