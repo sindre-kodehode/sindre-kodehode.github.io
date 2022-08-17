@@ -2,10 +2,8 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { utimes    } from "node:fs/promises";
-import { writeFile } from "node:fs/promises";
-import { argv      } from "node:process";
-import { exit      } from "node:process";
+import * as fs   from "node:fs/promises";
+import * as proc from "node:process";
 
 
 /*******************************************************************************
@@ -33,11 +31,13 @@ const createdText = name =>
 const updatedText = name =>
   `touch.js: updated file '${ name }'`
 
+const invalidText = opt =>
+  `mv.js: invalid option -- '${ opt.replace( /^-*/, "" ) }'`
+
 
 /*******************************************************************************
 *  variables                                                                   *
 *******************************************************************************/
-let options = false;
 let verbose = false;
 
 
@@ -46,19 +46,32 @@ let verbose = false;
 *******************************************************************************/
 
 // check if there are any arguments given, exit and display message if not
-if ( argv.length < 3 ) {
+if ( proc.argv.length < 3 ) {
   console.error( missingText );
-  exit( 0 );
+  proc.exit( 0 );
 }
 
-// --help: exit displaying a helpful message
-if ( argv[2].match( /--help/ ) ) {
-  console.log( helpText );
-  exit( 1 );
-}
+const sources = proc.argv.slice( 2 ).filter( arg => {
+  // --help: exit displaying a helpful message
+  if ( arg.match( /--help/ ) ) {
+    console.log( helpText );
+    proc.exit( 1 );
+  }
 
-// --verbose or -v: print message when touching a file
-if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
+  // --verbose or -v: print message when touching a file
+  if ( arg.match( /-v|--verbose/ ) ) {
+    verbose = true;
+    return false;
+  }
+
+  // exit and display message if invalid option was given
+  else if ( arg.match( /^-/ ) ) {
+    console.error( invalidText( arg ) );
+    proc.proc.exit( 0 );
+  }
+
+  return true;
+});
 
 
 /*******************************************************************************
@@ -66,34 +79,34 @@ if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
 *******************************************************************************/
 
 // run for each argument, skip first if an option is given
-for ( let path of argv.slice( options ? 3 : 2 ) ) {
+for ( const source of sources ) {
   try {
     // get current time
     const time = new Date();
 
     // update the access and modify date on the given file
-    await utimes( new URL( path, import.meta.url ), time, time );
+    await fs.utimes( new URL( source, import.meta.url ), time, time );
 
     // show message if verbose
-    verbose && console.log( updatedText( path ) ); 
+    if ( verbose ) console.log( updatedText( source) ); 
 
   } catch ( err ) {
     if ( err.code === "ENOENT" ) {
       // create empty file if it does not exist
-      await writeFile( new URL( path, import.meta.url ), "", "utf8" );
+      await fs.writeFile( new URL( source, import.meta.url ), "", "utf8" );
 
       // show message if verbose
-      verbose && console.log( createdText( path ) ); 
+      if ( verbose ) console.log( createdText( source ) ); 
 
     } else {
       // print error message
-      console.log( err );
+      console.log( err.message );
 
       // exit with error
-      exit( 1 );
+      proc.exit( 1 );
     }
   }
 }
 
 // exit with no error after successfully creating directories
-exit( 0 );
+proc.exit( 0 );
