@@ -2,9 +2,10 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { utimes, writeFile } from "node:fs/promises";
-import { argv   } from "node:process";
-import { exit   } from "node:process";
+import { utimes    } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { argv      } from "node:process";
+import { exit      } from "node:process";
 
 
 /*******************************************************************************
@@ -70,7 +71,7 @@ for ( let path of argv.slice( options ? 3 : 2 ) ) {
     // get current time
     const time = new Date();
 
-    // create a new URL with the current directory and the name given
+    // update the access and modify date on the given file
     await utimes( new URL( path, import.meta.url ), time, time );
 
     // show message if verbose
