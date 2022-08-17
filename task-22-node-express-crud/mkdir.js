@@ -2,9 +2,8 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { argv  } from "node:process";
-import { exit  } from "node:process";
-import { mkdir } from "node:fs/promises";
+import * as proc from "node:process";
+import * as fs   from "node:fs/promises";
 
 
 /*******************************************************************************
@@ -33,11 +32,13 @@ const fileExistText = name =>
 const pathExistText = name =>
   `mkdir.js: cannot create directory '${ name }': No such file or directory`
 
+const invalidText = opt =>
+  `mv.js: invalid option -- '${ opt.replace( /^-*/, "" ) }'`
+
 
 /*******************************************************************************
 *  variables                                                                   *
 *******************************************************************************/
-let options = false;
 let parents = false;
 let verbose = false;
 
@@ -47,22 +48,38 @@ let verbose = false;
 *******************************************************************************/
 
 // check if there are any arguments given, exit and display message if not
-if ( argv.length < 3 ) {
+if ( proc.argv.length < 3 ) {
   console.error( missingText );
   exit( 0 );
 }
 
-// --help: exit displaying a helpful message
-if ( argv[2].match( /--help/ ) ) {
-  console.log( helpText );
-  exit( 1 );
-}
+const sources = proc.argv.slice( 2 ).filter( arg => {
+  // --help: exit displaying a helpful message
+  if ( arg.match( /--help/ ) ) {
+    console.log( helpText );
+    exit( 1 );
+  }
 
-// --parents or -p: create parent directoy(ies) if the path does not exist
-if ( argv[2].match( /-p|--parents/ ) ) parents = options = true;
+  // --parents or -p: create parent directoy(ies) if the path does not exist
+  if ( arg.match( /-p|--parents/ ) ) {
+    parents = true;
+    return false;
+  }
 
-// --verbose or -v: print message when creating a directoy
-if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
+  // --verbose or -v: print message when creating a directoy
+  if ( arg.match( /-v|--verbose/ ) ) {
+    verbose = true;
+    return false;
+  }
+
+  // exit and display message if invalid option was given
+  else if ( arg.match( /^-/ ) ) {
+    console.error( invalidText( arg ) );
+    proc.exit( 0 );
+  }
+
+  return true;
+});
 
 
 /*******************************************************************************
@@ -70,20 +87,20 @@ if ( argv[2].match( /-v|--verbose/ ) ) verbose = options = true;
 *******************************************************************************/
 
 // run for each argument, skip first if an option is given
-for ( let path of argv.slice( options ? 3 : 2 ) ) {
+for ( const source of sources ) {
   try {
     // create a new URL with the current directory and the name given
-    await mkdir( new URL( path, import.meta.url ), { recursive : parents } );
+    await fs.mkdir( new URL( source, import.meta.url ), { recursive : parents } );
 
     // show message if verbose
-    verbose && console.log( createdText( path ) ); 
+    if ( verbose ) console.log( createdText( source ) ); 
 
   } catch ( err ) {
     // error if the directory already exists
-    err.code === "EEXIST" && console.error( fileExistText( path ) );
+    if ( err.code === "EEXIST" ) console.error( fileExistText( source ) );
 
     // error if the path does not exist
-    err.code === "ENOENT" && console.error( pathExistText( path ) );
+    if ( err.code === "ENOENT" ) console.error( pathExistText( source ) );
 
     // exit with error
     exit( 1 );
