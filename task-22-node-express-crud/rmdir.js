@@ -56,13 +56,13 @@ if ( proc.argv.length < 3 ) {
 
 const sources = proc.argv.slice( 2 ).filter( arg => {
   // --help: exit displaying a helpful message
-  if ( proc.arg.match( /--help/ ) ) {
+  if ( arg.match( /--help/ ) ) {
     console.log( helpText );
     proc.exit( 1 );
   }
 
   // --verbose or -v: print message when creating a file
-  if ( proc.arg.match( /-v|--verbose/ ) ) {
+  if ( arg.match( /-v|--verbose/ ) ) {
     verbose = true;
     return false;
   }
