@@ -11,6 +11,6 @@ export default styled.h3`
   text-overflow   : ellipsis          ;
   white-space     : nowrap            ;
   width           : 100%              ;
+
+  &::-webkit-scrollbar { display : none ; }
 `;
-
-

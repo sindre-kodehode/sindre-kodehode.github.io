@@ -133,6 +133,8 @@ Error generating stack: `+i.message+`
   text-overflow   : ellipsis          ;
   white-space     : nowrap            ;
   width           : 100%              ;
+
+  &::-webkit-scrollbar { display : none ; }
 `,qp=({title:e})=>Q(Yy,{children:e}),Gy=({product:{title:e,id:t,price:n,image:r}})=>Le(Qy,{children:[Q(Jp,{src:r,alt:e}),Q(qp,{title:e}),Q(bp,{price:n}),Q(as,{text:"remove",action:Fy(t)})]}),Ky=ut.main`
   display   : grid      ;
   gap       : 1rem      ;
