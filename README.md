@@ -33,7 +33,7 @@
 - [task-21-ts-react-webshop](task-21-ts-react-webshop/dist)
 
 ## kodehode projects
-- [project-planets](https://sindre-kodehode.github.io/planeter-prosjekt)
+- [project-01-neptune](project-01-neptune)
 
 ## extra tasks
 - [extra-00-endre](extra-00-endre)

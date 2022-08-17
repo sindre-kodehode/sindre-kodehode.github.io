@@ -1,0 +1,228 @@
+:root {
+  --lightest-blue : #e1ecf9 ;
+  --light-blue    : #609ce1 ;
+  --middle-blue   : #236ab9 ;
+  --dark-blue     : #133863 ;
+  --darkest-blue  : #091d34 ;
+}
+
+* {
+  box-sizing : border-box ;
+  margin     : 0          ;
+  padding    : 0          ;
+}
+
+body {
+  background  : var(--lightest-blue) ;
+  color       : var(--dark-blue)     ;
+  font-family : 'Roboto Serif'       ;
+  line-height : 1.6                  ;
+}
+
+
+/*******************************************************************************
+*  Header                                                                      *
+*******************************************************************************/
+header {
+  background : url(img/Neptune-bg.png) no-repeat center center/cover ;
+  height     : 100vh                                                 ;
+}
+
+header h1 {
+  color           : var(--middle-blue) ;
+  display         : flex               ;
+  font-family     : 'Nova Round'       ;
+  font-size       : 10em               ;
+  justify-content : center             ;
+  padding-top     : 1em                ;
+}
+
+
+/*******************************************************************************
+*  Navigation bar                                                              *
+*******************************************************************************/
+nav {
+  background  : var(--darkest-blue) ;
+  position    : sticky              ;
+  top         : 0                   ;
+  font-family : 'Roboto Slab'       ;
+}
+
+nav ul {
+  list-style-type : none ;
+  display         : flex ;
+}
+
+nav li:first-child {
+  background : var(--dark-blue) ;
+}
+
+nav li:last-child {
+  margin-left : auto ;
+}
+
+nav li a {
+  display         : block                ;
+  color           : var(--lightest-blue) ;
+  padding         : 0.5em                ;
+  text-decoration : none                 ;
+}
+
+nav li a:hover {
+  background : var(--light-blue) ;
+}
+
+nav li.dropdown {
+  display  : inline-block ;
+  position : relative     ;
+}
+
+div.dropdown-content {
+  background : var(--darkest-blue) ;
+  display    : none                ;
+  position   : absolute            ;
+  z-index    : 1                   ;
+}
+
+li.dropdown:hover div.dropdown-content {
+  display : block ;
+}
+
+
+/*******************************************************************************
+*  Intro Section                                                               *
+*******************************************************************************/
+section.intro p {
+  font-size  : 1.5em    ;
+  margin     : 4em auto ;
+  max-width  : 30em     ;
+  text-align : center   ;
+}
+
+
+/*******************************************************************************
+*  Image Gallery                                                               *
+*******************************************************************************/
+section.gallery-container {
+  background            : var(--darkest-blue) ;
+  display               : grid                ;
+  gap                   : 1em                 ;
+  grid-template-columns : repeat(4, auto)     ;
+  padding               : 1em                 ;
+}
+
+figure.gallery-frame {
+  align-items     : center               ;
+  background      : var(--dark-blue)     ;
+  color           : var(--lightest-blue) ;
+  display         : flex                 ;
+  flex-direction  : column               ;
+  justify-content : center               ;
+  padding         : 1em                  ;
+}
+
+figcaption.gallery-caption {
+  padding-top : 1em    ;
+  text-align  : center ;
+}
+
+img.gallery-image {
+  width: 100% ;
+}
+
+@media only screen and (max-width: 1200px) {
+  section.gallery-container {
+    grid-template-columns : repeat(2, auto) ;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  section.gallery-container {
+    grid-template-columns : auto ;
+  }
+}
+
+
+/*******************************************************************************
+*  Main section                                                                *
+*******************************************************************************/
+h2 {
+  font-family : 'Roboto Slab' ;
+  padding-top : 1em           ;
+  text-align  : center        ;
+}
+
+section.content {
+  align-items     : center ;
+  display         : flex   ;
+  justify-content : center ;
+}
+
+.content img {
+  height : auto ;
+  width  : 50%  ;
+}
+
+.description {
+  display        : flex   ;
+  flex-direction : column ;
+  width          : 50%    ;
+}
+
+.description p {
+  padding    : 2em    ;
+  text-align : center ;
+}
+
+@media only screen and (max-width: 1200px) {
+  .content {
+    flex-direction : column ;
+  }
+
+  .content:nth-child(even) {
+    display        : flex           ;
+    flex-direction : column-reverse ;
+  }
+
+  .content img {
+    width : 100% ;
+  }
+
+  .description {
+    padding : 0.5em ;
+    width   : 100%  ;
+  }
+}
+
+
+/*******************************************************************************
+*  Footer                                                                      *
+*******************************************************************************/
+footer {
+  background : var(--darkest-blue)  ;
+  color      : var(--lightest-blue) ;
+  display    : flex                 ;
+}
+
+footer p:first-child {
+  background: var(--dark-blue) ;
+}
+
+footer p:last-child {
+  color       : var(--light-blue) ;
+  margin-left : auto              ;
+}
+
+footer a {
+  color           : var(--lightest-blue) ;
+  text-decoration : none                 ;
+}
+
+footer a:hover {
+  background : var(--light-blue) ;
+}
+
+footer p, a {
+  padding : 0.5em ;
+  margin  : 0     ;
+}
