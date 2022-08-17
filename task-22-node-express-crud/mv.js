@@ -2,11 +2,12 @@
 /*******************************************************************************
 *  imports                                                                     *
 *******************************************************************************/
-import { argv   } from "node:process";
-import { exit   } from "node:process";
-import * as fs from "node:fs/promises";
-import { stdin as input, stdout as output } from "node:process";
-import * as readline from "node:readline/promises";
+import * as fs              from "node:fs/promises";
+import * as proc            from "node:process";
+import * as rl              from "node:readline/promises";
+import { existsSync       } from "node:fs"
+import { stdin  as input  } from "node:process";
+import { stdout as output } from "node:process";
 
 
 /*******************************************************************************
@@ -46,17 +47,17 @@ let verbose     = false;
 *******************************************************************************/
 
 // exit and display message if no arguments are given
-if ( argv.length < 3 ) {
+if ( proc.argv.length < 3 ) {
   console.error( missingText );
-  exit( 0 );
+  proc.exit( 0 );
 }
 
 // filter out options and return an array of only paths given
-const sources = argv.slice( 2 ).filter( arg => {
+const sources = proc.argv.slice( 2 ).filter( arg => {
   // --help: exit displaying a helpful message
   if ( arg.match( /^(--help)$/ ) ) {
     console.log( helpText );
-    exit( 1 );
+    proc.exit( 1 );
   }
 
   // --interactive or -i: set interactive to true and skip argument
@@ -74,10 +75,10 @@ const sources = argv.slice( 2 ).filter( arg => {
   // exit and display message if invalid option was given
   else if ( arg.match( /^-/ ) ) {
     console.error( invalidText( arg ) );
-    exit( 0 );
+    proc.exit( 0 );
   }
 
-  else return true;
+  return true;
 });
 
 
@@ -87,59 +88,53 @@ const sources = argv.slice( 2 ).filter( arg => {
 const dest    = sources.pop();
 const destUrl = new URL( dest, import.meta.url );
 
+// rename file and show message if verbose
 const rename = async ( source, dest, sourceUrl, destUrl ) => {
   await fs.rename( sourceUrl, destUrl );
-
-  // show message if verbose
-  verbose && console.log( renamedText( source, dest ) );
+  if ( verbose ) console.log( renamedText( source, dest ) );
 }
 
-// check if the destination exists and if it is a directory or a file
-let destStat;
-try { destStat = await fs.stat( destUrl ); }
-catch ( err ) { console.error( err.message ); }
+// if the destination exists, get the stats
+let destStat = existsSync( destUrl ) ? await fs.stat( destUrl ) : undefined;
 
-
+// loop through all the sources given
 for ( const source of sources ) {
   try {
     const sourceUrl = new URL( source, import.meta.url );
 
     // the destination does not exist, safe to just rename
-    if ( !destStat ) {
-      await rename( source, dest, sourceUrl, destUrl );
-    }
+    if ( !destStat ) await rename( source, dest, sourceUrl, destUrl );
 
     // the destination is a directory, move the source into the directory
     else if ( destStat.isDirectory() ) {
       const dirDestUrl = new URL(  `${dest}/${source}`, import.meta.url );
-      await rename( source, dest, sourceUrl, dirDestUrl );
+      await rename( source, `${dest}${source}`, sourceUrl, dirDestUrl );
     }
 
+    // the destination is an existing file
     else if ( destStat.isFile() ) {
-      // the destination is a file, confirm overwrite
+      // confirm overwrite if interactive
       if ( interactive ) {
-        const rl     = readline.createInterface({ input, output });
-        const answer = await rl.question( `mv.js: overwrite ${ dest }? ` );
-        rl.close();    
+        const cli    = rl.createInterface({ input, output });
+        const answer = await cli.question( `mv.js: overwrite ${ dest }? ` );
+        cli.close();    
 
         // rename if user confirms with y or yes
-        if ( answer.match( /y|yes/ ) ) {
+        if ( answer.match( /y|yes/ ) )
           await rename( source, dest, sourceUrl, destUrl );
-        }
       }
 
       // no confirmation needed, just overwrite
-      else {
-        await rename( source, dest, sourceUrl, destUrl );
-      }
+      else await rename( source, dest, sourceUrl, destUrl );
     }
   }
 
+  // catch and display error messages
   catch ( err ) {
     console.error( err.message );
-    exit( 1 );
+    proc.exit( 1 );
   }
 }
 
 // exit with no error after successfully creating directories
-exit( 0 );
+proc.exit( 0 );
