@@ -12,13 +12,13 @@ export default () => <>
   { CATEGORIES.map( cat =>
       <Route 
             key={ cat.id }
-           path={ `/task-21-ts-react-webshop/dist/${ cat.link }` }
+           path={ `/${ cat.link }` }
         element={ <Products filter={ cat.filter } /> }
       />
   )}
 
   <Route 
-       path={ "/task-21-ts-react-webshop/dist/cart" }
+       path={ "/cart" }
     element={ <Cart /> }
   />
 

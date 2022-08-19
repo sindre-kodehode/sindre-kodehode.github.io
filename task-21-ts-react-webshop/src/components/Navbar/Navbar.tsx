@@ -10,13 +10,13 @@ export default () => {
   return <StyledNavbar>
     { CATEGORIES.map( category => <Link 
         key={ category.id }
-         to={ `/task-21-ts-react-webshop/dist/${ category.link }` }>
+         to={ `/${ category.link }` }>
         { category.text }
       </Link>
     )}
 
     <Link 
-      to={ "/task-21-ts-react-webshop/dist/cart" }>
+      to={ "/cart" }>
       Cart { cart === 0 ? "" : `(${ cart })` }
     </Link>
   </StyledNavbar>;
