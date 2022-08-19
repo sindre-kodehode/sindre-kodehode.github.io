@@ -9,7 +9,7 @@ import { StrictMode    } from "react"                ;
 ReactDOM.createRoot( document.getElementById( "root" )! ).render(
   <StrictMode>
     <Provider store={ store }>
-      <BrowserRouter basename="/task-21-ts-react-webshop/dist">
+      <BrowserRouter basename={ `${ process.env.PUBLIC_URL }/task-21-ts-react-webshop/dist` }>
         <GlobalStyle />
         <App />
       </BrowserRouter>
