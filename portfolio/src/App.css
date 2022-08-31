@@ -1,0 +1,48 @@
+* {
+  box-sizing : border-box ;
+  margin     : 0          ;
+  padding    : 0          ;
+}
+
+:root {
+  --color-dark     : hsl( 45, 88%,  2%, 100% )       ;
+  --color-light    : hsl( 45, 90%, 90%, 100% )       ;
+  --color-shadow   : hsl( 45, 88%,  2%,  25% )       ;
+
+  --font-family    : "Noto Sans", sans-serif         ;
+
+  --size-shadow    : 0.25rem 0.25rem 0.25rem 0.25rem ;
+  --size-section   : 45rem                           ;
+
+  --margin-section : 1rem auto                       ;
+}
+
+body {
+  background : var( --color-light ) ;
+}
+
+section {
+  border-radius : 0.5rem                                     ;
+  box-shadow    : var( --size-shadow ) var( --color-shadow ) ;
+  display       : grid                                       ;
+  margin        : var( --margin-section )                    ;
+  overflow      : hidden                                     ;
+  width         : var( --size-section )                      ;
+}
+
+h2 {
+  background  : var( --color-dark  ) ;
+  color       : var( --color-light ) ;
+  font-family : var( --font-family ) ;
+}
+
+p {
+  color       : var( --color-dark  ) ;
+  font-family : var( --font-family ) ;
+}
+
+img {
+  height     : 100% ;
+  object-fit : fill ;
+  width      : 100% ;
+}
