@@ -25,6 +25,7 @@
 *  console.log(greet(1251, "Gunnar"))                                          *
 *  --> skal vise "Good afternoon Gunnar" i konsollen                           *
 *******************************************************************************/
+import assert from "node:assert";
 
 const oddOrEven = n => n % 2 === 0 ? "Even" : "Odd";
 
@@ -86,8 +87,8 @@ const greet5 = ( t, n ) => {
   return `Good ${ greeting } ${ n }`;
 }
 
-console.log( greet4(  100, "Endre" ) );
-console.log( greet4(  700, "Endre" ) );
-console.log( greet4( 1300, "Endre" ) );
-console.log( greet4( 1600, "Endre" ) );
-console.log( greet4( 1900, "Endre" ) );
+assert.equal( greet5(  100, "Endre" ), "Good night Endre"     );
+assert.equal( greet5(  700, "Endre" ), "Good morning Endre"   );
+assert.equal( greet5( 1300, "Endre" ), "Good afternoon Endre" );
+assert.equal( greet5( 1600, "Endre" ), "Good day Endre"       );
+assert.equal( greet5( 1900, "Endre" ), "Good evening Endre"   );
