@@ -1,27 +1,30 @@
-/* 1. Lag en funksjon som tar i mot et tall, sjekker om tallet er
-par eller oddetall, og returner enten "Odd" eller "Even"
+#! /usr/bin/env node
 
-f.eks:
-console.log(oddOrEven(12))
---> skal vise "Even" i konsollen
-
-2. Skriv en funksjon som tar i mot 2 parametre:
-
-    - Et tall, som er et klokkeslett (0 til 2359) og
-    - Et navn, som er en string.
-
-Funksjonen skal returne:
-
-"Good night (navn)" hvis klokkeslettet er mellom 0 og 600
-"Good morning (navn)" hvis klokkeslettet er mellom 600 og 1200
-"Good afternoon (navn)" hvis klokkeslettet er mellom 1200 og 1500
-"Good day (navn)" hvis klokkeslettet er mellom 1500 og 1800
-"Good evening (navn)" hvis klokkeslettet er mellom 1800 og 2359
-
-f.eks:
-console.log(greet(1251, "Gunnar"))
---> skal vise "Good afternoon Gunnar" i konsollen
-*/
+/*******************************************************************************
+*  1. Lag en funksjon som tar i mot et tall, sjekker om tallet er              *
+*  par eller oddetall, og returner enten "Odd" eller "Even"                    *
+*                                                                              *
+*  f.eks:                                                                      *
+*  console.log(oddOrEven(12))                                                  *
+*  --> skal vise "Even" i konsollen                                            *
+*                                                                              *
+*  2. Skriv en funksjon som tar i mot 2 parametre:                             *
+*                                                                              *
+*  - Et tall, som er et klokkeslett (0 til 2359) og                            *
+*  - Et navn, som er en string.                                                *
+*                                                                              *
+*  Funksjonen skal returne:                                                    *
+*                                                                              *
+*  "Good night (navn)" hvis klokkeslettet er mellom 0 og 600                   *
+*  "Good morning (navn)" hvis klokkeslettet er mellom 600 og 1200              *
+*  "Good afternoon (navn)" hvis klokkeslettet er mellom 1200 og 1500           *
+*  "Good day (navn)" hvis klokkeslettet er mellom 1500 og 1800                 *
+*  "Good evening (navn)" hvis klokkeslettet er mellom 1800 og 2359             *
+*                                                                              *
+*  f.eks:                                                                      *
+*  console.log(greet(1251, "Gunnar"))                                          *
+*  --> skal vise "Good afternoon Gunnar" i konsollen                           *
+*******************************************************************************/
 
 const oddOrEven = n => n % 2 === 0 ? "Even" : "Odd";
 
@@ -65,8 +68,8 @@ const greet4 = ( time, name ) => {
   const greetings = [ "evening", "day", "afternoon", "morning" ];
   let   greeting  = "night";
   
-  for ( let i = 0; i < times.length; i++ )
-    if ( time > times[i] ) { greeting = greetings[i]; break; }
+  for ( const [ i, t ] of times.entries() )
+    if ( time > t ) { greeting = greetings[i]; break; }
 
   return `Good ${ greeting } ${ name }`;
 };
@@ -83,8 +86,8 @@ const greet5 = ( t, n ) => {
   return `Good ${ greeting } ${ n }`;
 }
 
-console.log( greet5(  100, "Endre" ) );
-console.log( greet5(  700, "Endre" ) );
-console.log( greet5( 1300, "Endre" ) );
-console.log( greet5( 1600, "Endre" ) );
-console.log( greet5( 1900, "Endre" ) );
+console.log( greet4(  100, "Endre" ) );
+console.log( greet4(  700, "Endre" ) );
+console.log( greet4( 1300, "Endre" ) );
+console.log( greet4( 1600, "Endre" ) );
+console.log( greet4( 1900, "Endre" ) );
