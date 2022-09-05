@@ -1,22 +1,13 @@
-/* styles */
 import "./App.css";
 
-/* consts */
 // import eigenskapar  from "./consts/eigenskapar";
 // import ferdigheiter from "./consts/ferdigheiter";
-// import om           from "./consts/om";
+import om           from "./consts/om";
 import prosjekt     from "./consts/prosjekt";
 // import sysler       from "./consts/sysler";
 
-/* components */
 import Project from "./components/Project";
 
-  // <section>
-  //   <h2> OM MEG </h2>{
-  //   om.map( ({ id, om }) => 
-  //   <p key={ id }>{ om }</p> )
-  // }</section>
-  //
   // <section>
   //   <h2> EIGENSKAPAR </h2>{
   //   eigenskapar.map( ({ id, eigenskap }) =>
@@ -35,10 +26,15 @@ import Project from "./components/Project";
   //   <p key={ id }>{ sysle }</p> )
   // }</section>
 
-/* App */
 export default () => <>
+  <section>
+    <h2> OM MEG </h2>{
+    om.map( ({ id, om }) => 
+    <p key={ id }>{ om }</p> )
+  }</section>
+
   { prosjekt.map( project =>
-      <Project key={ project.id } { ...project } />
+      <Project key={ project.id } project={ project }  />
     )
   }
 </>;

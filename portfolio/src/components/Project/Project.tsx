@@ -1,11 +1,21 @@
-import ProjectI      from "../../types/project.type";
+import Description   from "../Description";
+import Header        from "../Header";
+import Picture       from "../Picture";
+import ProjectProps  from "./Project.type";
 import StyledSection from "./Project.style";
+import Tags          from "../Tags";
+import Title         from "../Title";
 
-export default ( project : ProjectI ) =>
+export default ( { project : { 
+  image,
+  title,
+  tags,
+  desc
+} } : ProjectProps ) =>
 <StyledSection>
-    <header><h2>{ project.header }</h2></header>
-    <picture> <img src={ project.image } alt={ project.title } /> </picture>
-    <h1>{ project.title }</h1>
-    <p><b>{ project.tags }</b></p>
-    <p>{ project.desc }</p>
+    <Header      text={ "project" }               />
+    <Picture      src={ image     } alt={ title } />
+    <Title       text={ title     }               />
+    <Tags        tags={ tags      }               />
+    <Description text={ desc      }               />
 </StyledSection>
