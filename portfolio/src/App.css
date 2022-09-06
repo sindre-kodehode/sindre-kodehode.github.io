@@ -5,9 +5,9 @@
 }
 
 :root {
-  --color-dark     : hsl( 45, 100%,  2%, 100% )            ;
-  --color-light    : hsl( 45, 100%, 90%, 100% )            ;
-  --color-shadow   : hsl( 45, 100%,  2%,  25% )            ;
+  --color-dark     : hsl( 45, 66%,  2%, 100% )             ;
+  --color-light    : hsl( 45, 66%, 90%, 100% )             ;
+  --color-shadow   : hsl( 45, 66%,  2%,  25% )             ;
 
   --font-family    : "Noto Sans", sans-serif               ;
 
@@ -19,7 +19,8 @@
 
   --size-shadow    : 0.25rem 0.25rem 0.25rem 0.25rem       ;
   --size-section   : 36rem                                 ;
- 
+
+  --border-radius  : 1rem                                  ;
   --margin-section : 2rem auto                             ;
 }
 

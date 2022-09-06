@@ -4,7 +4,6 @@ export default [
   { id : 3 , sysle : "Brettspel"         , },
   { id : 4 , sysle : "PlayStation"       , },
   { id : 5 , sysle : "Japan"             , },
-  { id : 6 , sysle : "Koding"            , },
-  { id : 7 , sysle : "Programmering"     , },
-  { id : 8 , sysle : "Kaffe"             , },
+  { id : 6 , sysle : "Programmering"     , },
+  { id : 7 , sysle : "Kaffe"             , },
 ]

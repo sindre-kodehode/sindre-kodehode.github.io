@@ -1,39 +1,42 @@
 import "./App.css";
 
-// import eigenskapar  from "./consts/eigenskapar";
-// import ferdigheiter from "./consts/ferdigheiter";
+import eigenskapar  from "./consts/eigenskapar";
+import ferdigheiter from "./consts/ferdigheiter";
 import om           from "./consts/om";
 import prosjekt     from "./consts/prosjekt";
-// import sysler       from "./consts/sysler";
+import sysler       from "./consts/sysler";
 
-import Project from "./components/Project";
-
-  // <section>
-  //   <h2> EIGENSKAPAR </h2>{
-  //   eigenskapar.map( ({ id, eigenskap }) =>
-  //   <p key={ id }>{ eigenskap }</p> )
-  // }</section>
-  //
-  // <section>
-  //   <h2> FERDIGHEITER </h2> {
-  //   ferdigheiter.map( ({ id, ferdigheit }) =>
-  //   <p key={ id }>{ ferdigheit }</p> )
-  // }</section>
-  //
-  // <section>
-  //   <h2> SYSLER </h2>{
-  //   sysler.map( ({ id, sysle }) =>
-  //   <p key={ id }>{ sysle }</p> )
-  // }</section>
+import Project     from "./components/Project";
+import Section     from "./components/Section";
+import Description from "./components/Description";
 
 export default () => <>
-  <section>
-    <h2> OM MEG </h2>{
+  <Section header={ "om meg" }> {
     om.map( ({ id, om }) => 
-    <p key={ id }>{ om }</p> )
-  }</section>
+      <Description key={ id } text={ om } />
+    )
+  } </Section>
 
-  { prosjekt.map( project =>
+  <Section header={ "eigenskapar" }> {
+    eigenskapar.map( ({ id, eigenskap }) =>
+      <Description key={ id } text={ eigenskap } />
+    )
+  }</Section>
+
+  <Section header={ "ferdigheiter" }> {
+    ferdigheiter.map( ({ id, ferdigheit }) =>
+      <Description key={ id } text={ ferdigheit } />
+    )
+  }</Section>
+
+  <Section header={ "sysler" }> {
+    sysler.map( ({ id, sysle }) =>
+      <Description key={ id } text={ sysle } />
+    )
+  }</Section>
+
+  {
+    prosjekt.map( project =>
       <Project key={ project.id } project={ project }  />
     )
   }

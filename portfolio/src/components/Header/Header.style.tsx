@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export default styled.header`
-  align-content   : center              ;
-  background      : var( --color-dark ) ;
-  display         : grid                ;
-  justify-content : center              ;
+  align-content   : center                         ;
+  background      : var( --color-dark )            ;
+  border-bottom   : 1px solid var( --color-light ) ;
+  display         : grid                           ;
+  justify-content : center                         ;
 
   & :first-child {
     color          : var( --color-light ) ;

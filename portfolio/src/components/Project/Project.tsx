@@ -1,21 +1,24 @@
 import Description   from "../Description";
-import Header        from "../Header";
 import Picture       from "../Picture";
 import ProjectProps  from "./Project.type";
 import StyledSection from "./Project.style";
 import Tags          from "../Tags";
 import Title         from "../Title";
+import Section       from "../Section";
 
 export default ( { project : { 
+  desc,
+  header,
   image,
-  title,
   tags,
-  desc
+  title,
+  url,
 } } : ProjectProps ) =>
-<StyledSection>
-    <Header      text={ "project" }               />
-    <Picture      src={ image     } alt={ title } />
-    <Title       text={ title     }               />
-    <Tags        tags={ tags      }               />
-    <Description text={ desc      }               />
-</StyledSection>
+<Section header={ header }>
+  <StyledSection>
+      <Picture      src={ image } alt={ title } url={ url } />
+      <Title       text={ title }                           />
+      <Tags        tags={ tags  }                           />
+      <Description text={ desc  }                           />
+  </StyledSection>
+</Section>
