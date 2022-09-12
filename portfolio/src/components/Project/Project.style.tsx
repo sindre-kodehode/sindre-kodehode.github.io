@@ -4,7 +4,8 @@ export default styled.section`
   display : grid ;
   gap     : 1rem ;
 
-  grid : "image title" 5rem
+  grid : "image .    " 1rem
+         "image title" 4rem
          "image tags " 1rem
          "image desc " 6rem /
          14rem  17rem       ;
