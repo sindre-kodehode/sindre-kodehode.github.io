@@ -22,8 +22,18 @@
 
   --border-radius  : 1rem                                  ;
   --margin-section : 2rem auto                             ;
+
+  --grid-root      : auto / auto auto                      ;
 }
 
-body {
-  background : var( --color-light ) ;
+@media screen and ( max-width: 80rem ) {
+  :root { --grid-root : auto / auto ; }
+}
+
+#root {
+  background      : var( --color-light ) ;
+  display         : grid                 ;
+  gap             : 2rem                 ;
+  grid            : var( --grid-root )   ;
+  justify-content : center               ;
 }
