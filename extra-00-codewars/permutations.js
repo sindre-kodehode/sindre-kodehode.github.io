@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 "use strict"
 import assert from "node:assert"
-import { randomInt } from "node:crypto";
 
 /*******************************************************************************
 *  In this kata you have to create all permutations of a non empty input       *
@@ -23,77 +22,65 @@ const permutations = [
 /*******************************************************************************
 *  add random elements                                                         *
 *******************************************************************************/
-  ( str ) => {
-    // function for finding the factorial
+  ( A ) => {
+    // helper function for finding the factorial
     const fac = n => n ? n * fac( --n ) : 1;
 
     // make an object containing the frequency of each element
-    const freq = [ ...str ]
-      .reduce( ( acc, e ) => ({ ...acc, [e] : acc[e] + 1 || 1 }), {} );
+    const freqs = [ ...A ]
+      .reduce( ( freqs, a ) => ({ ...freqs, [a] : freqs[a] + 1 || 1 }), {} );
 
     // divide the length of the string factorial divided by
     // frequency of all elements factorial
-    const n = Object.values( freq )
-      .reduce( ( acc, e ) => acc / fac( e ), fac( str.length ) );
+    const n = Object.values( freqs )
+      .reduce( ( n, a ) => n / fac( a ), fac( A.length ) );
 
     // a set to store only unique permutations
-    const perm = new Set();
+    const B = new Set();
 
     // loop until all unique permutations have been found
-    while ( perm.size < n )
-      perm.add( [ ...str ].sort( _ => Math.random() - 0.5 ).join`` );
+    while ( B.size < n )
+      B.add( [ ...A ].sort( _ => Math.random() - 0.5 ).join`` );
     
-    // return array of strings, sorted
-    return [ ...perm ].sort();
+    // return array of strings
+    return [ ...B ];
   },
 
 /*******************************************************************************
 *  find all the permutations for n - 1, then copy them n times and insert      *
 *  the next character in between the others, in all the places                 *
 *******************************************************************************/
-  ( str ) => {
-    let res = [ "" ];
+  ( A ) => {
+    let B = [ "" ];
 
     // loop over each character in str
-    [ ...str ].forEach( ( char, i ) =>
+    [ ...A ].forEach( ( a, i ) =>
 
       // copy previous array i + 1 times
-      res = Array( ++i ).fill( [ ...res ] ).flat().sort()
+      B = Array( ++i ).fill( [ ...B ] ).flat().sort()
 
       // for each splice next char in between the others i times
-      .map( ( e, j ) => e.slice( 0, j % i ) + char + e.slice( j % i )
+      .map( ( b, j ) => b.slice( 0, j % i ) + a + b.slice( j % i )
     ));
 
-    // return only unique permutations, sorted
-    return [ ...new Set( res ) ].sort();
+    // return only unique permutations
+    return [ ...new Set( B ) ];
   },
 
 /*******************************************************************************
-*  "one-liner"                                                                 *
+*  using lexicographical ordering                                              *
 *******************************************************************************/
-  A => [ ...new Set(
-    [ ...A ].reduce( ( B, c, i ) =>
-      Array( ++i ).fill( [ ...B ] ).flat().sort()
-      .map( ( e, j ) =>
-        e.slice( 0, j % i ) + c + e.slice( j % i ))
-    ,[ "" ] )
-  )].sort()
-  ,
-
-/*******************************************************************************
-*  using lexicographically ordering                                            *
-*******************************************************************************/
-  ( str ) => {
-    const result = [];
+  ( A ) => {
+    const B = [];
 
     // sort elements to find lexicographically minimal permutation
-    let a = [ ...str ].sort();
+    let a = [ ...A ].sort();
 
     while ( true ) {
       // add current permutation as a string to result
-      result.push( a.join`` );
+      B.push( a.join`` );
 
-      // Find the largest index k such that a[k] < a[k + 1]
+      // Find the largest index k such that a[k] < a[ k + 1 ]
       const k = a.findLastIndex( ( _, k ) => a[k] < a[ k + 1 ] );
 
       // If no such index exists, the permutation is the last permutation
@@ -110,7 +97,110 @@ const permutations = [
       a = [ ...a.slice( 0, k + 1 ), ...a.slice( k + 1 ).reverse() ];
     }
 
-    return result;
+    return B;
+  },
+
+/*******************************************************************************
+*  using Heap's algorithm ( recursive )                                        *
+*******************************************************************************/
+  ( A, B = [], a = [ ...A ], k = a.length ) => {
+    if ( !--k ) {
+      B.push( a.join`` );
+      return B;
+    }
+
+    // generate permutations with k-th unaltered
+    permutations[3]( A, B, a, k );
+
+    // generate permutations for k-th swapped with each k-1 initial
+    for ( let i = 0; i < k; i++ ) {
+
+      // swap choice dependent on parity of k (even or odd)
+      const l = ( k + 1 ) % 2 ? 0 : i;
+      [ a[l], a[k] ] = [ a[k], a[l] ];
+
+      // generate permutations with k-th altered
+      permutations[3]( A, B, a, k );
+    }
+
+    // filter unique
+    return [ ...new Set( B ) ];
+  },
+
+/*******************************************************************************
+*  using Heap's algorithm ( for loop )                                         *
+*******************************************************************************/
+  ( A ) => {
+    const a = [ ...A ];
+    const B = [];
+    let n   = A.length;
+
+    // c is an encoding of the stack state.
+    let c = Array( n ).fill( 0 );
+
+    B.push( a.join`` );
+    
+    // i acts similarly to a stack pointer
+    for ( let i = 1; i < n; i++ ) {
+      if ( c[i] < i ) {
+        // swap choice dependent on parity of k (even or odd)
+        const l = i % 2 ? c[i] : 0;
+        [ a[l], a[i] ] = [ a[i], a[l] ];
+
+        // swap has occurred, ending the for-loop. simulate the
+        // increment of the for-loop counter
+        B.push( a.join`` );
+        c[i]++
+
+        // simulate recursive call reaching the base case by bringing
+        // the pointer to the base case analog in the array
+        i = 0;
+
+      } else {
+        // reset the state and simulate popping the stack by incrementing
+        // the pointer.
+        c[i] = 0;
+      }
+    }
+
+    // filter unique
+    return [ ...new Set( B ) ];
+  },
+
+/*******************************************************************************
+*  using a tree structure                                                      *
+*******************************************************************************/
+  ( str ) => {
+    class Permutations extends Set {
+      constructor( pool, parent, value ) {
+        super();
+        this.pool   = [ ...pool ];
+        this.parent = parent;
+        this.value  = value;
+
+        // use pool to add children recursively 
+        this.pool.forEach( ( value, i ) => {
+          const newPool = this.pool.filter( ( _, j ) => j - i );
+          new Permutations( newPool, this, value );
+        });
+
+        // check if leaf node
+        if ( !this.pool.length ) {
+          let result  = "";
+          let current = this;
+
+          // walk back to root, collecting values
+          while ( current.parent ) {
+            result += current.value;
+            current = current.parent;
+          }
+
+          current.add( result );
+        } 
+      };
+    };
+
+    return [ ...new Permutations( str ) ];
   },
 
 ];
@@ -140,5 +230,5 @@ const tests = [
 
 permutations.forEach( func =>
   tests.forEach( ([ input, expected ]) =>
-    assert.deepEqual( func( input ), expected )
+    assert.deepEqual( func( input ).sort(), expected.sort() )
 ));
