@@ -1,0 +1,76 @@
+:root {
+  --font-primary   : "Montserrat", sans-serif ;
+  --font-secondary : "Fraunces"  , serif      ;
+
+  --font-brow      : 700 0.750rem            var( --font-primary   ) ;
+  --font-title     : 700 2.000rem / 2.000rem var( --font-secondary ) ;
+  --font-paragraph : 400 0.875rem / 1.500rem var( --font-primary   ) ;
+  --font-price     : 700 2.000rem            var( --font-secondary ) ;
+  --font-price-s   : 700 0.750rem            var( --font-secondary ) ;
+
+  --ls-brow        : 0.42em ;
+  --ls-title       : 0.02em ;
+  --ls-paragraph   : 0.01em ;
+  --ls-price       : 0.03em ;
+  --ls-price-s     : 0.03em ;
+
+  --color-dark-cyan         : hsl( 158,  36%,  37% ) ;
+  --color-cream             : hsl(  30,  38%,  92% ) ;
+  --color-very-dark-cyan    : hsl( 156,  42%,  18% ) ;
+  --color-very-dark-blue    : hsl( 212,  21%,  14% ) ;
+  --color-dark-greyish-blue : hsl( 228,  12%,  48% ) ;
+  --color-white             : hsl(   0, 100%, 100% ) ;
+}
+
+* {
+  box-sizing : border-box ;
+  margin     : 0          ;
+  padding    : 0          ;
+}
+
+body {
+  align-content  : center               ;
+  background     : var( --color-cream ) ;
+  display        : grid                 ;
+  justify-content: center               ;
+  min-height     : 100vh                ;
+}
+
+article {
+  background            : var( --color-white ) ;
+  border-radius         : 0.5rem               ;
+  display               : grid                 ;
+  grid-template-columns : 1fr 1fr              ;
+  height                : 28.0rem              ;
+  overflow              : hidden               ;
+  width                 : 37.5rem              ;
+}
+
+img {
+  height : 100% ;
+  width  : 100% ;
+}
+
+section {
+  display : grid ;
+  padding : 2rem ;
+}
+
+section :nth-child( 1 ) {
+  color         : var( --color-dark-greyish-blue ) ;
+  font          : var( --font-brow )               ;
+  letter-spacing: var( --ls-brow )                 ;
+  text-transform: uppercase                        ;
+}
+
+section :nth-child( 2 ) {
+  color          : var( --color-very-dark-blue ) ;
+  font           : var( --font-title )           ;
+  letter-spacing : var( --ls-title )             ;
+}
+
+section :nth-child( 3 ) {
+  color          : var( --color-dark-greyish-blue ) ;
+  font           : var( --font-paragraph )          ;
+  letter-spacing : var( --ls-paragraph )            ;
+}
