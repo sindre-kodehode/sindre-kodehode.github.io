@@ -172,30 +172,29 @@ const permutations = [
 *******************************************************************************/
   ( str ) => {
     class Permutations extends Set {
-      constructor( pool, parent, value ) {
+      constructor( pool, parent, value, root ) {
         super();
         this.pool   = [ ...pool ];
         this.parent = parent;
         this.value  = value;
+        this.root   = root || this;
 
         // use pool to add children recursively 
         this.pool.forEach( ( value, i ) => {
           const newPool = this.pool.filter( ( _, j ) => j - i );
-          new Permutations( newPool, this, value );
+          new Permutations( newPool, this, value, this.root );
         });
 
         // check if leaf node
         if ( !this.pool.length ) {
-          let result  = "";
+          let result  = this.value ?? "";
           let current = this;
 
           // walk back to root, collecting values
-          while ( current.parent ) {
-            result += current.value;
-            current = current.parent;
-          }
+          while ( current = current.parent )
+            result += current.value ?? "";
 
-          current.add( result );
+          this.root.add( result );
         } 
       };
     };
