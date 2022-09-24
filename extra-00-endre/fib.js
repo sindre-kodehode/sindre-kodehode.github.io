@@ -15,14 +15,14 @@ const fib2 = n => {
 }
 
 const fib3 = n => {
-  const result = Array( ++n );
+  const result = Array( n + 1 );
   result[0] = 0;
   result[1] = 1;
  
-  for ( let i = 2; i < n; i++ )
+  for ( let i = 2; i <= n; i++ )
     result[i] = result[ i - 1 ] + result[ i - 2 ];
  
-  return result[ --n ];
+  return result[ n ];
 }
 
 console.log( fib3( 10 ) );
