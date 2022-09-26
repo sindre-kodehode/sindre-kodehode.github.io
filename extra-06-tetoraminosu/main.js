@@ -1,4 +1,4 @@
-const WIDTH = 10, HEIGHT = 20, FPS = 30, MILLI = 1000 / FPS;
+const WIDTH = 12, HEIGHT = 21, FPS = 30, MILLI = 1000 / FPS;
 
 const trans = ( x, y ) => y * WIDTH + x;
 
@@ -37,7 +37,7 @@ class Piece {
     this.reset();
     this.playfield = playfield;
     this.interval  = setInterval( () => {
-      this.updateY( this.y + 1 )
+      this.y++;
       this.checkCollision();
     }, 200 );
   }
@@ -62,9 +62,6 @@ class Piece {
   checkCollision() { 
     let collision = false;
 
-    if ( this.y > HEIGHT - this.height )
-      collision = true;
-
     this.shape.forEach( ( e, i ) => {
       e.forEach( ( f, j ) => {
         const k = this.x + this.y * WIDTH + trans( j, i );
@@ -73,7 +70,7 @@ class Piece {
     })
 
     if ( collision ) {
-      this.updateY( this.y - 1 )
+      this.y--;
       this.draw();
       this.reset();
     }
@@ -94,24 +91,30 @@ class Piece {
   }
 
   moveLeft()  { 
-    this.updateX( this.x - 1 );
+    this.x--;
     if ( this.checkCollisionX() )
-      this.updateX( this.x + 1 );
+      this.x++;
   }
 
   moveRight() {
-    this.updateX( this.x + 1 );
+    this.x++;
     if ( this.checkCollisionX() )
-      this.updateX( this.x - 1 );
+      this.x--;
   }
-
-  updateX( newX ) { this.x = Math.max( 0, Math.min( WIDTH  - this.width,  newX ) ) }
-  updateY( newY ) { this.y = Math.max( 0, Math.min( HEIGHT - this.height + 1, newY ) ) }
 }
 
 class Playfield extends Array {
   constructor() {
     super( HEIGHT * WIDTH ).fill( false );
+
+    for ( let i = 0; i < HEIGHT * WIDTH; i += WIDTH )
+      this[ i ] = true;
+
+    for ( let i = WIDTH - 1; i < HEIGHT * WIDTH; i += WIDTH )
+      this[ i ] = true;
+
+    for ( let i = WIDTH * HEIGHT - WIDTH; i < HEIGHT * WIDTH; i++ )
+      this[ i ] = true;
   }
 }
 
