@@ -1,6 +1,7 @@
 const WIDTH = 10, HEIGHT = 20, FPS = 30, MILLI = 1000 / FPS;
 
 const trans = ( x, y ) => y * WIDTH + x;
+
 const shapes = [
   [
     [ 0, 1, 0 ],
@@ -23,17 +24,17 @@ const shapes = [
     [ 1, 1, 1 ],
   ],
   [
+    [ 1, 1 ],
+    [ 1, 1 ],
+  ],
+  [
     [ 1, 1, 1, 1 ],
   ],
 ]
 
 class Piece {
   constructor( playfield ) {
-    this.x         = 4;
-    this.y         = 0;
-    this.shape     = shapes[ Math.floor( Math.random() * shapes.length ) ];
-    this.height    = this.shape.length;
-    this.width     = this.shape[0].length;
+    this.reset();
     this.playfield = playfield;
     this.interval  = setInterval( () => {
       this.updateY( this.y + 1 )
@@ -41,26 +42,71 @@ class Piece {
     }, 200 );
   }
 
-  checkCollision() { 
-    if ( this.y >= HEIGHT - this.height ) {
-      this.shape.forEach( ( e, i ) => {
-        e.forEach( ( f, j ) => {
-          this.playfield[ this.x + this.y * WIDTH + trans( j, i ) ] = !!f;
-        })
+  reset() {
+    this.x      = 4;
+    this.y      = 0;
+    this.shape  = shapes[ Math.floor( Math.random() * shapes.length ) ];
+    this.height = this.shape.length;
+    this.width  = this.shape[0].length;
+  }
+
+  draw() {
+    this.shape.forEach( ( e, i ) => {
+      e.forEach( ( f, j ) => {
+        const k = this.x + this.y * WIDTH + trans( j, i );
+        this.playfield[ k ] = this.playfield[ k ] || f;
       })
-      this.x      = 4;
-      this.y      = 0;
-      this.shape  = shapes[ Math.floor( Math.random() * shapes.length ) ];
-      this.height = this.shape.length;
-      this.width  = this.shape[0].length;
+    })
+  }
+
+  checkCollision() { 
+    let collision = false;
+
+    if ( this.y > HEIGHT - this.height )
+      collision = true;
+
+    this.shape.forEach( ( e, i ) => {
+      e.forEach( ( f, j ) => {
+        const k = this.x + this.y * WIDTH + trans( j, i );
+        if ( this.playfield[ k ] && f ) collision = true;
+      })
+    })
+
+    if ( collision ) {
+      this.updateY( this.y - 1 )
+      this.draw();
+      this.reset();
     }
   }
 
-  moveLeft()  { this.updateX( this.x - 1 ) }
-  moveRight() { this.updateX( this.x + 1 ) }
+  checkCollisionX() {
+    let collision = false;
+
+    this.shape.forEach( ( e, i ) => {
+      e.forEach( ( f, j ) => {
+        const k = this.x + this.y * WIDTH + trans( j, i );
+        if ( this.playfield[ k ] && f ) collision = true;
+      })
+    })
+    
+    console.log( collision );
+    return collision;
+  }
+
+  moveLeft()  { 
+    this.updateX( this.x - 1 );
+    if ( this.checkCollisionX() )
+      this.updateX( this.x + 1 );
+  }
+
+  moveRight() {
+    this.updateX( this.x + 1 );
+    if ( this.checkCollisionX() )
+      this.updateX( this.x - 1 );
+  }
 
   updateX( newX ) { this.x = Math.max( 0, Math.min( WIDTH  - this.width,  newX ) ) }
-  updateY( newY ) { this.y = Math.max( 0, Math.min( HEIGHT - this.height, newY ) ) }
+  updateY( newY ) { this.y = Math.max( 0, Math.min( HEIGHT - this.height + 1, newY ) ) }
 }
 
 class Playfield extends Array {
@@ -83,7 +129,8 @@ class Buffer extends Array {
 
     this.piece.shape.forEach( ( e, i ) => {
       e.forEach( ( f, j ) => {
-        this[ this.piece.x + this.piece.y * WIDTH + trans( j, i ) ] = !!f;
+        const k = this.piece.x + this.piece.y * WIDTH + trans( j, i );
+        this[ k ] = this[ k ] || f;
       })
     })
 
