@@ -4,46 +4,46 @@ const trans = ( x, y ) => y * WIDTH + x;
 
 const shapes = [
   [
-    [ 0, 1, 0 ],
-    [ 1, 1, 1 ],
-    [ 0, 0, 0 ],
+    [ false, true , false ],
+    [ true , true , true  ],
+    [ false, false, false ],
   ],
   [
-    [ 1, 1, 0 ],
-    [ 0, 1, 1 ],
-    [ 0, 0, 0 ],
+    [ true , true , false ],
+    [ false, true , true  ],
+    [ false, false, false ],
   ],
   [
-    [ 0, 1, 1 ],
-    [ 1, 1, 0 ],
-    [ 0, 0, 0 ],
+    [ false, true , true  ],
+    [ true , true , false ],
+    [ false, false, false ],
   ],
   [
-    [ 1, 0, 0 ],
-    [ 1, 1, 1 ],
-    [ 0, 0, 0 ],
+    [ true , false, false ],
+    [ true , true , true  ],
+    [ false, false, false ],
   ],
   [
-    [ 0, 0, 1 ],
-    [ 1, 1, 1 ],
-    [ 0, 0, 0 ],
+    [ false, false, true  ],
+    [ true , true , true  ],
+    [ false, false, false ],
   ],
   [
-    [ 1, 1 ],
-    [ 1, 1 ],
+    [ true, true ],
+    [ true, true ],
   ],
   [
-    [ 0, 0, 0, 0 ],
-    [ 1, 1, 1, 1 ],
-    [ 0, 0, 0, 0 ],
-    [ 0, 0, 0, 0 ],
+    [ false, false, false, false ],
+    [ true , true , true , true  ],
+    [ false, false, false, false ],
+    [ false, false, false, false ],
   ],
 ]
 
 class Piece {
   constructor( playfield ) {
-    this.reset();
     this.playfield = playfield;
+    this.reset();
     this.interval  = setInterval( () => {
       this.y++;
       this.checkCollision();
@@ -70,6 +70,7 @@ class Piece {
     this.shape  = shapes[ Math.floor( Math.random() * shapes.length ) ];
     this.height = this.shape.length;
     this.width  = this.shape[0].length;
+    this.playfield.checkLines();
   }
 
   draw() {
@@ -96,6 +97,8 @@ class Piece {
       this.draw();
       this.reset();
     }
+
+    return collision;
   }
 
   checkCollisionX() {
@@ -108,8 +111,11 @@ class Piece {
       })
     })
     
-    console.log( collision );
     return collision;
+  }
+
+  moveDown() {
+    while( !this.checkCollision() ) this.y++;
   }
 
   moveLeft()  { 
@@ -138,6 +144,22 @@ class Playfield extends Array {
     for ( let i = WIDTH * HEIGHT - WIDTH; i < HEIGHT * WIDTH; i++ )
       this[ i ] = true;
   }
+
+  checkLines() {
+    for ( let i = 0; i < HEIGHT * WIDTH - WIDTH; i += WIDTH ) {
+      if ( this.slice( i + 1, i + WIDTH - 1 ).every( e => e ) ) {
+        this.deleteLine( i );
+      }
+    }
+  }
+
+  deleteLine( n ) {
+    for ( let i = n; i > 0; i -= WIDTH ) {
+      for ( let j = i; j < i + WIDTH - 1; j++ ) {
+        this[ j ] = this[ j - WIDTH ];
+      }
+    }
+  }
 }
 
 class Buffer extends Array {
@@ -149,13 +171,13 @@ class Buffer extends Array {
 
   render() {
     this.playfield.forEach( ( e, i ) => {
-      this[ i ] = e;
+      this[ i ] = !!e;
     })
 
     this.piece.shape.forEach( ( e, i ) => {
       e.forEach( ( f, j ) => {
         const k = this.piece.x + this.piece.y * WIDTH + trans( j, i );
-        this[ k ] = this[ k ] || f;
+        this[ k ] = this[ k ] || !!f;
       })
     })
 
@@ -191,5 +213,6 @@ document.addEventListener( "keydown", ({ key }) => {
   switch( key ) {
     case "ArrowLeft"  : piece.moveLeft()  ; break ;
     case "ArrowRight" : piece.moveRight() ; break ;
+    case "ArrowDown"  : piece.moveDown()  ; break ;
     case "ArrowUp"    : piece.rotate()    ; break ;
 }});
