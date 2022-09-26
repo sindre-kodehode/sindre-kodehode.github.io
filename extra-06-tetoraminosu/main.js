@@ -6,29 +6,37 @@ const shapes = [
   [
     [ 0, 1, 0 ],
     [ 1, 1, 1 ],
+    [ 0, 0, 0 ],
   ],
   [
     [ 1, 1, 0 ],
     [ 0, 1, 1 ],
+    [ 0, 0, 0 ],
   ],
   [
     [ 0, 1, 1 ],
     [ 1, 1, 0 ],
+    [ 0, 0, 0 ],
   ],
   [
     [ 1, 0, 0 ],
     [ 1, 1, 1 ],
+    [ 0, 0, 0 ],
   ],
   [
     [ 0, 0, 1 ],
     [ 1, 1, 1 ],
+    [ 0, 0, 0 ],
   ],
   [
     [ 1, 1 ],
     [ 1, 1 ],
   ],
   [
+    [ 0, 0, 0, 0 ],
     [ 1, 1, 1, 1 ],
+    [ 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0 ],
   ],
 ]
 
@@ -40,6 +48,20 @@ class Piece {
       this.y++;
       this.checkCollision();
     }, 200 );
+  }
+
+  rotate() {
+    const dimension = this.shape.length;
+
+    const newShape = Array( dimension ).fill().map( _ =>
+      Array( dimension ).fill( 0 )
+    );
+
+    for ( let i = 0; i < dimension; i++ )
+      for ( let j = 0; j < dimension; j++ )
+        newShape[ j ][ dimension - 1 - i ] = this.shape[ i ][ j ];
+
+    this.shape = newShape;
   }
 
   reset() {
@@ -169,4 +191,5 @@ document.addEventListener( "keydown", ({ key }) => {
   switch( key ) {
     case "ArrowLeft"  : piece.moveLeft()  ; break ;
     case "ArrowRight" : piece.moveRight() ; break ;
+    case "ArrowUp"    : piece.rotate()    ; break ;
 }});
