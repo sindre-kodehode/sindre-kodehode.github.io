@@ -266,7 +266,7 @@ a.button {
 /*******************************************************************************
 *  media queries                                                               *
 *******************************************************************************/
-@media screen and ( max-width : 560px ) {
+@media screen and ( max-width : 720px ) {
   main                   { grid-template-columns : auto                      ; }
   body                   { padding               : 0.5rem 0.5rem 0rem 0.5rem ; }
   article#skills section { width                 : 100%                      ; }
