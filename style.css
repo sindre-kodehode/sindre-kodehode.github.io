@@ -200,6 +200,7 @@ article#skills section ul {
   place-content : center ;
 }
 
+li:hover { transform: scale( 120% ) ; }
 
 /*******************************************************************************
 *  layout projects section                                                     *
