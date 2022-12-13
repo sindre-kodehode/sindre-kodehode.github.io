@@ -1,0 +1,278 @@
+:root {
+  --heading-1      : 800 2.000rem "Montserrat" ;
+  --subheading     : 400 1.500rem "Galada"     ;
+  --heading-2      : 800 1.500rem "Montserrat" ;
+  --heading-3      : 500 1.000rem "Montserrat" ;
+  --paragraph      : 400 0.750rem "Montserrat" ;
+  --anchor         : 700 0.875rem "Montserrat" ;
+  --card-heading   : 700 0.875rem "Montserrat" ;
+  --card-paragraph : 400 0.625rem "Montserrat" ;
+  --card-anchor    : 400 0.625rem "Montserrat" ;
+
+  --bg-body   : var( --color-grey-bg ) var( --gradient-grey  ) ;
+  --bg-header : var( --color-bg      ) var( --gradient-white ) ;
+
+  --color-bg      : hsla( 206, 100%,  6%, 1.00 ) ;
+  --color-black   : hsla(   0,  0%,   0%, 1.00 ) ;
+  --color-blue-1  : hsla( 198, 25%,  42%, 1.00 ) ;
+  --color-blue-2  : hsla( 217, 10%,  25%, 0.70 ) ;
+  --color-grey-1  : hsla(   0,  0%,  34%, 1.00 ) ;
+  --color-grey-2  : hsla(   0,  0%,  34%, 0.00 ) ;
+  --color-grey-bg : hsla(   0,  0%,  12%, 1.00 ) ;
+  --color-main-1  : hsla( 335, 70%,  46%, 1.00 ) ;
+  --color-main-2  : hsla( 335, 70%,  46%, 0.39 ) ;
+  --color-red-1   : hsla(   4, 94%,  69%, 1.00 ) ;
+  --color-red-2   : hsla( 335, 70%,  46%, 1.00 ) ;
+  --color-shadow  : hsla(   0,  0%,   0%, 0.50 ) ;
+  --color-white-1 : hsla(   0,  0%, 100%, 0.15 ) ;
+  --color-white-2 : hsla(   0,  0%,   0%, 0.00 ) ;
+  --color-white   : hsla(   0,  0%, 100%, 1.00 ) ;
+
+  --gradient-grey : linear-gradient(
+      180deg, 
+      var( --color-grey-1 )   0%, 
+      var( --color-grey-2 ) 100% ) ;
+  --gradient-main : linear-gradient( 
+      180deg, 
+      var( --color-main-1 )   0%, 
+      var( --color-main-2 ) 100% ) ;
+  --gradient-red : linear-gradient(
+      180deg,
+      var( --color-red-1 )   0%,
+      var( --color-red-2 ) 100% ) ;
+  --gradient-white : radial-gradient(
+      10rem 10rem at 50% 12rem,
+      var( --color-white-1 )   0%,
+      var( --color-white-2 ) 100% ) ;
+
+  --shadow : 0rem 0.25rem 0.25rem var( --color-shadow ) ;
+
+  --radius-small       : 0.50rem 0.50rem 0.50rem 0.50rem ;
+  --radius-large       : 1.50rem 1.50rem 1.50rem 1.50rem ;
+  --radius-x-large-top : 2.00rem 2.00rem 0.00rem 0.00rem ;
+}
+
+* {
+  box-sizing : border-box ;
+  margin     : 0          ;
+  padding    : 0          ;
+}
+
+
+/*******************************************************************************
+*  font                                                                        *
+*******************************************************************************/
+body                        { color           : var( --color-white    ) ; }
+a.button                    { color           : var( --color-white    ) ; }
+article#projects article    { color           : var( --color-black    ) ; }
+article#skills section      { color           : var( --color-black    ) ; }
+
+h1                          { font            : var( --heading-1      ) ; }
+h2                          { font            : var( --heading-2      ) ; }
+header h2                   { font            : var( --subheading     ) ; }
+article#about h3            { font            : var( --heading-3      ) ; }
+article#skills h3           { font            : var( --card-heading   ) ; }
+article#about p             { font            : var( --paragraph      ) ; }
+a.button                    { font            : var( --anchor         ) ; }
+article#projects article h3 { font            : var( --card-heading   ) ; }
+article#projects article p  { font            : var( --card-paragraph ) ; }
+article#projects article a  { font            : var( --card-anchor    ) ; }
+
+h1                          { letter-spacing  : -0.04em                 ; }
+h2, h3                      { letter-spacing  : -0.02em                 ; }
+
+article#projects article p  { text-align      : center                  ; }
+a.button                    { text-decoration : none                    ; }
+
+a.button                    { text-shadow     : var( --shadow  )        ; }
+
+
+/*******************************************************************************
+*  background                                                                  *
+*******************************************************************************/
+body                     { background : var( --bg-body       ) ; }
+header                   { background : var( --bg-header     ) ; }
+header h2                { background : var( --gradient-red  ) ; }
+main                     { background : var( --gradient-main ) ; }
+a.primary                { background : var( --color-blue-1  ) ; }
+a.secondary              { background : var( --color-blue-2  ) ; }
+article#skills div       { background : var( --color-white   ) ; }
+article#projects article { background : var( --color-white   ) ; }
+article#skills section   { background : var( --color-white   ) ; }
+
+header h2 {
+  background-clip         : text        ;
+  -webkit-background-clip : text        ;
+  -webkit-text-fill-color : transparent ;
+}
+
+
+/*******************************************************************************
+*  border-radius                                                               *
+*******************************************************************************/
+header                   { border-radius : var( --radius-x-large-top ) ; }
+a.button                 { border-radius : var( --radius-large       ) ; }
+article#skills div       { border-radius : var( --radius-small       ) ; }
+article#projects article { border-radius : var( --radius-small       ) ; }
+article#skills section   { border-radius : var( --radius-small       ) ; }
+
+
+/*******************************************************************************
+*  filter                                                                      *
+*******************************************************************************/
+article#about a img { filter : drop-shadow( var( --shadow ) ) ; }
+
+
+/*******************************************************************************
+*  images                                                                      *
+*******************************************************************************/
+#waves,
+article.project-card img {
+  height     : 100% ;
+  object-fit : fill ;
+  width      : 100% ;
+}
+
+/*******************************************************************************
+*  layout body                                                                 *
+*******************************************************************************/
+body {
+  padding : 2.00rem 2.00rem 0.00rem 2.00rem ;
+}
+
+
+/*******************************************************************************
+*  layout header                                                               *
+*******************************************************************************/
+header {
+  display     : grid                ;
+  padding     : 3rem 0rem 0rem 0rem ;
+  place-items : center              ;
+}
+
+
+/*******************************************************************************
+*  layout main                                                                 *
+*******************************************************************************/
+main {
+  display               : grid                               ;
+  gap                   : 2rem                               ;
+  grid-template-columns : repeat( 2, minmax( auto, 25rem ) ) ;
+  padding               : 2rem                               ;
+  place-content         : center                             ;
+}
+
+
+
+/*******************************************************************************
+*  layout about section                                                        *
+*******************************************************************************/
+article#about { 
+  display       : grid   ;
+  gap           : 1.0rem ;
+  place-content : start  ;
+}
+
+
+/*******************************************************************************
+*  layout skills section                                                       *
+*******************************************************************************/
+article#skills {
+  display     : grid   ;
+  gap         : 1.0rem ;
+  place-items : center ;
+}
+
+article#skills section {
+  display       : grid   ;
+  gap           : 0.5rem ;
+  padding       : 0.5rem ;
+  place-content : center ;
+  place-items   : center ;
+  width         : 14rem  ;
+}
+
+article#skills section ul {
+  display       : flex   ;
+  flex-wrap     : wrap   ;
+  gap           : 0.5rem ;
+  list-style    : none   ;
+  place-content : center ;
+}
+
+
+/*******************************************************************************
+*  layout projects section                                                     *
+*******************************************************************************/
+article#projects {
+  grid-area   : 2 / span 2 ; 
+  display     : grid       ;
+  gap         : 2.0rem     ;
+  place-items : center     ;
+}
+
+section#projects-list {
+  display               : grid              ;
+  gap                   : 2.0rem            ;
+  grid-template-columns : repeat( 4, auto ) ;
+  place-content         : space-between     ;
+}
+
+article.project-card {
+  display  : grid   ;
+  overflow : hidden ;
+}
+
+section.project-desc {
+  display     : grid   ;
+  gap         : 0.5rem ;
+  overflow    : hidden ;
+  padding     : 0.5rem ;
+  place-items : center ;
+}
+
+section.project-desc a {
+  display               : grid              ;
+  gap                   : 0.5rem            ;
+  grid-template-columns : repeat( 2, auto ) ;
+  place-items           : center            ;
+}
+
+/*******************************************************************************
+*  layout links                                                                *
+*******************************************************************************/
+section.links {
+  display        : grid          ;
+  gap            : 1rem          ;
+  grid-auto-flow : column        ;
+  place-content  : space-between ;
+}
+
+
+/*******************************************************************************
+*  layout buttons                                                              *
+*******************************************************************************/
+a.button {
+  display        : grid            ;
+  gap            : 0.5rem          ;
+  grid-auto-flow : column          ;
+  padding        : 0.75rem 2.00rem ;
+  place-content  : center          ;
+  place-items    : center          ;
+  white-space    : nowrap          ;
+}
+
+
+/*******************************************************************************
+*  media queries                                                               *
+*******************************************************************************/
+@media screen and ( max-width : 560px ) {
+  main                   { grid-template-columns : auto                      ; }
+  body                   { padding               : 0.5rem 0.5rem 0rem 0.5rem ; }
+  article#skills section { width                 : 100%                      ; }
+  section.links          { grid-auto-flow        : row                       ; }
+  section.links          { place-content         : stretch                   ; }
+  article#projects       { grid-area             : initial                   ; }
+  section#projects-list  { grid-template-columns : auto                      ; }
+  article#projects a     { grid-area             : 2                         ; }
+}
